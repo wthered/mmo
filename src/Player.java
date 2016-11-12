@@ -1,5 +1,7 @@
 import jdk.nashorn.internal.objects.annotations.Setter;
 
+import java.util.Scanner;
+
 /**
  * Created by wthered on 12/11/2016 3:23 μμ
  * The Project name is mmo.
@@ -12,12 +14,19 @@ class Player implements playerInterface {
     private int money;
     private int health;
     private int mana;
+    private int FactionID;
+    private int RaceID;
+    private int ClassID;
 
-    public Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
+    Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
         this.setName(newName);
         this.setHealth(100 * newLevel);
         this.setMana(150 * newLevel);
         this.setMoney(0);
+
+        this.FactionID = FactionID;
+        this.RaceID = RaceID;
+        this.ClassID = classID;
 
         System.out.println("Faction #" + FactionID + ", race = " + RaceID + ", Class = " + classID);
     }
@@ -71,7 +80,25 @@ class Player implements playerInterface {
         this.mana = mana;
     }
 
-    // Methods inherited from plaerInterface
+    // Faction
+    private int getFactionID() {
+        return this.FactionID;
+    }
+
+    private void setFaction(int faction) {
+        this.FactionID = faction;
+    }
+
+    // Race ID
+    private int getRaceID() {
+        return this.RaceID;
+    }
+
+    private void setRaceID(int raceID) {
+        this.RaceID = raceID;
+    }
+
+    // Methods inherited from playerInterface
     @Override
     public void showMoney() {
         System.out.println("Player.showMoney");
@@ -92,5 +119,56 @@ class Player implements playerInterface {
         System.out.println("Player.showMana");
     }
 
+    // The Game has started and we set the new created Player
+    void selectFaction() {
+        System.out.println("*****************");
+        System.out.println("** 1) Alliance **");
+        System.out.println("** 2) Horde    **");
+        System.out.println("*****************");
+        System.out.print("What Faction you want to join? ");
+        Scanner faction = new Scanner(System.in);
+        int selectedFaction = faction.nextInt();
+        this.setFaction(selectedFaction);
+    }
 
+    void selectClass() {
+        Faction f = new Faction(this.getFactionID());
+        switch (this.getFactionID()) {
+            case 1:
+                System.out.println("Player.selectClass Line 129");
+                break;
+            case 2:
+                System.out.println("Player.selectClass Line 132");
+                break;
+            default:
+                System.out.println("Player.selectClass Invalid Option " + this.getFactionID());
+        }
+    }
+
+    void selectRace() {
+        switch (this.getFactionID()) {
+            case 1:
+                System.out.println("You will select from Alliance Races");
+                break;
+            case 2:
+                System.out.println("You wll select from Horde Races");
+                break;
+            default:
+                System.out.println("Player.selectRace invalid Option");
+                System.out.println("We will join you in Neutral");
+                this.setFaction(0);
+        }
+
+        Race r = new Race();
+        this.setRaceID(4);
+        System.out.println("Player.selectRace is " + this.getRaceID());
+    }
+
+    public int getClassID() {
+        return ClassID;
+    }
+
+    public void setClassID(int classID) {
+        this.ClassID = classID;
+    }
 }

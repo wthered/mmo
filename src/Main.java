@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -20,16 +21,38 @@ public class Main {
 
         if (identify) {
             action = createOrLogin();
+            switch (action) {
+                case 1:
+                    System.out.println("You will create a new Player");
+                    Player p = createNewPlayer();
+                    break;
+                case 2:
+                    System.out.println("Sending http request to see your old Characters");
+                    break;
+                default:
+                    System.out.println("Invalid option");
+                    break;
+            }
         }
 
         System.out.println("Last action was " + action);
     }
 
+    private static Player createNewPlayer() {
+        Player p = new Player("William", 1, 1, 2, 3);
+
+        p.selectFaction();
+        p.selectRace();
+        p.selectClass();
+        return p;
+    }
+
     private static boolean auth(String username, String password) {
+        Random rnd = new Random();
         System.out.println("Server Authentication in Main.auth");
         System.out.println("Username\t" + username);
         System.out.println("Password\t" + password);
-        return true;
+        return rnd.nextBoolean();
     }
 
     private static int createOrLogin() {
