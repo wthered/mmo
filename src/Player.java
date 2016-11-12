@@ -154,7 +154,7 @@ class Player implements playerInterface {
                 raceID = r.selectAllianceRace();
                 break;
             case 2:
-                System.out.println("You wll select from Horde Races");
+                System.out.println("You will select from Horde Races");
                 raceID = r.selectHordeRace();
                 break;
             default:
@@ -164,7 +164,7 @@ class Player implements playerInterface {
         }
 
         this.setRaceID(raceID);
-        System.out.println("Player.selectRace is " + this.getRaceID());
+        System.out.println("Player.selectRace is " + this.getRaceID() + " or " + r.getRaceName() + " from " + this.getFactionID());
     }
 
     public int getClassID() {
