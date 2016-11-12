@@ -146,12 +146,16 @@ class Player implements playerInterface {
     }
 
     void selectRace() {
+        int raceID = 0;
+        Race r = new Race();
         switch (this.getFactionID()) {
             case 1:
                 System.out.println("You will select from Alliance Races");
+                raceID = r.selectAllianceRace();
                 break;
             case 2:
                 System.out.println("You wll select from Horde Races");
+                raceID = r.selectHordeRace();
                 break;
             default:
                 System.out.println("Player.selectRace invalid Option");
@@ -159,13 +163,12 @@ class Player implements playerInterface {
                 this.setFaction(0);
         }
 
-        Race r = new Race();
-        this.setRaceID(4);
+        this.setRaceID(raceID);
         System.out.println("Player.selectRace is " + this.getRaceID());
     }
 
     public int getClassID() {
-        return ClassID;
+        return this.ClassID;
     }
 
     public void setClassID(int classID) {

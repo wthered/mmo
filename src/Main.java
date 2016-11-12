@@ -49,10 +49,11 @@ public class Main {
 
     private static boolean auth(String username, String password) {
         Random rnd = new Random();
-        System.out.println("Server Authentication in Main.auth");
         System.out.println("Username\t" + username);
         System.out.println("Password\t" + password);
-        return rnd.nextBoolean();
+        boolean success = rnd.nextBoolean();
+        System.out.println("Server Authentication in Main.auth is " + success);
+        return success;
     }
 
     private static int createOrLogin() {
