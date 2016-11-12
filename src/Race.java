@@ -10,11 +10,15 @@ public class Race {
     private int raceIntellect;
     private int raceSpirit;
 
-    public Race(int Strength, int Agility, int Stamina, int Intellect, int Spirit) {
-        System.out.println("Your race Strength is " + Strength);
+    public Race() {
+        this(20,20,20,20,20);
+    }
+
+    private Race(int Strength, int Agility, int Stamina, int Intellect, int Spirit) {
+        System.out.println("Your race Strength is\t" + Strength);
         System.out.println("Your Race Agility is\t" + Agility);
         System.out.println("Your Race Stamina is\t" + Stamina);
-        System.out.println("Your Race Intellect is" + Intellect);
+        System.out.println("Your Race Intellect is\t"+ Intellect);
         System.out.println("Your Race Spirit is\t" + Spirit);
     }
 

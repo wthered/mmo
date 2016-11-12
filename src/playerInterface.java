@@ -4,11 +4,19 @@
  */
 interface playerInterface {
 
-    default void showMoney(Player p) {
+    default void showMoney() {
         System.out.println("playerInterface.showMoney says you have some money");
     }
 
-    default void getFaction(Player p) {
+    default void getFaction() {
         System.out.println("playerInterface.getFaction says you belong to Faction");
+    }
+
+    default void showHealth() {
+        System.out.println("playerInterface.showHealth");
+    }
+
+    default void showMana() {
+        System.out.println("playerInterface.showMana");
     }
 }
