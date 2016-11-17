@@ -10,10 +10,12 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/lib/groovy-all-2.4.6.jar!/" />
+          <root url="file:///usr/src/java" />
+          <root url="file:///usr/src/java" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file:///usr/src/java" recursive="false" />
       </library>
     </orderEntry>
   </component>

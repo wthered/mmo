@@ -8,7 +8,7 @@ import java.net.URL;
  * Created by wthered on 17/11/2016 4:03 μμ
  * The Project name is mmo.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings("ALL")
 class httpAuth {
 
     boolean send(String user, String pass) {
@@ -17,6 +17,8 @@ class httpAuth {
         boolean success = false;
         try {
             success = this.sendGet() == 200;
+            JsonRead jr = new JsonRead();
+            jr.read();
         } catch (Exception e) {
             e.printStackTrace();
         }
