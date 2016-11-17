@@ -51,7 +51,8 @@ public class Main {
         Random rnd = new Random();
         System.out.println("Username\t" + username);
         System.out.println("Password\t" + password);
-        boolean success = rnd.nextBoolean();
+        httpAuth auth = new httpAuth();
+        boolean success = auth.send(username, password);
         System.out.println("Server Authentication in Main.auth is " + success);
         return success;
     }
