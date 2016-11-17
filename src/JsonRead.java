@@ -33,7 +33,7 @@ class JsonRead {
             JSONArray msg = (JSONArray) jsonObject.get("weather");
             for (Object MsgObj : msg) {
                 JSONObject job = (JSONObject) MsgObj;
-//                System.out.println("A Message could be " + MsgObj);
+                System.out.println("A Message could be " + MsgObj.toString());
                 System.out.println("Description is " + job.get("description"));
                 System.out.println("Main Weather is" + job.get("main"));
             }
