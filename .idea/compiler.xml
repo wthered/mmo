@@ -18,5 +18,8 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="1.9">
+      <module name="mmo" target="" />
+    </bytecodeTargetLevel>
   </component>
 </project>
