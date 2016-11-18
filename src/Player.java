@@ -13,6 +13,7 @@ class Player implements playerInterface {
 	private int health;
 	private int mana;
 	private int FactionID;
+	private String Faction;
 	private int RaceID;
 	private int ClassID;
 
@@ -105,8 +106,18 @@ class Player implements playerInterface {
 
 	@Override
 	public String getFaction() {
-		System.out.println("Player.getFaction");
-		return "Player.getFaction";
+//		System.out.println("Player.getFaction");
+		switch (this.FactionID) {
+			case 1:
+				this.Faction = "Alliance";
+				break;
+			case 2:
+				this.Faction = "Horde";
+				break;
+			default:
+				System.out.println("Neutral in Player.getFaction");
+		}
+		return this.Faction;
 	}
 
 	@Override
@@ -168,7 +179,7 @@ class Player implements playerInterface {
 		}
 
 		this.setRaceID(raceID);
-		System.out.print("Player.selectRace is " + this.getRaceID() + " or " + r.getRaceName(this.getFactionID()));
+		System.out.print("Player.selectRace is " + this.getRaceID() + " or " + r.getRaceName(this.getFactionID()) );
 		System.out.println(" from " + this.getFaction());
 	}
 
