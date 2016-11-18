@@ -4,8 +4,9 @@
  */
 interface playerInterface {
 
-    default void showMoney() {
+    default int showMoney() {
         System.out.println("playerInterface.showMoney says you have some money");
+        return 0;
     }
 
     default String getFaction() {
@@ -21,5 +22,10 @@ interface playerInterface {
     default int showMana() {
         System.out.println("playerInterface.showMana");
         return 100;
+    }
+
+    default int showExperience() {
+        System.out.println("playerInterface.showExperience");
+        return 0;
     }
 }

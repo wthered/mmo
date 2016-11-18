@@ -9,17 +9,17 @@ class Faction {
 
     Faction(int factionID) {
         this.setFactionID(factionID);
-        System.out.println("Faction.Faction #" + this.getFactionID() + " or " + this.getFactionName() );
+        System.out.println("Faction.Faction #" + this.getFactionID() + " or " + this.getFactionName());
     }
 
-     /************************
+    /************************
      ** Setters and Getters **
      ************************/
 
     // FactionID
-     private int getFactionID() {
-	     return this.FactionID;
-     }
+    private int getFactionID() {
+        return this.FactionID;
+    }
 
     private void setFactionID(int factionID) {
         this.FactionID = factionID;

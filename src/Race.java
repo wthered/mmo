@@ -56,7 +56,7 @@ class Race {
 
 	// Stamina
 	public int getRaceStamina() {
-		return raceStamina;
+		return this.raceStamina;
 	}
 
 	public void setRaceStamina(int raceStamina) {

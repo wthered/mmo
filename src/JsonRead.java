@@ -13,38 +13,38 @@ import java.io.IOException;
 
 class JsonRead {
 
-    JsonRead() {
-        System.out.println("JsonRad Constructor");
-    }
+	JsonRead() {
+		System.out.println("JsonRad Constructor");
+	}
 
-    void read() {
+	void read() {
 
 
-        JSONParser parser = new JSONParser();
+		JSONParser parser = new JSONParser();
 
-        try {
+		try {
 
-            Object obj = parser.parse(new FileReader("/home/wthered/json.txt"));
+			Object obj = parser.parse(new FileReader("/home/wthered/json.txt"));
 
-            JSONObject jsonObject = (JSONObject) obj;
+			JSONObject jsonObject = (JSONObject) obj;
 
-            String name = (String) jsonObject.get("name");
-            System.out.println("JSON Name is " + name);
+			String name = (String) jsonObject.get("name");
+			System.out.println("JSON Name is " + name);
 
-            long age = (Long) jsonObject.get("age");
-            System.out.println("Your Age is " + age + " years old");
+			long age = (Long) jsonObject.get("age");
+			System.out.println("Your Age is " + age + " years old");
 
-            // loop array
-            JSONArray msg = (JSONArray) jsonObject.get("weather");
-            for (Object MsgObj : msg) {
-                JSONObject job = (JSONObject) MsgObj;
-                System.out.println("A Message could be " + MsgObj.toString());
-                System.out.println("Description is " + job.get("description"));
-                System.out.println("Main Weather is" + job.get("main"));
-            }
+			// loop array
+			JSONArray msg = (JSONArray) jsonObject.get("weather");
+			for (Object MsgObj : msg) {
+				JSONObject job = (JSONObject) MsgObj;
+				System.out.println("A Message could be " + MsgObj.toString());
+				System.out.println("Description is " + job.get("description"));
+				System.out.println("Main Weather is" + job.get("main"));
+			}
 
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+	}
 }

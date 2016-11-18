@@ -6,175 +6,177 @@ import java.util.Scanner;
  */
 class Player implements playerInterface {
 
-    // Player Attributes
-    private String Name;
-    private int level;
-    private int money;
-    private int health;
-    private int mana;
-    private int FactionID;
-    private int RaceID;
-    private int ClassID;
+	// Player Attributes
+	private String Name;
+	private int level;
+	private int money;
+	private int health;
+	private int mana;
+	private int FactionID;
+	private int RaceID;
+	private int ClassID;
 
-    Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
-        this.setName(newName);
-        this.setHealth(100 * newLevel);
-        this.setMana(150 * newLevel);
-        this.setMoney(0);
+	Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
+		this.setName(newName);
+		this.setHealth(100 * newLevel);
+		this.setMana(150 * newLevel);
+		this.setMoney(0);
 
-        this.FactionID = FactionID;
-        this.RaceID = RaceID;
-        this.ClassID = classID;
+		this.FactionID = FactionID;
+		this.RaceID = RaceID;
+		this.ClassID = classID;
 
-        System.out.println("Faction #" + FactionID + ", race = " + RaceID + ", Class = " + classID);
-    }
+		System.out.println("Faction #" + FactionID + ", race = " + RaceID + ", Class = " + classID);
+	}
 
-    /*********************
-     * Setter & Getters **
-     ********************/
+	/*********************
+	 ** Setter & Getters **
+	 *********************/
 
-    // playerName
-    public String getName() {
-        return Name;
-    }
+	// playerName
+	String getName() {
+		return this.Name;
+	}
 
-    private void setName(String name) {
-        Name = name;
-    }
+	private void setName(String name) {
+		this.Name = name;
+	}
 
-    // Level
-    public int getLevel() {
-        return this.level;
-    }
+	// Level
+	public int getLevel() {
+		return this.level;
+	}
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
-    // Money money money
-    int getMoney() {
-        return this.money;
-    }
+	// Money money money
+	int getMoney() {
+		return this.money;
+	}
 
-    private void setMoney(int money) {
-        this.money = money;
-    }
+	private void setMoney(int money) {
+		this.money = money;
+	}
 
-    // Health
-    public int getHealth() {
-        return this.health;
-    }
+	// Health
+	public int getHealth() {
+		return this.health;
+	}
 
-    private void setHealth(int health) {
-        this.health = health;
-    }
+	private void setHealth(int health) {
+		this.health = health;
+	}
 
-    // Mana
-    public int getMana() {
-        return this.mana;
-    }
+	// Mana
+	public int getMana() {
+		return this.mana;
+	}
 
-    private void setMana(int mana) {
-        this.mana = mana;
-    }
+	private void setMana(int mana) {
+		this.mana = mana;
+	}
 
-    // Faction
-    private int getFactionID() {
-        return this.FactionID;
-    }
+	// Faction
+	private int getFactionID() {
+		return this.FactionID;
+	}
 
-    private void setFaction(int faction) {
-        this.FactionID = faction;
-    }
+	private void setFaction(int faction) {
+		this.FactionID = faction;
+	}
 
-    // Race ID
-    private int getRaceID() {
-        return this.RaceID;
-    }
+	// Race ID
+	private int getRaceID() {
+		return this.RaceID;
+	}
 
-    private void setRaceID(int raceID) {
-        this.RaceID = raceID;
-    }
+	private void setRaceID(int raceID) {
+		this.RaceID = raceID;
+	}
 
-    // Methods inherited from playerInterface
-    @Override
-    public void showMoney() {
-        System.out.println("Player.showMoney");
-    }
+	// Methods inherited from playerInterface
+	@Override
+	public int showMoney() {
+		System.out.println("Player.showMoney");
+		return this.money;
+	}
 
-    @Override
-    public String getFaction() {
-        System.out.println("Player.getFaction");
-	    return "Player.getFaction";
-    }
+	@Override
+	public String getFaction() {
+		System.out.println("Player.getFaction");
+		return "Player.getFaction";
+	}
 
-    @Override
-    public void showHealth() {
-        System.out.println("Player.showHealth");
-    }
+	@Override
+	public int showHealth() {
+		System.out.println("Player.showHealth");
+		return this.health;
+	}
 
-    @Override
-    public void showMana() {
-        System.out.println("Player.showMana");
-    }
+	@Override
+	public int showMana() {
+		System.out.println("Player.showMana");
+		return this.mana;
+	}
 
-    // The Game has started and we set the new created Player
-    void selectFaction() {
-        System.out.println("*****************");
-        System.out.println("** 1) Alliance **");
-        System.out.println("** 2) Horde    **");
-        System.out.println("*****************");
-        System.out.print("What Faction you want to join? ");
-        Scanner faction = new Scanner(System.in);
-        int selectedFaction = faction.nextInt();
-        this.setFaction(selectedFaction);
-    }
+	// The Game has started and we set the new created Player
+	void selectFaction() {
+		System.out.println("*****************");
+		System.out.println("** 1) Alliance **");
+		System.out.println("** 2) Horde    **");
+		System.out.println("*****************");
+		System.out.print("What Faction you want to join? ");
+		Scanner faction = new Scanner(System.in);
+		int selectedFaction = faction.nextInt();
+		this.setFaction(selectedFaction);
+	}
 
-    void selectClass() {
-        Faction f = new Faction(this.getFactionID());
-        switch (this.getFactionID()) {
-            case 1:
-	            System.out.println("Faction " + f.getFactionName());
-	            System.out.println("Player.selectClass Line 129");
-	            break;
-	        case 2:
-		        f.getFactionName();
-		        System.out.println("Player.selectClass Line 132");
-		        break;
-	        default:
-                System.out.println("Player.selectClass Invalid Option " + this.getFactionID());
-        }
-    }
+	void selectClass() {
+		Faction f = new Faction(this.getFactionID());
+		switch (this.getFactionID()) {
+			case 1:
+				System.out.println("Faction " + f.getFactionName());
+				System.out.println("Player.selectClass Line 129 RaceID is " + this.getRaceID());
+				break;
+			case 2:
+				f.getFactionName();
+				System.out.println("Player.selectClass Line 132");
+				break;
+			default:
+				System.out.println("Player.selectClass Invalid Option " + this.getFactionID());
+		}
+	}
 
-    void selectRace() {
-        int raceID = 0;
-        Race r = new Race();
-        switch (this.getFactionID()) {
-            case 1:
-                System.out.println("You will select from Alliance Races");
-                raceID = r.selectAllianceRace();
-                break;
-            case 2:
-                System.out.println("You will select from Horde Races");
-                raceID = r.selectHordeRace();
-                break;
-            default:
-                System.out.println("Player.selectRace invalid Option");
-                System.out.println("We will join you in Neutral");
-                this.setFaction(0);
-        }
+	void selectRace() {
+		int raceID = 0;
+		Race r = new Race();
+		switch (this.getFactionID()) {
+			case 1:
+				System.out.println("You will select from Alliance Races");
+				raceID = r.selectAllianceRace();
+				break;
+			case 2:
+				System.out.println("You will select from Horde Races");
+				raceID = r.selectHordeRace();
+				break;
+			default:
+				System.out.println("Player.selectRace invalid Option");
+				System.out.println("We will join you in Neutral");
+				this.setFaction(0);
+		}
 
-        this.setRaceID(raceID);
-	    System.out.println("Player.selectRace is " + this.getRaceID() + " or ");
-	    System.out.println("" + r.getRaceName(this.getFactionID()));
-	    System.out.println(" from " + this.getFaction());
-    }
+		this.setRaceID(raceID);
+		System.out.print("Player.selectRace is " + this.getRaceID() + " or " + r.getRaceName(this.getFactionID()));
+		System.out.println(" from " + this.getFaction());
+	}
 
-    public int getClassID() {
-        return this.ClassID;
-    }
+	int getClassID() {
+		return this.ClassID;
+	}
 
-    public void setClassID(int classID) {
-        this.ClassID = classID;
-    }
+	public void setClassID(int classID) {
+		this.ClassID = classID;
+	}
 }
