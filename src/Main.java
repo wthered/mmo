@@ -28,7 +28,7 @@ class Main {
 					int[] m = convertMoney(p.getMoney());
 					String money = m[0] + "g " + m[1] + "s " + m[2] + "c";
 					System.out.println(p.getName() + " has " + money + "! Use them wisely");
-					System.out.println("Main.main says PlayerClass is " + p.getClassID() + " from " + p.getFaction());
+					System.out.println("Main.main says PlayerClass is " + p.getClass() + " from " + p.getFaction());
 					break;
 				case 2:
 					System.out.println("Sending http request to see your old Characters");
