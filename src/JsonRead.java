@@ -13,7 +13,12 @@ import java.io.IOException;
 
 class JsonRead {
 
+    JsonRead() {
+        System.out.println("JsonRad Conctructor");
+    }
+
     void read() {
+
 
         JSONParser parser = new JSONParser();
 
