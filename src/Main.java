@@ -25,11 +25,12 @@ public class Main {
                 case 1:
                     System.out.println("You will create a new Player");
                     Player p = createNewPlayer();
-                    break;
-                case 2:
-                    System.out.println("Sending http request to see your old Characters");
-                    break;
-                default:
+	                System.out.println("You have " + p.getMoney() + " money. Use them wisely");
+	                break;
+	            case 2:
+		            System.out.println("Sending http request to see your old Characters");
+		            break;
+	            default:
                     System.out.println("Invalid option");
                     break;
             }
@@ -39,7 +40,8 @@ public class Main {
     }
 
     private static Player createNewPlayer() {
-        Player p = new Player("William", 1, 1, 2, 3);
+	    Random rnd = new Random();
+	    Player p = new Player("William", 1, 1 + rnd.nextInt(3), 1 + rnd.nextInt(3), 1 + rnd.nextInt(3));
 
         p.selectFaction();
         p.selectRace();
@@ -48,7 +50,6 @@ public class Main {
     }
 
     private static boolean auth(String username, String password) {
-        Random rnd = new Random();
         System.out.println("Username\t" + username);
         System.out.println("Password\t" + password);
         httpAuth auth = new httpAuth();

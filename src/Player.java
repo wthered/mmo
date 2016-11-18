@@ -1,5 +1,3 @@
-import jdk.nashorn.internal.objects.annotations.Setter;
-
 import java.util.Scanner;
 
 /**
@@ -54,7 +52,7 @@ class Player implements playerInterface {
     }
 
     // Money money money
-    public int getMoney() {
+    int getMoney() {
         return this.money;
     }
 
@@ -105,8 +103,9 @@ class Player implements playerInterface {
     }
 
     @Override
-    public void getFaction() {
+    public String getFaction() {
         System.out.println("Player.getFaction");
+	    return "Player.getFaction";
     }
 
     @Override
@@ -135,12 +134,14 @@ class Player implements playerInterface {
         Faction f = new Faction(this.getFactionID());
         switch (this.getFactionID()) {
             case 1:
-                System.out.println("Player.selectClass Line 129");
-                break;
-            case 2:
-                System.out.println("Player.selectClass Line 132");
-                break;
-            default:
+	            System.out.println("Faction " + f.getFactionName());
+	            System.out.println("Player.selectClass Line 129");
+	            break;
+	        case 2:
+		        f.getFactionName();
+		        System.out.println("Player.selectClass Line 132");
+		        break;
+	        default:
                 System.out.println("Player.selectClass Invalid Option " + this.getFactionID());
         }
     }
@@ -164,7 +165,9 @@ class Player implements playerInterface {
         }
 
         this.setRaceID(raceID);
-        System.out.println("Player.selectRace is " + this.getRaceID() + " or " + r.getRaceName() + " from " + this.getFactionID());
+	    System.out.println("Player.selectRace is " + this.getRaceID() + " or ");
+	    System.out.println("" + r.getRaceName(this.getFactionID()));
+	    System.out.println(" from " + this.getFaction());
     }
 
     public int getClassID() {

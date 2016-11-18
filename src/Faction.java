@@ -18,15 +18,15 @@ class Faction {
 
     // FactionID
      private int getFactionID() {
-        return this.FactionID;
-    }
+	     return this.FactionID;
+     }
 
     private void setFactionID(int factionID) {
         this.FactionID = factionID;
     }
 
     // FactionName
-    private String getFactionName() {
+    String getFactionName() {
         switch (this.getFactionID()) {
             case 1:
                 this.setFactionName("Alliance");

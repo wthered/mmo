@@ -14,7 +14,7 @@ import java.io.IOException;
 class JsonRead {
 
     JsonRead() {
-        System.out.println("JsonRad Conctructor");
+        System.out.println("JsonRad Constructor");
     }
 
     void read() {

@@ -8,8 +8,9 @@ interface playerInterface {
         System.out.println("playerInterface.showMoney says you have some money");
     }
 
-    default void getFaction() {
+    default String getFaction() {
         System.out.println("playerInterface.getFaction says you belong to Faction");
+        return "InterfacePlayerFactionName";
     }
 
     default void showHealth() {
