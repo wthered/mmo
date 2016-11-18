@@ -13,11 +13,13 @@ interface playerInterface {
         return "InterfacePlayerFactionName";
     }
 
-    default void showHealth() {
+    default int showHealth() {
         System.out.println("playerInterface.showHealth");
+        return 100;
     }
 
-    default void showMana() {
+    default int showMana() {
         System.out.println("playerInterface.showMana");
+        return 100;
     }
 }
