@@ -14,7 +14,7 @@ import java.io.IOException;
 class JsonRead {
 
 	JsonRead() {
-		System.out.println("JsonRead Constructor");
+//		System.out.println("JsonRead Constructor");
 	}
 
 	void read() {
@@ -24,10 +24,9 @@ class JsonRead {
 		JSONParser parser = new JSONParser();
 
 		try {
-
 //			Object obj = parser.parse(new FileReader("/home/wthered/json.txt"));
-
 //			JSONObject jsonObject = (JSONObject) obj;
+
 			JSONObject jsonObject = (JSONObject) parser.parse(http.sendGet());
 
 			String base = (String) jsonObject.get("base");
@@ -40,9 +39,9 @@ class JsonRead {
 			JSONArray msg = (JSONArray) jsonObject.get("weather");
 			for (Object MsgObj : msg) {
 				JSONObject job = (JSONObject) MsgObj;
-				System.out.println("A Message could be " + MsgObj.toString());
-				System.out.println("Description is " + job.get("description"));
-				System.out.println("Main Weather is" + job.get("main"));
+//				System.out.println("A Message could be " + MsgObj.toString());
+				System.out.println("Weather Prediction for Naxos is " + job.get("description"));
+				System.out.println("Main Weather is "+ job.get("main"));
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

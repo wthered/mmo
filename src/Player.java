@@ -12,9 +12,9 @@ class Player implements playerInterface {
 	private int money;
 	private int health;
 	private int mana;
-	private int FactionID;
+	int FactionID;
 	private String Faction;
-	private int RaceID;
+	int RaceID;
 	int ClassID;
 
 	Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
@@ -39,7 +39,7 @@ class Player implements playerInterface {
 		return this.Name;
 	}
 
-	private void setName(String name) {
+	void setName(String name) {
 		this.Name = name;
 	}
 
@@ -62,7 +62,7 @@ class Player implements playerInterface {
 	}
 
 	// Health
-	public int getHealth() {
+	int getHealth() {
 		return this.health;
 	}
 
@@ -71,7 +71,7 @@ class Player implements playerInterface {
 	}
 
 	// Mana
-	public int getMana() {
+	int getMana() {
 		return this.mana;
 	}
 
@@ -187,7 +187,7 @@ class Player implements playerInterface {
 		return this.ClassID;
 	}
 
-	public void setClassID(int classID) {
+	void setClassID(int classID) {
 		this.ClassID = classID;
 	}
 }

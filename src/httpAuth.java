@@ -46,7 +46,7 @@ class httpAuth {
 
         if (responseCode == 200) {
             response = getResponse(connection);
-            System.out.println("Response = " + response);
+//            System.out.println("Response = " + response);
         }
         return response;
     }

@@ -25,10 +25,27 @@ class Main {
 				case 1:
 					System.out.println("You will create a new Player");
 					Player p = createNewPlayer();
+					Race r = new Race();
+
+					// Init these vars or reset Project
+					p.setClassID(p.ClassID);
+					System.out.println("Main.main\t\t Player RaceID is\t" + p.RaceID);
+
+					System.out.printf("What is your name " + r.getRaceName(p.FactionID) + "? ");
+					Scanner playerInfo = new Scanner(System.in);
+					String playerName = playerInfo.nextLine();
+					p.setName(playerName);
+					System.out.println("Ok " + playerName + "!");
+
+					System.out.println("Your health is " + p.getHealth() + " health points");
+					System.out.println("Your Mana is " + p.getMana() );
+
 					int[] m = convertMoney(p.getMoney());
 					String money = m[0] + "g " + m[1] + "s " + m[2] + "c";
 					System.out.println(p.getName() + " has " + money + "! Use them wisely");
 					System.out.println("Main.main says PlayerClass is " + p.ClassID + " from " + p.getFaction());
+
+					System.out.println("You are ready to quest " + p.getName());
 					break;
 				case 2:
 					System.out.println("Sending http request to see your old Characters");

@@ -21,7 +21,7 @@ class Race {
 
 	private Race(int Strength, int Agility, int Stamina, int Intellect, int Spirit) {
 		this.raceStrength = Strength;
-		System.out.println("Your race Strength is\t" + this.raceStrength);
+		System.out.println("Your Race Strength is\t" + this.raceStrength);
 
 		this.raceAgility = Agility;
 		System.out.println("Your Race Agility is\t" + this.raceAgility);
@@ -150,7 +150,7 @@ class Race {
 				this.setRaceName("Night Elf");
 				break;
 			default:
-				System.out.println("This is never reached");
+				System.out.println("RaceID is never " + this.getRaceID() + " in Race.setAllianceRaceName");
 				break;
 		}
 		System.out.println("Setting Race as " + this.raceName);
