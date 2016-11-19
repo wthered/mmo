@@ -15,9 +15,21 @@ class Main {
 		Scanner userScan = new Scanner(System.in);
 		username = userScan.nextLine();
 
+		/*
+		While username not contains numbers
+		notValid if contains [0-9] at least once
+		todo Place this snippet inside auth Class
+		*/
+		while( !username.matches("(^|,)[a-zA-Z0-9]{1,}") ) {
+			System.out.print("What is you username? ");
+			userScan = new Scanner(System.in);
+			username = userScan.nextLine();
+		}
+
 		System.out.print("What is your Password? ");
 		password = userScan.nextLine();
 
+		// todo while identify != false { auth(username,password); }
 		boolean identify = auth(username, password);
 
 		if (identify) {
@@ -46,6 +58,7 @@ class Main {
 					System.out.println("** 2) Female **");
 					System.out.println("***************");
 					System.out.println("What is your desired sex " + p.getName() + "?");
+
 					playerInfo.nextInt();
 					p.setSex(playerInfo.nextInt());
 
@@ -63,6 +76,12 @@ class Main {
 
 					System.out.println("You are ready to quest " + p.getName());
 					PlayerAction a = new PlayerAction(p);
+
+					int lastPlayerAction = a.selectAction();
+					while (lastPlayerAction != 0) {
+						lastPlayerAction = a.selectAction();
+						a.doAction();
+					}
 					break;
 				case 2:
 					System.out.println("Sending http request to see your old Characters");

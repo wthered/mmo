@@ -9,13 +9,15 @@ class PlayerAction {
 
     private int lastAction;
     private String playerName;
+    private Player myself;
 
     PlayerAction(Player actor) {
         this.lastAction = 0;
+        this.myself = actor;
         this.playerName = actor.getName();
     }
 
-    public int selectAction() {
+    int selectAction() {
         System.out.println("***************");
         System.out.println("** 1) Eat   **");
         System.out.println("** 2) Drink **");
@@ -25,6 +27,7 @@ class PlayerAction {
         System.out.println("** 6) Go to Area **");
         System.out.println("** 7) Go to Location (x,y) or current Area **");
         System.out.println("** 8) Report yourself                      **");
+        System.out.println("** 0) I'm done here. Fly me to the moon    **");
         System.out.println("*********************************************");
         Scanner actionScanner = new Scanner(System.in);
         this.lastAction = actionScanner.nextInt(3);
@@ -33,5 +36,15 @@ class PlayerAction {
 
     public void report() {
         System.out.println("Last Action of " + this.playerName + " is " + this.lastAction);
+    }
+
+    void doAction() {
+        switch (this.lastAction) {
+            case 3:
+                System.out.println("Looking around to find another player (thru http) for " + this.playerName + " in PlayerAction.doAction");
+                break;
+            default:
+                System.out.println("Not implemented yet in PlayerAction.doAction");
+        }
     }
 }
