@@ -157,7 +157,7 @@ class Race {
 	}
 
 	private void setHordeRaceName(int raceID) {
-		this.setRaceName("Orc or another");
+		this.setRaceName("Orc or other");
 		System.out.println("Race.setHordeRaceName Horde Race is " + raceID);
 	}
 
