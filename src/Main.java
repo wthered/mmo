@@ -1,4 +1,3 @@
-import java.text.MessageFormat;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -64,9 +63,10 @@ class Main {
 					p.setSex(playerInfo.nextInt());
 
 					System.out.println("Ok " + playerName + "!");
+					p.selectClass();
 
 					System.out.println("Your health is " + p.getHealth() + " health points");
-					System.out.println("Your Mana is " + p.getMana() );
+					System.out.println("Your Mana is " + p.getItsMana() );
 
 					int[] m = convertMoney(p.getMoney());
 					String money = m[0] + "g " + m[1] + "s " + m[2] + "c";

@@ -4,16 +4,17 @@ import java.util.Scanner;
  * Created by wthered on 18/11/2016.
  * This is not the default Template
  */
-public class Human {
+class Human {
 
 	private int HumanClassID;
 	private String HumanClass;
 
-	public Human() {
+	Human() {
 		System.out.println("Human.Human Constructor");
 	}
 
-	public int selectClass() {
+	int selectClass() {
+		System.out.println("Human.selectClass");
 		System.out.println("*****************");
 		System.out.println("** 1) Magician **");
 		System.out.println("** 2) Paladin  **");

@@ -7,29 +7,50 @@ import java.util.Scanner;
 class Player implements playerInterface {
 
 	// Player Attributes
-	private String Name;
-	private int level;
+	private static String Name;
+	int level;
 	private int money;
 	private int health;
-	private int mana;
+	private int itsMana;
+	private int maxMana;
+
+	// playerFaction Setup
 	int FactionID;
 	private String Faction;
+
+	// playerRace Setup
 	int RaceID;
+	private String RaceName;
+
+	// playerClass SetUp
 	int ClassID;
+	String ClassName;
+
+	// Sex setup
 	private int itsSex;
 	String itsSexName;
+
+	public String getRaceName() {
+		System.out.println("Player.getRaceName sets raceName to <sth> for " + this.getRaceID() );
+		return this.RaceName;
+	}
+
+	public void setRaceName(String raceName) {
+		System.out.println("Player.setRaceName faction is " + this.Faction);
+		this.RaceName = raceName;
+	}
 
 	Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
 		this.setName(newName);
 		this.setHealth(100 * newLevel);
-		this.setMana(150 * newLevel);
+		this.setItsMana(150 * newLevel);
 		this.setMoney(0);
 
 		this.FactionID = FactionID;
 		this.RaceID = RaceID;
 		this.ClassID = classID;
 
-		System.out.println("Faction #" + FactionID + ", race = " + RaceID + ", Class = " + classID);
+//		System.out.println("Faction #" + FactionID + ", race = " + RaceID + ", Class = " + classID);
 	}
 
 	/*********************
@@ -37,12 +58,12 @@ class Player implements playerInterface {
 	 *********************/
 
 	// playerName
-	String getName() {
-		return this.Name;
+	public String getName() {
+		return Name;
 	}
 
-	void setName(String name) {
-		this.Name = name;
+	void setName(String playerName) {
+		Name = playerName;
 	}
 
 	// Level
@@ -73,12 +94,12 @@ class Player implements playerInterface {
 	}
 
 	// Mana
-	int getMana() {
-		return this.mana;
+	int getItsMana() {
+		return this.itsMana;
 	}
 
-	private void setMana(int mana) {
-		this.mana = mana;
+	private void setItsMana(int itsMana) {
+		this.itsMana = itsMana;
 	}
 
 	// Faction
@@ -87,7 +108,7 @@ class Player implements playerInterface {
 	}
 
 	private void setFaction(int faction) {
-		this.FactionID = faction;
+		FactionID = faction;
 	}
 
 	// Race ID
@@ -109,7 +130,7 @@ class Player implements playerInterface {
 	@Override
 	public String getFaction() {
 //		System.out.println("Player.getFaction");
-		switch (this.FactionID) {
+		switch (FactionID) {
 			case 1:
 				this.Faction = "Alliance";
 				break;
@@ -131,7 +152,7 @@ class Player implements playerInterface {
 	@Override
 	public int showMana() {
 		System.out.println("Player.showMana");
-		return this.mana;
+		return this.itsMana;
 	}
 
 	// The Game has started and we set the new created Player
@@ -147,15 +168,17 @@ class Player implements playerInterface {
 	}
 
 	void selectClass() {
-		Faction f = new Faction(this.getFactionID());
-		switch (this.getFactionID()) {
+		Faction f = new Faction(getFactionID());
+		switch (getFactionID()) {
 			case 1:
-//				System.out.println("Faction " + f.getFactionName());
-				System.out.println("Player.selectClass Line 129 RaceID is " + this.getRaceID());
+				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
+				int pClass = PlayerClass.ShowAllianceClassesFor( this.RaceID );
+				this.setClassID(pClass);
+				System.out.println("Player.selectClass Line 154 RaceID is " + this.getRaceID() + " or " + this.RaceName);
 				break;
 			case 2:
-				f.getFactionName();
-				System.out.println("Player.selectClass Line 132");
+				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
+				System.out.println("Player.selectClass Line 158");
 				break;
 			default:
 				System.out.println("Player.selectClass Invalid Option " + this.getFactionID());

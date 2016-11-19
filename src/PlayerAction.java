@@ -9,13 +9,11 @@ import java.util.Scanner;
 class PlayerAction {
 
 	private int lastAction;
-	private String playerName;
 	private Player myself;
 
 	PlayerAction(Player actor) {
 		this.lastAction = 0;
 		this.myself = actor;
-		this.playerName = actor.getName();
 	}
 
 	int selectAction() {
@@ -32,7 +30,7 @@ class PlayerAction {
 		System.out.println("** 8) Report yourself (Position and Stats) **");
 		System.out.println("** 0) Done. Fly me to the moon and stars   **");
 		System.out.println("*********************************************");
-		System.out.print("What is your desire, " + this.playerName + "? ");
+		System.out.print("What is your desire, " + myself.ClassName + "? ");
 		Scanner actionScanner = new Scanner(System.in);
 		try {
 			thisAction = actionScanner.nextInt();
@@ -48,11 +46,11 @@ class PlayerAction {
 	}
 
 	private void report() {
-		System.out.println(myself.getName() + " is level " + myself.getLevel() );
-		System.out.println("I currently have " + myself.getHealth() + " Health Points and " + myself.getMana() );
-		System.out.println("I have " + myself.getMoney() );
+		System.out.println(myself.getName() + " is level " + myself.level );
+		System.out.println("I currently have " + myself.getHealth() + " Health Points and " + myself.getItsMana() );
+		System.out.println("I have " + myself.getMoney() + " coins");
 //		System.out.println("Currently being in " + myself.ge);
-		System.out.println("Last Action of " + this.playerName + " is " + this.lastAction);
+		System.out.println("Last Action of " + myself.getName() + " is " + this.lastAction);
 	}
 
 	void doAction() {
@@ -62,7 +60,7 @@ class PlayerAction {
 		*/
 		switch (this.lastAction) {
 			case 3:
-				System.out.println("Looking to find another player (thru http) for " + this.playerName + " in PlayerAction.doAction");
+				System.out.println("Looking to find another player (thru http) for " + myself.getName() + " in PlayerAction.doAction");
 				break;
 			case 8:
 				this.report();
