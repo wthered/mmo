@@ -28,9 +28,10 @@ class PlayerAction {
 		System.out.println("** 6) Go to Area                           **");
 		System.out.println("** 7) Go to Location (x,y) of current Area **");
 		System.out.println("** 8) Report yourself (Position and Stats) **");
+		System.out.println("** 9) See What i have in Inventory         **");
 		System.out.println("** 0) Done. Fly me to the moon and stars   **");
 		System.out.println("*********************************************");
-		System.out.print("What is your desire, " + myself.ClassName + "? ");
+		System.out.print("What is your desire, " + myself.getRaceName() + "? ");
 		Scanner actionScanner = new Scanner(System.in);
 		try {
 			thisAction = actionScanner.nextInt();

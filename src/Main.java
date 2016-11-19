@@ -63,7 +63,7 @@ class Main {
 					p.setSex(playerInfo.nextInt());
 
 					System.out.println("Ok " + playerName + "!");
-					p.selectClass();
+//					p.selectClass();
 
 					System.out.println("Your health is " + p.getHealth() + " health points");
 					System.out.println("Your Mana is " + p.getItsMana() );
