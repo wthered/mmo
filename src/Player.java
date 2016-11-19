@@ -46,7 +46,7 @@ class Player implements playerInterface {
 	}
 
 	// Level
-	public int getLevel() {
+	int getLevel() {
 		return this.level;
 	}
 
@@ -150,7 +150,7 @@ class Player implements playerInterface {
 		Faction f = new Faction(this.getFactionID());
 		switch (this.getFactionID()) {
 			case 1:
-				System.out.println("Faction " + f.getFactionName());
+//				System.out.println("Faction " + f.getFactionName());
 				System.out.println("Player.selectClass Line 129 RaceID is " + this.getRaceID());
 				break;
 			case 2:
@@ -181,8 +181,7 @@ class Player implements playerInterface {
 		}
 
 		this.setRaceID(raceID);
-		System.out.print("Player.selectRace is " + this.getRaceID() + " or " + r.getRaceName(this.getFactionID()) );
-		System.out.println(" from " + this.getFaction());
+//		System.out.println("Player.selectRace is " + r.getRaceName(this.getFactionID()) + " from " + this.getFaction());
 	}
 
 	int getClassID() {

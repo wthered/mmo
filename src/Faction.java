@@ -9,7 +9,7 @@ class Faction {
 
     Faction(int factionID) {
         this.setFactionID(factionID);
-        System.out.println("Faction.Faction #" + this.getFactionID() + " or " + this.getFactionName());
+//        System.out.println("Faction.Faction #" + this.getFactionID() + " or " + this.getFactionName());
     }
 
     /************************

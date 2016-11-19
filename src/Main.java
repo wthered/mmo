@@ -2,6 +2,8 @@ import java.text.MessageFormat;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.text.MessageFormat.format;
+
 class Main {
 
 	public static void main(String[] args) {
@@ -10,21 +12,16 @@ class Main {
 		String password;
 		int action = 0;
 
-		System.out.println("Main.main");
 		System.out.print("What is you username? ");
 		Scanner userScan = new Scanner(System.in);
 		username = userScan.nextLine();
 
+		userAuth usr = new userAuth(username);
 		/*
-		While username not contains numbers
-		notValid if contains [0-9] at least once
-		todo Place this snippet inside auth Class
+		** While username not contains numbers
 		*/
-		while( username.matches("^[a-zA-Z]{1,}") ) {
-			System.out.println("invalid Username! redo from start");
-			System.out.print("What is you username? ");
-			userScan = new Scanner(System.in);
-			username = userScan.nextLine();
+		while( !usr.validateName() ) {
+			usr.getNewName(userScan);
 		}
 
 		System.out.print("What is your Password? ");
@@ -52,8 +49,6 @@ class Main {
 					p.setClassID(p.ClassID);
 					r.setRaceID(p.RaceID);
 
-					System.out.println("Main.main\t\t Player RaceID is\t" + p.RaceID );
-
 					// Setting PlayerName
 					System.out.printf("What is your name " + r.getRaceName(p.FactionID) + "? ");
 					Scanner playerInfo = new Scanner(System.in);
@@ -77,7 +72,7 @@ class Main {
 					String money = m[0] + "g " + m[1] + "s " + m[2] + "c";
 					System.out.println(p.getName() + " has " + money + "! Use them wisely");
 
-					String message = MessageFormat.format("Main.main says {0} is {1} {2} (sex {4}) from {3}", p.getName(), r.getRaceName(p.FactionID), p.ClassID, p.getFaction(), p.itsSexName);
+					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.FactionID), p.ClassID, p.getFaction(), p.itsSexName);
 					System.out.println(message);
 
 					System.out.println("You are ready to quest " + p.getName());
@@ -132,7 +127,7 @@ class Main {
 
 		// Check if input is valid int
 		if( actScan.hasNextInt() ) {
-			System.out.println("Line 134 of Main.createOrLogin creation = " + actScan.hasNextInt() );
+//			System.out.println("Line 130 of Main.createOrLogin creation = " + actScan.hasNextInt() );
 			creation = actScan.nextInt();
 		}
 

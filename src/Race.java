@@ -33,7 +33,7 @@ class Race {
 		System.out.println("Your Race Intellect is\t" + this.raceIntellect);
 
 		this.raceSpirit = Spirit;
-		System.out.println("Your Race Spirit is\t" + this.raceSpirit);
+		System.out.println("Your Race Spirit is\t\t" + this.raceSpirit);
 	}
 
 	// Strength
@@ -118,18 +118,16 @@ class Race {
 	}
 
 	String getRaceName(int FactionID) {
-		System.out.println("Faction Selector in Race.getRaceName");
 		switch (FactionID) {
 			case 1:
 				this.setAllianceRaceName();
-//				this.setRaceName("Orc or Human");
 				break;
 			case 2:
 				this.setHordeRaceName(this.getRaceID());
 				break;
 			default:
 				System.out.println("This is never reached in Race.getRaceName");
-				this.setRaceName("Darth Vader White");
+				this.setRaceName("StarTrooper");
 				break;
 		}
 		return this.raceName;
@@ -153,7 +151,7 @@ class Race {
 				System.out.println("RaceID is never " + this.getRaceID() + " in Race.setAllianceRaceName");
 				break;
 		}
-		System.out.println("Setting Race as " + this.raceName);
+//		System.out.println("Setting Race as " + this.raceName);
 	}
 
 	private void setHordeRaceName(int raceID) {
