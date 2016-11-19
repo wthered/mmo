@@ -65,8 +65,7 @@ class Main {
 					System.out.println("** 1) Male   **");
 					System.out.println("** 2) Female **");
 					System.out.println("***************");
-					System.out.print("What is your desired sex " + p.getName() + "?");
-
+					System.out.print("What is your desired sex " + p.getName() + "? ");
 					p.setSex(playerInfo.nextInt());
 
 					System.out.println("Ok " + playerName + "!");
@@ -78,8 +77,8 @@ class Main {
 					String money = m[0] + "g " + m[1] + "s " + m[2] + "c";
 					System.out.println(p.getName() + " has " + money + "! Use them wisely");
 
-					String plow = MessageFormat.format("Main.main says {0} is {1} {2} from {3}", p.getName(), r.getRaceName(p.FactionID), p.ClassID, p.getFaction());
-					System.out.println(plow);
+					String message = MessageFormat.format("Main.main says {0} is {1} {2} (sex {4}) from {3}", p.getName(), r.getRaceName(p.FactionID), p.ClassID, p.getFaction(), p.itsSexName);
+					System.out.println(message);
 
 					System.out.println("You are ready to quest " + p.getName());
 					PlayerAction a = new PlayerAction(p);
