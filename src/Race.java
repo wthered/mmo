@@ -33,7 +33,7 @@ class Race {
 		System.out.println("Your Race Intellect is\t" + this.raceIntellect);
 
 		this.raceSpirit = Spirit;
-		System.out.println("Your Race Spirit is\t" + Spirit);
+		System.out.println("Your Race Spirit is\t" + this.raceSpirit);
 	}
 
 	// Strength

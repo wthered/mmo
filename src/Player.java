@@ -15,7 +15,7 @@ class Player implements playerInterface {
 	private int FactionID;
 	private String Faction;
 	private int RaceID;
-	private int ClassID;
+	int ClassID;
 
 	Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
 		this.setName(newName);

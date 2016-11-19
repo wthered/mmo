@@ -14,25 +14,27 @@ import java.io.IOException;
 class JsonRead {
 
 	JsonRead() {
-		System.out.println("JsonRad Constructor");
+		System.out.println("JsonRead Constructor");
 	}
 
 	void read() {
 
-
+		String weather = null;
+		httpAuth http = new httpAuth();
 		JSONParser parser = new JSONParser();
 
 		try {
 
-			Object obj = parser.parse(new FileReader("/home/wthered/json.txt"));
+//			Object obj = parser.parse(new FileReader("/home/wthered/json.txt"));
 
-			JSONObject jsonObject = (JSONObject) obj;
+//			JSONObject jsonObject = (JSONObject) obj;
+			JSONObject jsonObject = (JSONObject) parser.parse(http.sendGet());
 
-			String name = (String) jsonObject.get("name");
-			System.out.println("JSON Name is " + name);
+			String base = (String) jsonObject.get("base");
+			System.out.println("JSON Name is " + base);
 
-			long age = (Long) jsonObject.get("age");
-			System.out.println("Your Age is " + age + " years old");
+//			long age = (Long) jsonObject.get("age");
+//			System.out.println("Your Age is " + age + " years old");
 
 			// loop array
 			JSONArray msg = (JSONArray) jsonObject.get("weather");
@@ -42,9 +44,8 @@ class JsonRead {
 				System.out.println("Description is " + job.get("description"));
 				System.out.println("Main Weather is" + job.get("main"));
 			}
-
-		} catch (IOException | ParseException e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 }

@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -16,7 +17,7 @@ class httpAuth {
         System.out.println("httpAuth.auth password " + pass);
         boolean success = false;
         try {
-            success = this.sendGet() == 200;
+            success = this.getResponseCode(this.connect()) == 200;
             JsonRead jr = new JsonRead();
             jr.read();
         } catch (Exception e) {
@@ -25,21 +26,29 @@ class httpAuth {
         return success;
     }
 
-    private int sendGet() throws Exception {
-        String query = "http://api.openweathermap.org/data/2.5/weather?q=naxos&appid=e5ddf07b3fcdd1e7febf01551aba84d0";
-        URL url = new URL(query);
+    private HttpURLConnection connect() throws IOException {
+        String urlString = "http://api.openweathermap.org/data/2.5/weather?q=naxos&appid=e5ddf07b3fcdd1e7febf01551aba84d0";
+        URL url = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        return connection;
+    }
+
+    public String sendGet() throws Exception {
+        // Init of Local Vars
+        HttpURLConnection connection = this.connect();
+        String response = null;
+
         connection.setRequestMethod("GET");
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:49.0) Gecko/20100101 Firefox/49.0");
 
         int responseCode = connection.getResponseCode();
-        System.out.println("Response Code is " + responseCode);
+//        System.out.println("Response Code is " + responseCode);
 
         if (responseCode == 200) {
-            String response = getResponse(connection);
+            response = getResponse(connection);
             System.out.println("Response = " + response);
         }
-        return responseCode;
+        return response;
     }
 
     private String getResponse(HttpURLConnection connection) {
@@ -53,8 +62,12 @@ class httpAuth {
             return response.toString();
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.out.println("Line 41 Exception caught");
+            System.out.println("httpAuth.getResponse Exception caught");
         }
-        return "";
+        return null;
+    }
+
+    private int getResponseCode(HttpURLConnection c) throws IOException {
+        return c.getResponseCode();
     }
 }
