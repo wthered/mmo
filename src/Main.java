@@ -1,3 +1,4 @@
+import java.text.MessageFormat;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -29,12 +30,25 @@ class Main {
 
 					// Init these vars or reset Project
 					p.setClassID(p.ClassID);
-					System.out.println("Main.main\t\t Player RaceID is\t" + p.RaceID);
+					r.setRaceID(p.RaceID);
 
+					System.out.println("Main.main\t\t Player RaceID is\t" + p.RaceID );
+
+					// Setting PlayerName
 					System.out.printf("What is your name " + r.getRaceName(p.FactionID) + "? ");
 					Scanner playerInfo = new Scanner(System.in);
 					String playerName = playerInfo.nextLine();
 					p.setName(playerName);
+
+					// Setting PlayerSex
+					System.out.println("***************");
+					System.out.println("** 1) Male   **");
+					System.out.println("** 2) Female **");
+					System.out.println("***************");
+					System.out.println("What is your desired sex " + p.getName() + "?");
+					playerInfo.nextInt();
+					p.setSex(playerInfo.nextInt());
+
 					System.out.println("Ok " + playerName + "!");
 
 					System.out.println("Your health is " + p.getHealth() + " health points");
@@ -43,9 +57,12 @@ class Main {
 					int[] m = convertMoney(p.getMoney());
 					String money = m[0] + "g " + m[1] + "s " + m[2] + "c";
 					System.out.println(p.getName() + " has " + money + "! Use them wisely");
-					System.out.println("Main.main says PlayerClass is " + p.ClassID + " from " + p.getFaction());
+
+					String plow = MessageFormat.format("Main.main says {0} is {1} {2} from {3}", p.getName(), r.getRaceName(p.FactionID), p.ClassID, p.getFaction());
+					System.out.println(plow);
 
 					System.out.println("You are ready to quest " + p.getName());
+					PlayerAction a = new PlayerAction(p);
 					break;
 				case 2:
 					System.out.println("Sending http request to see your old Characters");

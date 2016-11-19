@@ -16,6 +16,8 @@ class Player implements playerInterface {
 	private String Faction;
 	int RaceID;
 	int ClassID;
+	private int itsSex;
+	private String itsSexName;
 
 	Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
 		this.setName(newName);
@@ -189,5 +191,19 @@ class Player implements playerInterface {
 
 	void setClassID(int classID) {
 		this.ClassID = classID;
+	}
+
+	void setSex(int sex) {
+		switch (this.itsSex % 2) {
+			case 0:
+				this.itsSexName = "Female";
+				break;
+			case 1:
+				this.itsSexName = "Male";
+				break;
+			default:
+				System.out.println("Player sex is never " + this.itsSex + " in Player.setSex");
+		}
+		this.itsSex = sex;
 	}
 }

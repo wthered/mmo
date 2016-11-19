@@ -113,7 +113,7 @@ class Race {
 		return this.raceID;
 	}
 
-	private void setRaceID(int raceID) {
+	void setRaceID(int raceID) {
 		this.raceID = raceID;
 	}
 

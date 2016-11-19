@@ -29,8 +29,8 @@ class JsonRead {
 
 			JSONObject jsonObject = (JSONObject) parser.parse(http.sendGet());
 
-			String base = (String) jsonObject.get("base");
-			System.out.println("JSON Name is " + base);
+//			String base = (String) jsonObject.get("base");
+//			System.out.println("JSON Name is " + base);
 
 //			long age = (Long) jsonObject.get("age");
 //			System.out.println("Your Age is " + age + " years old");
