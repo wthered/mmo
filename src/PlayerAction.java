@@ -45,7 +45,7 @@ class PlayerAction {
 
 	private void report() {
 		System.out.println(myself.getName() + " is level " + myself.level );
-		System.out.println("I currently have " + myself.getItsHealth() + " Health Points and " + myself.getItsMana() + " Mano");
+		System.out.println("I currently have " + myself.getItsHealth() + " Health Points and " + myself.getItsMana() + " Mana");
 		System.out.println("Your Allowed maxHealth is " + myself.maxHealth);
 		System.out.println("Your Allowed maxNanaPt is " + myself.maxMana);
 		System.out.println("I have " + myself.getMoney() + " coins");

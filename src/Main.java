@@ -65,14 +65,14 @@ class Main {
 					System.out.println("Ok " + playerName + "!");
 //					p.selectClass();
 
-					System.out.println("Your health is " + p.getItsHealth() + " health points");
-					System.out.println("Your Mana is " + p.getItsMana() );
+					System.out.println("Your health is " + p.getItsHealth() + " health Points");
+					System.out.println("Your Mana is " + p.getItsMana() + " Mana Points");
 
 					int[] m = convertMoney(p.getMoney());
 					String money = m[0] + "g " + m[1] + "s " + m[2] + "c";
 					System.out.println(p.getName() + " has " + money + "! Use them wisely");
 
-					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.FactionID), p.ClassID, p.getFaction(), p.itsSexName);
+					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.FactionID), p.ClassName, p.getFaction(), p.itsSexName);
 					System.out.println(message);
 
 					System.out.println("You are ready to quest " + p.getName());

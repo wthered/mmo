@@ -8,11 +8,17 @@ class Player implements playerInterface {
 
 	// Player Attributes
 	private static String Name;
+
 	int level;
 	private int money;
-	private int health;
+
+	// Health Variables
+	private int itsHealth;
+	int maxHealth;
+
+	// mana Variables
 	private int itsMana;
-	private int maxMana;
+	int maxMana;
 
 	// playerFaction Setup
 	int FactionID;
@@ -42,7 +48,7 @@ class Player implements playerInterface {
 
 	Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
 		this.setName(newName);
-		this.setHealth(100 * newLevel);
+		this.setItsHealth(100 * newLevel);
 		this.setItsMana(150 * newLevel);
 		this.setMoney(0);
 
@@ -85,12 +91,12 @@ class Player implements playerInterface {
 	}
 
 	// Health
-	int getHealth() {
-		return this.health;
+	int getItsHealth() {
+		return this.itsHealth;
 	}
 
-	private void setHealth(int health) {
-		this.health = health;
+	private void setItsHealth(int itsHealth) {
+		this.itsHealth = itsHealth;
 	}
 
 	// Mana
@@ -146,7 +152,7 @@ class Player implements playerInterface {
 	@Override
 	public int showHealth() {
 		System.out.println("Player.showHealth");
-		return this.health;
+		return this.itsHealth;
 	}
 
 	@Override
@@ -169,12 +175,17 @@ class Player implements playerInterface {
 
 	void selectClass() {
 		Faction f = new Faction(getFactionID());
-		switch (getFactionID()) {
+
+		// Test
+		PlayerClass pc = new PlayerClass(this);
+		switch (this.getFactionID()) {
 			case 1:
 				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
-				int pClass = PlayerClass.ShowAllianceClassesFor( this.RaceID );
-				this.setClassID(pClass);
-				System.out.println("Player.selectClass Line 154 RaceID is " + this.getRaceID() + " or " + this.RaceName);
+				pc.ShowAllianceClassesFor( this.RaceID );
+				// PlayerClassID is set into the function above
+				//this.setClassID(pClass);
+				// fixme this.RaceName = null
+				System.out.println("Player.selectClass Line 154 RaceID is " + this.getRaceID() + " or " + this.ClassName);
 				break;
 			case 2:
 				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
