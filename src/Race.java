@@ -37,11 +37,11 @@ class Race {
 	}
 
 	// Strength
-	public int getRaceStrength() {
+	int getRaceStrength() {
 		return this.raceStrength;
 	}
 
-	public void setRaceStrength(int raceStrength) {
+	void setRaceStrength(int raceStrength) {
 		this.raceStrength = raceStrength;
 	}
 
@@ -50,7 +50,7 @@ class Race {
 		return this.raceAgility;
 	}
 
-	public void setRaceAgility(int raceAgility) {
+	void setRaceAgility(int raceAgility) {
 		this.raceAgility = raceAgility;
 	}
 
@@ -59,7 +59,7 @@ class Race {
 		return this.raceStamina;
 	}
 
-	public void setRaceStamina(int raceStamina) {
+	void setRaceStamina(int raceStamina) {
 		this.raceStamina = raceStamina;
 	}
 
@@ -68,7 +68,7 @@ class Race {
 		return this.raceIntellect;
 	}
 
-	public void setRaceIntellect(int raceIntellect) {
+	void setRaceIntellect(int raceIntellect) {
 		this.raceIntellect = raceIntellect;
 	}
 
@@ -77,7 +77,7 @@ class Race {
 		return this.raceSpirit;
 	}
 
-	public void setRaceSpirit(int raceSpirit) {
+	void setRaceSpirit(int raceSpirit) {
 		this.raceSpirit = raceSpirit;
 	}
 
@@ -155,7 +155,7 @@ class Race {
 	}
 
 	private void setHordeRaceName(int raceID) {
-		this.setRaceName("Orc or other");
+		this.setRaceName("Orc");
 		System.out.println("Race.setHordeRaceName Horde Race is " + raceID);
 	}
 

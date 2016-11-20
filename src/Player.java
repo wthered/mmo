@@ -13,6 +13,11 @@ class Player implements playerInterface {
 	private int money;
 
 	// Health Variables
+	/* The maximum amount of health a player
+	** character has is determined by a
+	** combination of the character's
+	** level and stamina
+	*/
 	private int itsHealth;
 	int maxHealth;
 
@@ -137,11 +142,6 @@ class Player implements playerInterface {
 	}
 
 	// Methods inherited from playerInterface
-//	@Override
-//	public int showMoney() {
-//		System.out.println("Player.showMoney");
-//		return this.money;
-//	}
 
 	@Override
 	public String getFaction() {
@@ -158,18 +158,6 @@ class Player implements playerInterface {
 		}
 		return this.Faction;
 	}
-
-//	@Override
-//	public int showHealth() {
-//		System.out.println("Player.showHealth");
-//		return this.itsHealth;
-//	}
-
-//	@Override
-//	public int showMana() {
-//		System.out.println("Player.showMana");
-//		return this.itsMana;
-//	}
 
 	// The Game has started and we set the new created Player
 	void selectFaction() {
@@ -283,5 +271,13 @@ class Player implements playerInterface {
 
 	public static void setItsY(int itsY) {
 		Player.itsY = itsY;
+	}
+
+	/*
+	** This should be called just after player
+	** advances to next level
+	*/
+	public void setMaxHealth() {
+		this.maxHealth = 100*this.level;
 	}
 }

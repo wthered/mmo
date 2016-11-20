@@ -13,10 +13,12 @@ class PlayerAction {
 
 	private int lastAction;
 	private Player myself;
+	private Race racist;
 
-	PlayerAction(Player actor) {
+	PlayerAction(Player actor, Race playRace) {
 		this.lastAction = 0;
 		this.myself = actor;
+		this.racist = playRace;
 	}
 
 	int selectAction() {
@@ -31,7 +33,7 @@ class PlayerAction {
 		System.out.println("** 7) Go to Location (x,y) of current Area **");
 		System.out.println("** 8) Report yourself (Position and Stats) **");
 		System.out.println("** 9) See What i have in Inventory         **");
-		System.out.println("** 0) Done. Fly me to the moon and stars   **");
+		System.out.println("** 0) Fly me to the moon among the stars   **");
 		System.out.println("*********************************************");
 		System.out.print("What is your desire, " + myself.getName() + "? ");
 		Scanner actionScanner = new Scanner(System.in);
@@ -47,14 +49,15 @@ class PlayerAction {
 
 	private void report() {
 		System.out.println(myself.getName() + " is level " + myself.level );
-		System.out.println("I currently have " + myself.getItsHealth() + " Health Points and " + myself.showMana() + " Mana");
-		System.out.println("Your Allowed maximum Health is " + myself.maxHealth);
-		System.out.println("Your Allowed maximum Mana points is " + myself.maxMana);
+		System.out.println("I currently have " + myself.getItsHealth() + " Health Points of " + myself.maxHealth + " max");
+		System.out.println("I currently have " + myself.getItsMana() + " mana points of " + myself.maxMana + " max");
 		System.out.println("I have " + myself.getMoney() + " coins");
 		System.out.println("I have " + myself.showExperience() + " experience" );
-		System.out.println("Currently being in **" + myself.getPosition() + "** of " + myself.getArea());
-		System.out.println("Your city is " + myself.getCity());
+		System.out.println("You can find me near " + myself.getPosition() + " of " + myself.getArea() + ", " + myself.getCity());
 		System.out.println("Last Action of " + myself.getName() + " is " + this.lastAction);
+
+		System.out.println("******** Attributes Report Starts here ********");
+		System.out.println("** Strength for " + myself.getRaceName() + " is " + racist.getRaceStrength());
 	}
 
 	void doAction() throws InterruptedException {
@@ -63,25 +66,31 @@ class PlayerAction {
 		** todo 2) look into Inventory to see if drinkIsAvailable()
 		*/
 		switch (this.lastAction) {
+			case 0:
+				System.out.println("Exiting....");
+				break;
 			case 3:
+				// Looking to find another player (thru http) for " + myself.getName() + " in PlayerAction.doAction;
 				Timer timer = new Timer();
-				timer.schedule(new PlayerChat(), 0, 5000);
+				timer.schedule(new PlayerChat(this.lastAction), 0, 5000);
 				if (this.lastAction == 0) {
 					timer.cancel();
 					timer.purge();
 				}
-//				System.out.println("Looking to find another player (thru http) for " + myself.getName() + " in PlayerAction.doAction");
-				break;
-			case 8:
-				this.report();
 				break;
 			case 5:
 				for (int i = 0; i < 5; i++) {
-					Thread.sleep(1000);
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException ex) {
+						System.out.println("PlayerAction.doAction interrupted in line 83");
+						ex.printStackTrace();
+						Thread.currentThread().interrupt();
+					}
 					System.out.println(Thread.activeCount() + " in PlayerAction.doAction");
 				}
-			case 0:
-				System.out.println("Exiting....");
+			case 8:
+				this.report();
 				break;
 			default:
 				System.out.println("Not implemented yet in PlayerAction.doAction for " + this.lastAction);
@@ -89,8 +98,15 @@ class PlayerAction {
 	}
 
 	private class PlayerChat extends TimerTask {
+
+		private int lastAction;
+
+		PlayerChat(int lastAction) {
+			this.lastAction = lastAction;
+		}
+
 		public void run() {
-			System.out.println("PlayerChat.run in PlayerAction line 84");
+			System.out.println("PlayerChat.run in PlayerAction line 84 LastAction = " + this.lastAction);
 			Toolkit.getDefaultToolkit().beep();
 		}
 	}

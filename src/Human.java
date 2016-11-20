@@ -1,10 +1,11 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  * Created by wthered on 18/11/2016.
  * This is not the default Template
  */
-class Human {
+class Human extends Race {
 
 	private int HumanClassID;
 	private String HumanClass;
@@ -27,49 +28,71 @@ class Human {
 		System.out.println("** 7) Hunter   **");
 		System.out.println("** 8) Monk     **");
 		System.out.println("*****************");
-        System.out.print("Select your Class, Human? ");
+		System.out.print("Select your Class, Human? ");
         Scanner humanScan = new Scanner(System.in);
 		try {
 			myself.ClassID = humanScan.nextInt();
 			this.setHumanClassID(myself.ClassID);
-		} catch (Exception ex) {
+		} catch (InputMismatchException ex) {
+			System.out.println("Invalid Input in Human.selectClass");
 			ex.printStackTrace();
 		}
         return this.HumanClassID;
     }
-
-//    public int getHumanClassID() {
-//        return HumanClassID;
-//    }
 
     private void setHumanClassID(int humanClassID) {
         this.HumanClassID = humanClassID;
     }
 
     public String getHumanClass() {
+	    Race human = new Race();
 	    switch (this.HumanClassID) {
 		    case 1:
 		    	this.setHumanClass("Mage");
+			    human.setRaceIntellect(23);
+			    human.setRaceSpirit(23);
 			    break;
 		    case 2:
+		    	human.setRaceStrength(22);
+			    human.setRaceStamina(22);
+			    human.setRaceSpirit(22);
 		    	this.setHumanClass("Paladin");
 			    break;
 		    case 3:
+		    	human.setRaceIntellect(22);
+			    human.setRaceSpirit(24);
 		    	this.setHumanClass("Priest");
 			    break;
 		    case 4:
+		    	human.setRaceStrength(21);
+			    human.setRaceAgility(23);
+			    human.setRaceStamina(21);
+			    human.setRaceSpirit(21);
 		    	this.setHumanClass("Rogue");
 			    break;
 		    case 5:
+		    	human.setRaceStamina(21);
+			    human.setRaceIntellect(22);
+			    human.setRaceSpirit(23);
 		    	this.setHumanClass("Warlock");
 			    break;
 		    case 6:
+		    	human.setRaceStrength(23);
+			    human.setRaceStamina(22);
+			    human.setRaceSpirit(21);
 		    	this.setHumanClass("Warrior");
 			    break;
 		    case 7:
+		    	human.setRaceAgility(23);
+			    human.setRaceStamina(21);
+			    human.setRaceSpirit(21);
 		    	this.setHumanClass("Hunter");
 			    break;
 		    case 8:
+		    	human.setRaceStrength(21);
+			    human.setRaceAgility(21);
+			    human.setRaceStamina(21);
+			    human.setRaceIntellect(22);
 		    	this.setHumanClass("Monk");
 			    break;
 		    default:
@@ -82,6 +105,5 @@ class Human {
     private void setHumanClass(String humanClass) {
         this.HumanClass = humanClass;
     }
-
 
 }
