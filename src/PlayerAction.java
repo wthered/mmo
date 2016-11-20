@@ -59,6 +59,11 @@ class PlayerAction {
 
 		System.out.println("******** Attributes Report Starts here ********");
 		System.out.println("** Strength for " + myself.getRaceName() + " is " + racist.getRaceStrength());
+		System.out.println("** Agility for " + myself.getRaceName() + " is " + racist.getRaceAgility());
+		System.out.println("** Stamina for " + myself.getRaceName() + " is " + racist.getRaceStamina());
+		System.out.println("** Intellectual" + myself.getRaceName() + " is " + racist.getRaceSpirit());
+		System.out.println("** Spirit  for " + myself.getRaceName() + " is " + racist.getRaceSpirit());
+		System.out.println("***********************************************");
 	}
 
 	void doAction() throws InterruptedException {

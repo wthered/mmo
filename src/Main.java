@@ -46,10 +46,11 @@ class Main {
 					Player p = createNewPlayer(r);
 
 					// Init these vars or reset Project
-					System.out.println("\nBefore\n");
+					System.out.println("Main.main Before line 51\n");
 					p.setClassID(p.ClassID);
-					System.out.println("\nAfter\n");
+					System.out.println("Main.main After Line 51\n");
 					r.setRaceID(p.RaceID);
+					System.out.println("Main.main Setting Player Attributes in line 53");
 					r.setPlayerAttributes(p);
 
 					// Setting PlayerName

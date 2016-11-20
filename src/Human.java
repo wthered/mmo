@@ -7,8 +7,8 @@ import java.util.Scanner;
  */
 class Human extends Race {
 
-	private int HumanClassID;
 	private static String HumanClass;
+	private int HumanClassID;
 	private Player myself;
 
 	Human(Player p) {
@@ -37,7 +37,7 @@ class Human extends Race {
 			System.out.println("Invalid Input in Human.selectClass");
 			ex.printStackTrace();
 		}
-		return this.HumanClassID;
+		return myself.ClassID;
 	}
 
 	private void setHumanClassID(int humanClassID) {

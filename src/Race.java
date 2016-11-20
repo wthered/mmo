@@ -6,13 +6,12 @@ import java.util.Scanner;
  */
 class Race {
 
+	int raceID;
 	private int raceStrength;
 	private int raceAgility;
 	private int raceStamina;
 	private int raceIntellect;
 	private int raceSpirit;
-
-	int raceID;
 	private String raceName;
 
 	Race() {
@@ -46,7 +45,7 @@ class Race {
 	}
 
 	// Agility
-	public int getRaceAgility() {
+	int getRaceAgility() {
 		return this.raceAgility;
 	}
 
@@ -55,7 +54,7 @@ class Race {
 	}
 
 	// Stamina
-	public int getRaceStamina() {
+	int getRaceStamina() {
 		return this.raceStamina;
 	}
 
@@ -73,7 +72,7 @@ class Race {
 	}
 
 	// Spirit
-	public int getRaceSpirit() {
+	int getRaceSpirit() {
 		return this.raceSpirit;
 	}
 
@@ -148,10 +147,10 @@ class Race {
 				this.setRaceName("Night Elf");
 				break;
 			default:
-				System.out.println("RaceID is never " + this.getRaceID() + " in Race.setAllianceRaceName");
+				System.out.println("Race.setAllianceRaceName\tRaceID is never " + this.getRaceID());
 				break;
 		}
-//		System.out.println("Setting Race as " + this.raceName);
+		System.out.println("Race.setAllianceRaceName Setting Race as " + this.raceName);
 	}
 
 	private void setHordeRaceName(int raceID) {

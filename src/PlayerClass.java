@@ -9,11 +9,11 @@ class PlayerClass {
 
 	PlayerClass(Player p) {
 		this.myself = p;
-//		System.out.println("PlayerClass.PlayerClass");
+		System.out.println("PlayerClass.PlayerClass");
 	}
 
 	void ShowAllianceClassesFor(Race racist) {
-//		System.out.println("PlayerClass.ShowAvailableClassesFor " + myself.getRaceName());
+		System.out.println("PlayerClass.ShowAvailableClassesFor " + myself.getRaceName());
 		switch (racist.raceID) {
 			case 1:
 				Human h = new Human(this.myself);
@@ -35,9 +35,11 @@ class PlayerClass {
 				System.out.println("Night Elves can be hunters");
 				break;
 			default:
-				System.out.println("PlayerClass.ShowAvailableClassesFor never reaches " + racist);
+				System.out.println("PlayerClass.ShowAvailableClassesFor never reaches " + racist.raceID);
 				break;
 		}
+		// Setting For now
+		// Will change after coding is complete
 		myself.RaceName = "Human";
 	}
 

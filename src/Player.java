@@ -6,12 +6,24 @@ import java.util.Scanner;
  */
 class Player implements playerInterface {
 
+	// playerFaction Setup
+	static int FactionID;
 	// Player Attributes
 	private static String Name;
-
+	// Position Related Stuff
+	private static int itsX;
+	private static int itsY;
 	int level;
+	int maxHealth;
+	int maxMana;
+	// playerRace Setup
+	int RaceID;
+	String RaceName;
+	// playerClass SetUp
+	int ClassID;
+	String ClassName;
+	String itsSexName;
 	private int money;
-
 	// Health Variables
 	/* The maximum amount of health a player
 	** character has is determined by a
@@ -19,32 +31,11 @@ class Player implements playerInterface {
 	** level and stamina
 	*/
 	private int itsHealth;
-	int maxHealth;
-
 	// mana Variables
 	private int itsMana;
-	int maxMana;
-
-	// playerFaction Setup
-	static int FactionID;
 	private String Faction;
-
-	// playerRace Setup
-	int RaceID;
-	String RaceName;
-
-	// playerClass SetUp
-	int ClassID;
-	String ClassName;
-
 	// Sex setup
 	private int itsSex;
-	String itsSexName;
-
-	// Position Related Stuff
-	private static int itsX;
-	private static int itsY;
-
 	private String City;
 	private String Area;
 
@@ -66,6 +57,24 @@ class Player implements playerInterface {
 		this.ClassID = classID;
 
 //		System.out.println("Faction #" + FactionID + ", race = " + RaceID + ", Class = " + classID);
+	}
+
+	// xAxis of Player
+	public static int getItsX() {
+		return itsX;
+	}
+
+	public static void setItsX(int itsX) {
+		Player.itsX = itsX;
+	}
+
+	// yAxis of Player
+	public static int getItsY() {
+		return itsY;
+	}
+
+	public static void setItsY(int itsY) {
+		Player.itsY = itsY;
 	}
 
 	/*********************
@@ -122,9 +131,7 @@ class Player implements playerInterface {
 		return FactionID;
 	}
 
-	private void setFaction(int faction) {
-		FactionID = faction;
-	}
+	// Methods inherited from playerInterface
 
 	// Race ID
 	private int getRaceID() {
@@ -137,15 +144,13 @@ class Player implements playerInterface {
 
 	// RaceName
 	String getRaceName() {
-//		System.out.println("Player.getRaceName reports " + this.RaceName + " as raceName for " + this.ClassName );
+		System.out.println("Player.getRaceName reports " + this.getName() + " is " + this.RaceName + " " + this.ClassName);
 		return this.RaceName;
 	}
 
-	// Methods inherited from playerInterface
-
 	@Override
 	public String getFaction() {
-//		System.out.println("Player.getFaction");
+		System.out.println("Player.getFaction");
 		switch (FactionID) {
 			case 1:
 				this.Faction = "Alliance";
@@ -157,6 +162,10 @@ class Player implements playerInterface {
 				System.out.println("Neutral in Player.getFaction");
 		}
 		return this.Faction;
+	}
+
+	private void setFaction(int faction) {
+		FactionID = faction;
 	}
 
 	// The Game has started and we set the new created Player
@@ -177,12 +186,12 @@ class Player implements playerInterface {
 		PlayerClass pc = new PlayerClass(this);
 		switch (this.getFactionID()) {
 			case 1:
-				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
+				System.out.println("Player.selectClass " + this.getName() + " will select Class for " + f.getFactionName());
 				pc.ShowAllianceClassesFor( playRace );
 				// PlayerClassID is set into the function above
 				//this.setClassID(pClass);
 				// fixme this.RaceName = null
-				System.out.println("Player.selectClass Line 154 " + this.getName() + " is " + this.RaceName + " " + playRace.getRaceName(getFactionID()));
+				System.out.println("Player.selectClass Line 185 " + this.getName() + " is " + this.RaceName + " " + playRace.getRaceName(getFactionID()));
 				break;
 			case 2:
 				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
@@ -246,31 +255,13 @@ class Player implements playerInterface {
 		Area = areaName;
 	}
 
-	// City
-	public void setCity(String cityName) {
-		City = cityName;
-	}
-
 	String getCity() {
 		return "Ironforge";
 	}
 
-	// xAxis of Player
-	public static int getItsX() {
-		return itsX;
-	}
-
-	public static void setItsX(int itsX) {
-		Player.itsX = itsX;
-	}
-
-	// yAxis of Player
-	public static int getItsY() {
-		return itsY;
-	}
-
-	public static void setItsY(int itsY) {
-		Player.itsY = itsY;
+	// City
+	public void setCity(String cityName) {
+		City = cityName;
 	}
 
 	/*
