@@ -6,7 +6,6 @@
 class PlayerClass {
 
 	private Player myself;
-	private String PlayerClassName;
 
 	PlayerClass(Player p) {
 		this.myself = p;
@@ -14,14 +13,13 @@ class PlayerClass {
 	}
 
 	void ShowAllianceClassesFor(int racist) {
-		System.out.println("PlayerClass.ShowAvailableClassesFor " + racist);
+		System.out.println("PlayerClass.ShowAvailableClassesFor " + myself.getRaceName());
 		switch (racist) {
 			case 1:
-				Human h = new Human();
+				Human h = new Human(this.myself);
 				myself.ClassID = h.selectClass();
 				System.out.println("Humans (ClassID = " + myself.ClassID +") can be magician among others");
 				myself.ClassName = this.getAllianceClassName();
-				System.out.println(myself.getName() + " is a " + this.PlayerClassName);
 				break;
 			case 2:
 				// selectGnomeRace();
@@ -39,26 +37,27 @@ class PlayerClass {
 				System.out.println("PlayerClass.ShowAvailableClassesFor never reaches " + racist);
 				break;
 		}
+		myself.RaceName = "Human";
 	}
 
 	private String getAllianceClassName() {
 		switch (myself.ClassID) {
 			case 1:
-				this.PlayerClassName = "Mage";
+				myself.ClassName = "Mage";
 				break;
 			case 2:
-				this.PlayerClassName = "Paladin";
+				myself.ClassName = "Paladin";
 				break;
 			case 3:
-				this.PlayerClassName = "Priest";
+				myself.ClassName = "Priest";
 				break;
 			case 4:
-				this.PlayerClassName = "Rogue";
+				myself.ClassName = "Rogue";
 				break;
 			default:
-				this.PlayerClassName = "someAllianceClassName";
+				myself.ClassName = "someAllianceClassName";
 				System.out.println("PlayerClass.getAllianceClassName Βαριέμαι τώρα και έχω πονοκέφαλο");
 		}
-		return this.PlayerClassName;
+		return myself.ClassName;
 	}
 }

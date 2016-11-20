@@ -11,7 +11,7 @@ class Main {
 		String password;
 		int action = 0;
 
-		System.out.print("What is you username? ");
+		System.out.print("What is your username? ");
 		Scanner userScan = new Scanner(System.in);
 		username = userScan.nextLine();
 
@@ -23,7 +23,7 @@ class Main {
 			usr.getNewName(userScan);
 		}
 
-		System.out.print("What is your Password? ");
+		System.out.print("What is your password? ");
 		password = userScan.nextLine();
 
 		/*
@@ -49,7 +49,7 @@ class Main {
 					r.setRaceID(p.RaceID);
 
 					// Setting PlayerName
-					System.out.printf("What is your name " + r.getRaceName(p.FactionID) + "? ");
+					System.out.printf("What is your name " + r.getRaceName(Player.FactionID) + "? ");
 					Scanner playerInfo = new Scanner(System.in);
 					String playerName = playerInfo.nextLine();
 					p.setName(playerName);
@@ -72,7 +72,7 @@ class Main {
 					String money = m[0] + "g " + m[1] + "s " + m[2] + "c";
 					System.out.println(p.getName() + " has " + money + "! Use them wisely");
 
-					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.FactionID), p.ClassName, p.getFaction(), p.itsSexName);
+					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(Player.FactionID), p.ClassName, p.getFaction(), p.itsSexName);
 					System.out.println(message);
 
 					System.out.println("You are ready to quest " + p.getName());
@@ -82,13 +82,18 @@ class Main {
 					int lastPlayerAction = a.selectAction();
 
 					// Test-> Put a.doAction into a.selectAction
-					a.doAction();
-
-					// Repeat until I say so
-					while (lastPlayerAction != 0) {
-						lastPlayerAction = a.selectAction();
+					try {
 						a.doAction();
+						// Repeat until I say so
+						while (lastPlayerAction != 0) {
+							lastPlayerAction = a.selectAction();
+							a.doAction();
+						}
+					} catch (InterruptedException ex) {
+						System.out.println("Interrupted in line 88 of Main.main");
+						ex.printStackTrace();
 					}
+
 					break;
 				case 2:
 					System.out.println("Sending http request to see your old Characters");

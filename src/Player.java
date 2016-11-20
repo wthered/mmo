@@ -21,12 +21,12 @@ class Player implements playerInterface {
 	int maxMana;
 
 	// playerFaction Setup
-	int FactionID;
+	static int FactionID;
 	private String Faction;
 
 	// playerRace Setup
 	int RaceID;
-	private String RaceName;
+	String RaceName;
 
 	// playerClass SetUp
 	int ClassID;
@@ -36,23 +36,27 @@ class Player implements playerInterface {
 	private int itsSex;
 	String itsSexName;
 
-	public String getRaceName() {
-		System.out.println("Player.getRaceName sets raceName to <sth> for " + this.getRaceID() );
-		return this.RaceName;
-	}
+	// Position Related Stuff
+	private static int itsX;
+	private static int itsY;
 
-	public void setRaceName(String raceName) {
-		System.out.println("Player.setRaceName faction is " + this.Faction);
-		this.RaceName = raceName;
-	}
+	private String City;
+	private String Area;
 
 	Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
 		this.setName(newName);
-		this.setItsHealth(100 * newLevel);
-		this.setItsMana(150 * newLevel);
 		this.setMoney(0);
+		this.setLevel(newLevel);
 
-		this.FactionID = FactionID;
+		// Health Init
+		this.setItsHealth(100 * newLevel);
+		this.maxHealth = 100;
+
+		// Mana Init
+		this.setItsMana(150 * newLevel);
+		this.maxMana = 150;
+
+		Player.FactionID = FactionID;
 		this.RaceID = RaceID;
 		this.ClassID = classID;
 
@@ -77,7 +81,7 @@ class Player implements playerInterface {
 		return this.level;
 	}
 
-	public void setLevel(int level) {
+	private void setLevel(int level) {
 		this.level = level;
 	}
 
@@ -110,7 +114,7 @@ class Player implements playerInterface {
 
 	// Faction
 	private int getFactionID() {
-		return this.FactionID;
+		return FactionID;
 	}
 
 	private void setFaction(int faction) {
@@ -126,12 +130,18 @@ class Player implements playerInterface {
 		this.RaceID = raceID;
 	}
 
-	// Methods inherited from playerInterface
-	@Override
-	public int showMoney() {
-		System.out.println("Player.showMoney");
-		return this.money;
+	// RaceName
+	String getRaceName() {
+		System.out.println("Player.getRaceName sets raceName to " + this.RaceName + " for " + this.ClassName );
+		return this.RaceName;
 	}
+
+	// Methods inherited from playerInterface
+//	@Override
+//	public int showMoney() {
+//		System.out.println("Player.showMoney");
+//		return this.money;
+//	}
 
 	@Override
 	public String getFaction() {
@@ -149,17 +159,17 @@ class Player implements playerInterface {
 		return this.Faction;
 	}
 
-	@Override
-	public int showHealth() {
-		System.out.println("Player.showHealth");
-		return this.itsHealth;
-	}
+//	@Override
+//	public int showHealth() {
+//		System.out.println("Player.showHealth");
+//		return this.itsHealth;
+//	}
 
-	@Override
-	public int showMana() {
-		System.out.println("Player.showMana");
-		return this.itsMana;
-	}
+//	@Override
+//	public int showMana() {
+//		System.out.println("Player.showMana");
+//		return this.itsMana;
+//	}
 
 	// The Game has started and we set the new created Player
 	void selectFaction() {
@@ -176,7 +186,6 @@ class Player implements playerInterface {
 	void selectClass() {
 		Faction f = new Faction(getFactionID());
 
-		// Test
 		PlayerClass pc = new PlayerClass(this);
 		switch (this.getFactionID()) {
 			case 1:
@@ -185,7 +194,7 @@ class Player implements playerInterface {
 				// PlayerClassID is set into the function above
 				//this.setClassID(pClass);
 				// fixme this.RaceName = null
-				System.out.println("Player.selectClass Line 154 RaceID is " + this.getRaceID() + " or " + this.ClassName);
+				System.out.println("Player.selectClass Line 154 " + this.getName() + " is " + this.RaceName + " " + this.ClassName);
 				break;
 			case 2:
 				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
@@ -218,10 +227,6 @@ class Player implements playerInterface {
 //		System.out.println("Player.selectRace is " + r.getRaceName(this.getFactionID()) + " from " + this.getFaction());
 	}
 
-	int getClassID() {
-		return this.ClassID;
-	}
-
 	void setClassID(int classID) {
 		this.ClassID = classID;
 	}
@@ -238,5 +243,45 @@ class Player implements playerInterface {
 				System.out.println("Player sex is never " + this.itsSex + " in Player.setSex");
 		}
 		this.itsSex = sex;
+	}
+
+	String getPosition() {
+		return "Bridge near Auction House";
+	}
+
+	// Area of Interest
+	String getArea() {
+		return "Don Morogh";
+	}
+
+	public void setArea(String areaName) {
+		Area = areaName;
+	}
+
+	// City
+	public void setCity(String cityName) {
+		City = cityName;
+	}
+
+	String getCity() {
+		return "Ironforge";
+	}
+
+	// xAxis of Player
+	public static int getItsX() {
+		return itsX;
+	}
+
+	public static void setItsX(int itsX) {
+		Player.itsX = itsX;
+	}
+
+	// yAxis of Player
+	public static int getItsY() {
+		return itsY;
+	}
+
+	public static void setItsY(int itsY) {
+		Player.itsY = itsY;
 	}
 }
