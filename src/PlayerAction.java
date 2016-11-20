@@ -1,5 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by wthered on 19/11/2016.
@@ -18,7 +20,6 @@ class PlayerAction {
 
 	int selectAction() {
 		int thisAction = 0;
-		boolean valid;
 		System.out.println("*********************************************");
 		System.out.println("** 1) Eat                                  **");
 		System.out.println("** 2) Drink                                **");
@@ -31,7 +32,7 @@ class PlayerAction {
 		System.out.println("** 9) See What i have in Inventory         **");
 		System.out.println("** 0) Done. Fly me to the moon and stars   **");
 		System.out.println("*********************************************");
-		System.out.print("What is your desire, " + myself.getRaceName() + "? ");
+		System.out.print("What is your desire, " + myself.getName() + "? ");
 		Scanner actionScanner = new Scanner(System.in);
 		try {
 			thisAction = actionScanner.nextInt();
@@ -42,13 +43,11 @@ class PlayerAction {
 		return thisAction;
 	}
 
-	private boolean validate(int action) {
-		return action < 9;
-	}
-
 	private void report() {
 		System.out.println(myself.getName() + " is level " + myself.level );
-		System.out.println("I currently have " + myself.getHealth() + " Health Points and " + myself.getItsMana() );
+		System.out.println("I currently have " + myself.getItsHealth() + " Health Points and " + myself.getItsMana() + " Mano");
+		System.out.println("Your Allowed maxHealth is " + myself.maxHealth);
+		System.out.println("Your Allowed maxNanaPt is " + myself.maxMana);
 		System.out.println("I have " + myself.getMoney() + " coins");
 //		System.out.println("Currently being in " + myself.ge);
 		System.out.println("Last Action of " + myself.getName() + " is " + this.lastAction);
@@ -61,7 +60,9 @@ class PlayerAction {
 		*/
 		switch (this.lastAction) {
 			case 3:
-				System.out.println("Looking to find another player (thru http) for " + myself.getName() + " in PlayerAction.doAction");
+				Timer timer = new Timer();
+				timer.schedule(new PlayerChat(), 0, 5000);
+//				System.out.println("Looking to find another player (thru http) for " + myself.getName() + " in PlayerAction.doAction");
 				break;
 			case 8:
 				this.report();
@@ -71,6 +72,12 @@ class PlayerAction {
 				break;
 			default:
 				System.out.println("Not implemented yet in PlayerAction.doAction for " + this.lastAction);
+		}
+	}
+
+	private class PlayerChat extends TimerTask {
+		public void run() {
+			System.out.println("PlayerChat.run in PlayerAction line 84");
 		}
 	}
 }
