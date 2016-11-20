@@ -65,7 +65,7 @@ class Main {
 					System.out.println("Ok " + playerName + "!");
 //					p.selectClass();
 
-					System.out.println("Your health is " + p.getHealth() + " health points");
+					System.out.println("Your health is " + p.getItsHealth() + " health points");
 					System.out.println("Your Mana is " + p.getItsMana() );
 
 					int[] m = convertMoney(p.getMoney());
@@ -78,7 +78,13 @@ class Main {
 					System.out.println("You are ready to quest " + p.getName());
 					PlayerAction a = new PlayerAction(p);
 
+					// Select What to do and do it
 					int lastPlayerAction = a.selectAction();
+
+					// Test-> Put a.doAction into a.selectAction
+					a.doAction();
+
+					// Repeat until I say so
 					while (lastPlayerAction != 0) {
 						lastPlayerAction = a.selectAction();
 						a.doAction();
