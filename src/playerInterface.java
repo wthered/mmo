@@ -9,18 +9,18 @@ interface playerInterface {
 	// Before we begin, we init with random Values
 	Random rndStats = new Random();
 
-    default int showMoney() {
-        System.out.println("playerInterface.showMoney says you have some money");
-        return 0;
-    }
+	default int showMoney() {
+		System.out.println("playerInterface.showMoney says you have some money");
+		return 0;
+	}
 
-    default String getFaction() {
-        System.out.println("playerInterface.getFaction says you belong to Faction");
-        return "InterfacePlayerFactionName";
-    }
+	default String getFaction() {
+		System.out.println("playerInterface.getFaction says you belong to Faction");
+		return "InterfacePlayerFactionName";
+	}
 
-    default int showExperience() {
-        System.out.println("playerInterface.showExperience");
-        return 0;
-    }
+	default int showExperience() {
+		System.out.println("playerInterface.showExperience");
+		return 0;
+	}
 }

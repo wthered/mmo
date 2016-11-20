@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -89,10 +90,9 @@ class Main {
 							a.doAction();
 						}
 					} catch (InterruptedException ex) {
-						System.out.println("Interrupted in line 88 of Main.main");
+						System.out.println("Interrupted in line 93 of Main.main");
 						ex.printStackTrace();
 					}
-
 					break;
 				case 2:
 					System.out.println("Sending http request to see your old Characters");
@@ -102,7 +102,6 @@ class Main {
 					break;
 			}
 		}
-
 		System.out.println("Last action was " + action);
 	}
 

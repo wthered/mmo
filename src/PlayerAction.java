@@ -32,7 +32,7 @@ class PlayerAction {
 		System.out.println("** 6) Go to Area                           **");
 		System.out.println("** 7) Go to Location (x,y) of current Area **");
 		System.out.println("** 8) Report yourself (Position and Stats) **");
-		System.out.println("** 9) See What i have in Inventory         **");
+		System.out.println("** 9) See what I have in Inventory / Bank  **");
 		System.out.println("** 0) Fly me to the moon among the stars   **");
 		System.out.println("*********************************************");
 		System.out.print("What is your desire, " + myself.getName() + "? ");
@@ -40,11 +40,12 @@ class PlayerAction {
 		try {
 			thisAction = actionScanner.nextInt();
 		} catch (InputMismatchException ex) {
-			System.out.println(" is not a valid option" + thisAction);
+			System.out.println(thisAction + " is not a valid option");
 			ex.printStackTrace();
+		} finally {
+			this.lastAction = thisAction;
 		}
-		this.lastAction = thisAction;
-		return thisAction;
+		return this.lastAction;
 	}
 
 	private void report() {

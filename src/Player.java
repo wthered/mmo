@@ -137,7 +137,7 @@ class Player implements playerInterface {
 
 	// RaceName
 	String getRaceName() {
-		System.out.println("Player.getRaceName sets raceName to " + this.RaceName + " for " + this.ClassName );
+		System.out.println("Player.getRaceName reports " + this.RaceName + " as raceName for " + this.ClassName );
 		return this.RaceName;
 	}
 
