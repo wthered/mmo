@@ -182,7 +182,7 @@ class Player implements playerInterface {
 				// PlayerClassID is set into the function above
 				//this.setClassID(pClass);
 				// fixme this.RaceName = null
-				System.out.println("Player.selectClass Line 154 " + this.getName() + " is " + this.RaceName + " " + this.ClassName);
+				System.out.println("Player.selectClass Line 154 " + this.getName() + " is " + this.RaceName + " " + playRace.getRaceName(getFactionID()));
 				break;
 			case 2:
 				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );

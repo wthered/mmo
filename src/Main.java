@@ -42,11 +42,13 @@ class Main {
 			switch (action) {
 				case 1:
 					System.out.println("You will create a new Player");
-					Player p = createNewPlayer();
 					Race r = new Race();
+					Player p = createNewPlayer(r);
 
 					// Init these vars or reset Project
-//					p.setClassID(p.ClassID);
+					System.out.println("\nBefore\n");
+					p.setClassID(p.ClassID);
+					System.out.println("\nAfter\n");
 					r.setRaceID(p.RaceID);
 					r.setPlayerAttributes(p);
 
@@ -63,7 +65,6 @@ class Main {
 							playerName = playerInfo.nextLine();
 						}
 					}
-
 
 					// Setting PlayerSex
 					System.out.println("***************");
@@ -115,10 +116,9 @@ class Main {
 		System.out.println("Last action was " + action);
 	}
 
-	private static Player createNewPlayer() {
+	private static Player createNewPlayer(Race r) {
 		Random rnd = new Random();
 		Player p = new Player("William", 1, 1 + rnd.nextInt(3), 1 + rnd.nextInt(3), 1 + rnd.nextInt(3));
-		Race r = new Race();
 
 		p.selectFaction();
 		p.selectRace();
