@@ -12,12 +12,13 @@ class PlayerClass {
 //		System.out.println("PlayerClass.PlayerClass");
 	}
 
-	void ShowAllianceClassesFor(int racist) {
+	void ShowAllianceClassesFor(Race racist) {
 //		System.out.println("PlayerClass.ShowAvailableClassesFor " + myself.getRaceName());
-		switch (racist) {
+		switch (racist.raceID) {
 			case 1:
 				Human h = new Human(this.myself);
 				myself.ClassID = h.selectClass();
+				h.setHumanAttributes(racist);
 				System.out.println("Humans (ClassID = " + myself.ClassID +") can be magician among others");
 				myself.ClassName = this.getAllianceClassName();
 				break;

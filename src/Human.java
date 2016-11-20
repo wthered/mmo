@@ -8,7 +8,7 @@ import java.util.Scanner;
 class Human extends Race {
 
 	private int HumanClassID;
-	private String HumanClass;
+	private static String HumanClass;
 	private Player myself;
 
 	Human(Player p) {
@@ -29,7 +29,7 @@ class Human extends Race {
 		System.out.println("** 8) Monk     **");
 		System.out.println("*****************");
 		System.out.print("Select your Class, Human? ");
-        Scanner humanScan = new Scanner(System.in);
+		Scanner humanScan = new Scanner(System.in);
 		try {
 			myself.ClassID = humanScan.nextInt();
 			this.setHumanClassID(myself.ClassID);
@@ -37,73 +37,71 @@ class Human extends Race {
 			System.out.println("Invalid Input in Human.selectClass");
 			ex.printStackTrace();
 		}
-        return this.HumanClassID;
-    }
+		return this.HumanClassID;
+	}
 
-    private void setHumanClassID(int humanClassID) {
-        this.HumanClassID = humanClassID;
-    }
+	private void setHumanClassID(int humanClassID) {
+		this.HumanClassID = humanClassID;
+	}
 
-    public String getHumanClass() {
-	    Race human = new Race();
-	    switch (this.HumanClassID) {
-		    case 1:
-		    	this.setHumanClass("Mage");
-			    human.setRaceIntellect(23);
-			    human.setRaceSpirit(23);
-			    break;
-		    case 2:
-		    	human.setRaceStrength(22);
-			    human.setRaceStamina(22);
-			    human.setRaceSpirit(22);
-		    	this.setHumanClass("Paladin");
-			    break;
-		    case 3:
-		    	human.setRaceIntellect(22);
-			    human.setRaceSpirit(24);
-		    	this.setHumanClass("Priest");
-			    break;
-		    case 4:
-		    	human.setRaceStrength(21);
-			    human.setRaceAgility(23);
-			    human.setRaceStamina(21);
-			    human.setRaceSpirit(21);
-		    	this.setHumanClass("Rogue");
-			    break;
-		    case 5:
-		    	human.setRaceStamina(21);
-			    human.setRaceIntellect(22);
-			    human.setRaceSpirit(23);
-		    	this.setHumanClass("Warlock");
-			    break;
-		    case 6:
-		    	human.setRaceStrength(23);
-			    human.setRaceStamina(22);
-			    human.setRaceSpirit(21);
-		    	this.setHumanClass("Warrior");
-			    break;
-		    case 7:
-		    	human.setRaceAgility(23);
-			    human.setRaceStamina(21);
-			    human.setRaceSpirit(21);
-		    	this.setHumanClass("Hunter");
-			    break;
-		    case 8:
-		    	human.setRaceStrength(21);
-			    human.setRaceAgility(21);
-			    human.setRaceStamina(21);
-			    human.setRaceIntellect(22);
-		    	this.setHumanClass("Monk");
-			    break;
-		    default:
-			    System.out.println("Human.getHumanClass This is never reached");
-			    this.setHumanClass("StarYoda");
-	    }
-        return HumanClass;
-    }
+	void setHumanAttributes(Race human) {
+		switch (myself.ClassID) {
+			case 1:
+				this.setHumanClass("Mage");
+				human.setRaceIntellect(23);
+				human.setRaceSpirit(23);
+				break;
+			case 2:
+				human.setRaceStrength(22);
+				human.setRaceStamina(22);
+				human.setRaceSpirit(22);
+				this.setHumanClass("Paladin");
+				break;
+			case 3:
+				human.setRaceIntellect(22);
+				human.setRaceSpirit(24);
+				this.setHumanClass("Priest");
+				break;
+			case 4:
+				human.setRaceStrength(21);
+				human.setRaceAgility(23);
+				human.setRaceStamina(21);
+				human.setRaceSpirit(21);
+				this.setHumanClass("Rogue");
+				break;
+			case 5:
+				human.setRaceStamina(21);
+				human.setRaceIntellect(22);
+				human.setRaceSpirit(23);
+				this.setHumanClass("Warlock");
+				break;
+			case 6:
+				human.setRaceStrength(23);
+				human.setRaceStamina(22);
+				human.setRaceSpirit(21);
+				this.setHumanClass("Warrior");
+				break;
+			case 7:
+				human.setRaceAgility(23);
+				human.setRaceStamina(21);
+				human.setRaceSpirit(21);
+				this.setHumanClass("Hunter");
+				break;
+			case 8:
+				human.setRaceStrength(21);
+				human.setRaceAgility(21);
+				human.setRaceStamina(21);
+				human.setRaceIntellect(22);
+				this.setHumanClass("Monk");
+				break;
+			default:
+				System.out.println("Human.getHumanClass HumanClassID is never " + this.HumanClassID);
+				HumanClass = "StarYoda";
+		}
+	}
 
-    private void setHumanClass(String humanClass) {
-        this.HumanClass = humanClass;
-    }
+	private void setHumanClass(String humanClass) {
+		HumanClass = humanClass;
+	}
 
 }

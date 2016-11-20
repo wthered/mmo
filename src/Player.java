@@ -171,14 +171,14 @@ class Player implements playerInterface {
 		this.setFaction(selectedFaction);
 	}
 
-	void selectClass() {
+	void selectClass(Race playRace) {
 		Faction f = new Faction(getFactionID());
 
 		PlayerClass pc = new PlayerClass(this);
 		switch (this.getFactionID()) {
 			case 1:
 				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
-				pc.ShowAllianceClassesFor( this.RaceID );
+				pc.ShowAllianceClassesFor( playRace );
 				// PlayerClassID is set into the function above
 				//this.setClassID(pClass);
 				// fixme this.RaceName = null

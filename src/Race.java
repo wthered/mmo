@@ -12,7 +12,7 @@ class Race {
 	private int raceIntellect;
 	private int raceSpirit;
 
-	private int raceID;
+	int raceID;
 	private String raceName;
 
 	Race() {
@@ -161,5 +161,9 @@ class Race {
 
 	private void setRaceName(String raceName) {
 		this.raceName = raceName;
+	}
+
+	void setPlayerAttributes(Player p) {
+		System.out.println("Race.setPlayerAttributes Player is " + p.RaceName + " (" + p.RaceID + ")");
 	}
 }

@@ -46,14 +46,24 @@ class Main {
 					Race r = new Race();
 
 					// Init these vars or reset Project
-					p.setClassID(p.ClassID);
+//					p.setClassID(p.ClassID);
 					r.setRaceID(p.RaceID);
+					r.setPlayerAttributes(p);
 
 					// Setting PlayerName
 					System.out.printf("What is your name " + r.getRaceName(Player.FactionID) + "? ");
+
 					Scanner playerInfo = new Scanner(System.in);
 					String playerName = playerInfo.nextLine();
-					p.setName(playerName);
+					if(playerName.matches("[a-zA-Z]")) {
+						p.setName(playerName);
+					} else {
+						while (playerName.matches("[a-zA-Z]")) {
+							System.out.println("Your name can only contain letters");
+							playerName = playerInfo.nextLine();
+						}
+					}
+
 
 					// Setting PlayerSex
 					System.out.println("***************");
@@ -108,10 +118,11 @@ class Main {
 	private static Player createNewPlayer() {
 		Random rnd = new Random();
 		Player p = new Player("William", 1, 1 + rnd.nextInt(3), 1 + rnd.nextInt(3), 1 + rnd.nextInt(3));
+		Race r = new Race();
 
 		p.selectFaction();
 		p.selectRace();
-		p.selectClass();
+		p.selectClass(r);
 		return p;
 	}
 
