@@ -5,6 +5,9 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by wthered on 17/11/2016 5:49 μμ
@@ -29,8 +32,17 @@ class JsonRead {
 
 			JSONObject jsonObject = (JSONObject) parser.parse(http.sendGet());
 
-//			String base = (String) jsonObject.get("base");
-//			System.out.println("JSON Name is " + base);
+			JSONObject baseSystem = (JSONObject) jsonObject.get("sys");
+			JSONObject system = (JSONObject) parser.parse(baseSystem.toString());
+
+			long sunRise = (long) system.get("sunrise");
+			long sunDown = (long) system.get("sunset");
+
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date sunSett = new Date(sunDown);
+
+			System.out.println("Sun rise at " + sunRise + " or " + dateFormat.format(sunRise));
+			System.out.println("Sun sets at " + sunDown + " or " + dateFormat.format(sunSett));
 
 //			long age = (Long) jsonObject.get("age");
 //			System.out.println("Your Age is " + age + " years old");

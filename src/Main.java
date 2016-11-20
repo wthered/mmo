@@ -126,7 +126,7 @@ class Main {
 
 	private static int createOrLogin() {
 		int creation = 0;
-		System.out.println("Main.createOrLogin");
+//		System.out.println("Main.createOrLogin");
 		System.out.println("**************************");
 		System.out.println("** 1) Create Character  **");
 		System.out.println("** 2) Resume saved Game **");

@@ -21,19 +21,19 @@ class Race {
 
 	private Race(int Strength, int Agility, int Stamina, int Intellect, int Spirit) {
 		this.raceStrength = Strength;
-		System.out.println("Your Race Strength is\t" + this.raceStrength);
+//		System.out.println("Your Race Strength is\t" + this.raceStrength);
 
 		this.raceAgility = Agility;
-		System.out.println("Your Race Agility is\t" + this.raceAgility);
+//		System.out.println("Your Race Agility is\t" + this.raceAgility);
 
 		this.raceStamina = Stamina;
-		System.out.println("Your Race Stamina is\t" + this.raceStamina);
+//		System.out.println("Your Race Stamina is\t" + this.raceStamina);
 
 		this.raceIntellect = Intellect;
-		System.out.println("Your Race Intellect is\t" + this.raceIntellect);
+//		System.out.println("Your Race Intellect is\t" + this.raceIntellect);
 
 		this.raceSpirit = Spirit;
-		System.out.println("Your Race Spirit is\t\t" + this.raceSpirit);
+//		System.out.println("Your Race Spirit is\t\t" + this.raceSpirit);
 	}
 
 	// Strength

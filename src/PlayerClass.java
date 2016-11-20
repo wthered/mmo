@@ -9,11 +9,11 @@ class PlayerClass {
 
 	PlayerClass(Player p) {
 		this.myself = p;
-		System.out.println("PlayerClass.PlayerClass");
+//		System.out.println("PlayerClass.PlayerClass");
 	}
 
 	void ShowAllianceClassesFor(int racist) {
-		System.out.println("PlayerClass.ShowAvailableClassesFor " + myself.getRaceName());
+//		System.out.println("PlayerClass.ShowAvailableClassesFor " + myself.getRaceName());
 		switch (racist) {
 			case 1:
 				Human h = new Human(this.myself);
