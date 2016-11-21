@@ -19,12 +19,12 @@ class PlayerClass {
 				Human h = new Human(this.myself);
 				myself.ClassID = h.selectClass();
 				h.setHumanAttributes(racist);
-				System.out.println("Humans (ClassID = " + myself.ClassID +") can be magician among others");
+				System.out.println("Humans (ClassID = " + myself.ClassID + ") can be wizards among others");
 				myself.ClassName = this.getAllianceClassName();
 				break;
 			case 2:
 				// selectGnomeRace();
-				System.out.println("Gnome can be Warlocks");
+				System.out.println("\n\n\nGnome can be Warlocks\n\n\n");
 				break;
 			case 3:
 				// selectDwarfRace();
@@ -46,7 +46,7 @@ class PlayerClass {
 	private String getAllianceClassName() {
 		switch (myself.ClassID) {
 			case 1:
-				myself.ClassName = "Mage";
+				myself.ClassName = "Wizard";
 				break;
 			case 2:
 				myself.ClassName = "Paladin";
@@ -57,9 +57,30 @@ class PlayerClass {
 			case 4:
 				myself.ClassName = "Rogue";
 				break;
+			case 5:
+				myself.ClassName = "Warrior";
+				break;
+			case 6:
+				myself.ClassName = "Druid";
+				break;
+			case 7:
+				myself.ClassName = "Hunter";
+				break;
+			case 8:
+				myself.ClassName = "Warlock";
+				break;
+			case 9:
+				myself.ClassName = "Shaman";
+				break;
+			case 10:
+				myself.ClassName = "Monk";
+				break;
+			case 11:
+				myself.ClassName = "Death Knight";
+				break;
 			default:
 				myself.ClassName = "someAllianceClassName";
-				System.out.println("PlayerClass.getAllianceClassName Βαριέμαι τώρα και έχω πονοκέφαλο");
+				System.out.println("PlayerClass.getAllianceClassName ClassID is never " + myself.ClassID);
 		}
 		return myself.ClassName;
 	}

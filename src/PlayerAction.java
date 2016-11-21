@@ -1,8 +1,5 @@
 import java.awt.*;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * Created by wthered on 19/11/2016.
@@ -67,6 +64,7 @@ class PlayerAction {
 	}
 
 	void doAction() throws InterruptedException {
+		Random place = new Random(100);
 		/*
 		** todo 1) look into Inventory to see if foodIsAvailable()
 		** todo 2) look into Inventory to see if drinkIsAvailable()
@@ -74,6 +72,12 @@ class PlayerAction {
 		switch (this.lastAction) {
 			case 0:
 				System.out.println("Exiting....");
+				break;
+			case 1:
+				this.eat();
+				break;
+			case 2:
+				this.drink();
 				break;
 			case 3:
 				// Looking to find another player (thru http) for " + myself.getName() + " in PlayerAction.doAction;
@@ -84,6 +88,10 @@ class PlayerAction {
 					timer.purge();
 				}
 				break;
+			case 4:
+				Quest q = new Quest(myself);
+				q.doQuest(1);
+				break;
 			case 5:
 				for (int i = 0; i < 5; i++) {
 					try {
@@ -93,14 +101,33 @@ class PlayerAction {
 						ex.printStackTrace();
 						Thread.currentThread().interrupt();
 					}
-					System.out.println(Thread.activeCount() + " in PlayerAction.doAction");
+					System.out.println("Thread counts " + Thread.activeCount() + " in PlayerAction.doAction");
 				}
+				break;
+			case 6:
+				Travel t = new Travel(myself);
+				t.visit("Ironforge");
+//				t.selectDestination();
+				break;
+			case 7:
+				myself.travel(1 + place.nextInt(100), 1 + place.nextInt(100));
+				break;
 			case 8:
 				this.report();
 				break;
 			default:
 				System.out.println("Not implemented yet in PlayerAction.doAction for " + this.lastAction);
 		}
+	}
+
+	private void eat() {
+		System.out.println("I currently have " + myself.getItsHealth());
+		System.out.println("Is this " + myself.getMaxHealth() + " ?");
+		System.out.println("I maybe should not eat");
+	}
+
+	private void drink() {
+		System.out.println("I currently have " + myself.getItsMana() + " with max = " + myself.getMaxMana());
 	}
 
 	private class PlayerChat extends TimerTask {

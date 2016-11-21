@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -8,38 +9,44 @@ class Player implements playerInterface {
 
 	// playerFaction Setup
 	static int FactionID;
+	private static String Faction;
+
 	// Player Attributes
 	private static String Name;
-	// Position Related Stuff
-	private static int itsX;
-	private static int itsY;
-	int level;
 	int maxHealth;
-	int maxMana;
-	// playerRace Setup
+	int level;
 	int RaceID;
 	String RaceName;
 	// playerClass SetUp
 	int ClassID;
 	String ClassName;
 	String itsSexName;
+	int maxMana;
+	// Position Related Stuff
+	private int itsX;
+	private int itsY;
+	// playerRace Setup
+	private Race racist;
 	private int money;
 	// Health Variables
 	/* The maximum amount of health a player
 	** character has is determined by a
 	** combination of the character's
 	** level and stamina
+	** playerHealth = 100*level + healthFromStamina
+	** currentStamina = baseStamina + 2*level
+	** Stamina provides 1 health per stamina for the first 20 points of stamina, and 14 health per point of stamina thereafter.
+	** http://www.wowpedia.org/Attributes#Stamina
 	*/
 	private int itsHealth;
 	// mana Variables
 	private int itsMana;
-	private String Faction;
 	// Sex setup
 	private int itsSex;
 	private String City;
 	private String Area;
 
-	Player(String newName, int newLevel, int FactionID, int RaceID, int classID) {
+	Player(String newName, int newLevel, int FactionID, Race playRace, int classID) {
 		this.setName(newName);
 		this.setMoney(0);
 		this.setLevel(newLevel);
@@ -52,29 +59,34 @@ class Player implements playerInterface {
 		this.setItsMana(150 * newLevel);
 		this.maxMana = 150;
 
+		// Faction Initializer
 		Player.FactionID = FactionID;
-		this.RaceID = RaceID;
+		Faction = "Alliance";
+
+		// Race Initializer
+		this.RaceID = playRace.raceID;
 		this.ClassID = classID;
 
-//		System.out.println("Faction #" + FactionID + ", race = " + RaceID + ", Class = " + classID);
+		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
 	}
 
 	// xAxis of Player
-	public static int getItsX() {
-		return itsX;
+	private int getItsX() {
+		System.out.println("Player.getItsX Currently X =" + this.itsX);
+		return this.itsX;
 	}
 
-	public static void setItsX(int itsX) {
-		Player.itsX = itsX;
+	private void setItsX(int itsX) {
+		this.itsX = itsX;
 	}
 
 	// yAxis of Player
-	public static int getItsY() {
-		return itsY;
+	private int getItsY() {
+		return this.itsY;
 	}
 
-	public static void setItsY(int itsY) {
-		Player.itsY = itsY;
+	private void setItsY(int itsY) {
+		this.itsY = itsY;
 	}
 
 	/*********************
@@ -144,7 +156,7 @@ class Player implements playerInterface {
 
 	// RaceName
 	String getRaceName() {
-		System.out.println("Player.getRaceName reports " + this.getName() + " is " + this.RaceName + " " + this.ClassName);
+		System.out.println("Player.getRaceName reports " + this.getName() + " is " + this.RaceID + " " + this.ClassName);
 		return this.RaceName;
 	}
 
@@ -153,15 +165,15 @@ class Player implements playerInterface {
 		System.out.println("Player.getFaction");
 		switch (FactionID) {
 			case 1:
-				this.Faction = "Alliance";
+				Faction = "Alliance";
 				break;
 			case 2:
-				this.Faction = "Horde";
+				Faction = "Horde";
 				break;
 			default:
 				System.out.println("Neutral in Player.getFaction");
 		}
-		return this.Faction;
+		return Faction;
 	}
 
 	private void setFaction(int faction) {
@@ -182,11 +194,12 @@ class Player implements playerInterface {
 
 	void selectClass(Race playRace) {
 		Faction f = new Faction(getFactionID());
-
+		playRace.setRaceID(this.RaceID);
 		PlayerClass pc = new PlayerClass(this);
 		switch (this.getFactionID()) {
 			case 1:
-				System.out.println("Player.selectClass " + this.getName() + " will select Class for " + f.getFactionName());
+//				System.out.println("Player.selectClass " + this.getName() + " will select Class for " + f.getFactionName());
+				System.out.println("Player.selectClass The raceID is " + this.RaceID + " or " + playRace.raceID);
 				pc.ShowAllianceClassesFor( playRace );
 				// PlayerClassID is set into the function above
 				//this.setClassID(pClass);
@@ -248,15 +261,17 @@ class Player implements playerInterface {
 
 	// Area of Interest
 	String getArea() {
-		return "Don Morogh";
+		this.Area = "Don Morogh";
+		return this.Area;
 	}
 
-	public void setArea(String areaName) {
-		Area = areaName;
+	void setArea(String areaName) {
+		this.Area = areaName;
 	}
 
 	String getCity() {
-		return "Ironforge";
+		this.City = "Ironforge";
+		return this.City;
 	}
 
 	// City
@@ -270,5 +285,20 @@ class Player implements playerInterface {
 	*/
 	public void setMaxHealth() {
 		this.maxHealth = 100*this.level;
+	}
+
+	int getMaxHealth() {
+		return maxHealth;
+	}
+
+	int getMaxMana() {
+		return this.maxMana;
+	}
+
+	void travel(int newX, int newY) {
+		System.out.println("Travelling from (" + this.getItsX() + "," + this.getItsY() + ")");
+		this.setItsX(newX);
+		this.setItsY(newY);
+		System.out.println("Player.travel Reports (" + newX + ", " + newY + ")");
 	}
 }

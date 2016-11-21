@@ -7,12 +7,12 @@ import java.util.Scanner;
 class Race {
 
 	int raceID;
+	private String raceName;
 	private int raceStrength;
 	private int raceAgility;
 	private int raceStamina;
 	private int raceIntellect;
 	private int raceSpirit;
-	private String raceName;
 
 	Race() {
 		this(20,20,20,20,20);
@@ -81,6 +81,7 @@ class Race {
 	}
 
 	int selectAllianceRace() {
+		System.out.println("Race.selectAllianceRace");
 		System.out.println("******************");
 		System.out.println("** 1) Human     **");
 		System.out.println("** 2) Gnome     **");
@@ -103,9 +104,9 @@ class Race {
 		System.out.println("******************");
 		System.out.print("What Race are you? ");
 		Scanner hordeScanner = new Scanner(System.in);
-		int horder = hordeScanner.nextInt();
-		this.setRaceID(horder);
-		return horder;
+		int horde = hordeScanner.nextInt();
+		this.setRaceID(horde);
+		return horde;
 	}
 
 	private int getRaceID() {
@@ -125,7 +126,7 @@ class Race {
 				this.setHordeRaceName(this.getRaceID());
 				break;
 			default:
-				System.out.println("This is never reached in Race.getRaceName");
+				System.out.println("Race.getRaceName This is never reached");
 				this.setRaceName("StarTrooper");
 				break;
 		}

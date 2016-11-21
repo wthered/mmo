@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -46,9 +45,9 @@ class Main {
 					Player p = createNewPlayer(r);
 
 					// Init these vars or reset Project
-					System.out.println("Main.main Before line 51\n");
+//					System.out.println("Main.main Before line 51\n");
 					p.setClassID(p.ClassID);
-					System.out.println("Main.main After Line 51\n");
+//					System.out.println("Main.main After Line 51\n");
 					r.setRaceID(p.RaceID);
 					System.out.println("Main.main Setting Player Attributes in line 53");
 					r.setPlayerAttributes(p);
@@ -58,10 +57,10 @@ class Main {
 
 					Scanner playerInfo = new Scanner(System.in);
 					String playerName = playerInfo.nextLine();
-					if(playerName.matches("[a-zA-Z]")) {
+					if (playerName.matches("[a-zA-Z]{1,}")) {
 						p.setName(playerName);
 					} else {
-						while (playerName.matches("[a-zA-Z]")) {
+						while (playerName.matches("[a-zA-Z]{1,}")) {
 							System.out.println("Your name can only contain letters");
 							playerName = playerInfo.nextLine();
 						}
@@ -119,7 +118,7 @@ class Main {
 
 	private static Player createNewPlayer(Race r) {
 		Random rnd = new Random();
-		Player p = new Player("William", 1, 1 + rnd.nextInt(3), 1 + rnd.nextInt(3), 1 + rnd.nextInt(3));
+		Player p = new Player("William", 1, 1 + rnd.nextInt(3), r, 1 + rnd.nextInt(3));
 
 		p.selectFaction();
 		p.selectRace();
@@ -138,7 +137,7 @@ class Main {
 
 	private static int createOrLogin() {
 		int creation = 0;
-//		System.out.println("Main.createOrLogin");
+		System.out.println("Main.createOrLogin");
 		System.out.println("**************************");
 		System.out.println("** 1) Create Character  **");
 		System.out.println("** 2) Resume saved Game **");
@@ -148,7 +147,7 @@ class Main {
 
 		// Check if input is valid int
 		if( actScan.hasNextInt() ) {
-//			System.out.println("Line 130 of Main.createOrLogin creation = " + actScan.hasNextInt() );
+//			System.out.println("Line 150 of Main.createOrLogin creation = " + actScan.hasNextInt() );
 			creation = actScan.nextInt();
 		}
 

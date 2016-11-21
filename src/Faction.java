@@ -4,12 +4,12 @@
  */
 class Faction {
 
-    private int FactionID;
-    private String FactionName;
+	private static int FactionID;
+	private static String FactionName;
 
     Faction(int factionID) {
         this.setFactionID(factionID);
-//        System.out.println("Faction.Faction #" + this.getFactionID() + " or " + this.getFactionName());
+	    System.out.println("Faction.Faction #" + this.getFactionID() + " or " + this.getFactionName());
     }
 
     /************************
@@ -18,11 +18,11 @@ class Faction {
 
     // FactionID
     private int getFactionID() {
-        return this.FactionID;
+	    return FactionID;
     }
 
     private void setFactionID(int factionID) {
-        this.FactionID = factionID;
+	    FactionID = factionID;
     }
 
     // FactionName
@@ -38,10 +38,10 @@ class Faction {
                 System.out.println("This is never reached in Faction.getFactionName");
                 break;
         }
-        return this.FactionName;
+	    return FactionName;
     }
 
     private void setFactionName(String factionName) {
-        this.FactionName = factionName;
+	    FactionName = factionName;
     }
 }

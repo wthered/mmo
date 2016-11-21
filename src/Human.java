@@ -19,7 +19,7 @@ class Human extends Race {
 	int selectClass() {
 		System.out.println("Human.selectClass");
 		System.out.println("*****************");
-		System.out.println("** 1) Magician **");
+		System.out.println("** 1) Wizard   **");
 		System.out.println("** 2) Paladin  **");
 		System.out.println("** 3) Priest   **");
 		System.out.println("** 4) Rogue    **");
