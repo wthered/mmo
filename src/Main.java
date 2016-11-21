@@ -3,6 +3,28 @@ import java.util.Scanner;
 
 import static java.text.MessageFormat.format;
 
+/* todo
+	Players have (maybe 2?) Professions
+	AttackPower
+	Block / Parry Abilities
+	Wizards / Warlocks use SpellPower
+	Rogue / Warriors use MeleePower
+	Some weapons have spellPower (or addSpellPower() ? ), some Melee (maybe some both?)
+
+	All players have explore Abilities. When you explore you might find monsters / gold / weapon
+	Each Weapon has accuracy (spellAccuracy / MeleeAcc)
+	Each weapon has CriticalChance (if succeed { this.damage *= 2; } on this cast of attackAction
+
+	example: https://www.youtube.com/watch?v=WrYEZdQZ3aw
+	 class Ogre {
+	    this.level = new RandomBetween(1,2).toInt();
+	    CurrentHealth = 200/200;
+	    minimumDamage = 30;
+	    maximumDamage = 65;
+	    chanceToHit = 60;
+	    chanceToBlock = 15;
+	 }
+ */
 class Main {
 
 	public static void main(String[] args) {

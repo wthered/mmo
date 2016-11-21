@@ -20,12 +20,12 @@ class PlayerClass {
 				myself.ClassID = h.selectClass();
 				h.setHumanAttributes(racist);
 				System.out.println("Humans (ClassID = " + myself.ClassID + ") can be wizards among others");
-				myself.ClassName = this.getAllianceClassName();
+//				myself.ClassName = this.getAllianceClassName();
 				break;
 			case 2:
 				Gnome regan = new Gnome(myself);
 				myself.ClassID = regan.selectGnomeClass();
-				myself.ClassName = this.getAllianceClassName();
+//				myself.ClassName = this.getAllianceClassName();
 				regan.setGnomeAttributes(racist);
 				System.out.println("Gnome can be Warlocks");
 				break;
@@ -43,7 +43,8 @@ class PlayerClass {
 		}
 		// Setting For now
 		// Will change after coding is complete
-		myself.RaceName = "Human";
+		myself.RaceName = "defaultClassName";
+		myself.ClassName = this.getAllianceClassName();
 	}
 
 	private String getAllianceClassName() {

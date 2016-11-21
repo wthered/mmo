@@ -12,15 +12,19 @@ class Player implements playerInterface {
 
 	// Player Attributes
 	private static String Name;
+	String ClassName;
 	int maxHealth;
 	int level;
 	int RaceID;
 	String RaceName;
 	// playerClass SetUp
 	int ClassID;
-	String ClassName;
 	String itsSexName;
 	int maxMana;
+
+	// placeHolder for later (see toDo section in Main.java)
+	boolean inBattle = false;
+
 	// Position Related Stuff
 	private int itsX;
 	private int itsY;
@@ -249,10 +253,6 @@ class Player implements playerInterface {
 //		System.out.println("Player.selectRace is " + r.getRaceName(this.getFactionID()) + " from " + this.getFaction());
 	}
 
-	void setClassID(int classID) {
-		this.ClassID = classID;
-	}
-
 	void setSex(int sex) {
 		switch (this.itsSex % 2) {
 			case 0:
@@ -312,5 +312,21 @@ class Player implements playerInterface {
 		this.setItsX(newX);
 		this.setItsY(newY);
 		System.out.println("Player.travel Reports (" + newX + ", " + newY + ")");
+	}
+
+	String getClassName() {
+		return this.ClassName;
+	}
+
+	public void setClassName(String className) {
+		this.ClassName = className;
+	}
+
+	int getClassID() {
+		return this.ClassID;
+	}
+
+	void setClassID(int classID) {
+		this.ClassID = classID;
 	}
 }
