@@ -23,8 +23,11 @@ class PlayerClass {
 				myself.ClassName = this.getAllianceClassName();
 				break;
 			case 2:
-				// selectGnomeRace();
-				System.out.println("\n\n\nGnome can be Warlocks\n\n\n");
+				Gnome regan = new Gnome(myself);
+				myself.ClassID = regan.selectGnomeClass();
+				myself.ClassName = this.getAllianceClassName();
+				regan.setGnomeAttributes(racist);
+				System.out.println("Gnome can be Warlocks");
 				break;
 			case 3:
 				// selectDwarfRace();

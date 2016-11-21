@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -63,11 +62,15 @@ class Player implements playerInterface {
 		Player.FactionID = FactionID;
 		Faction = "Alliance";
 
-		// Race Initializer
+		/*
+		** Race Initializer **
+		** It is not sync'd **
+		** with race Class  **
+		*/
 		this.RaceID = playRace.raceID;
 		this.ClassID = classID;
 
-		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
+//		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
 	}
 
 	// xAxis of Player
@@ -194,16 +197,25 @@ class Player implements playerInterface {
 
 	void selectClass(Race playRace) {
 		Faction f = new Faction(getFactionID());
+
+		// Set the RaceID Properly
 		playRace.setRaceID(this.RaceID);
+
+		// Set the RaceName for Alliance Races
+		playRace.setAllianceRaceName();
+
 		PlayerClass pc = new PlayerClass(this);
 		switch (this.getFactionID()) {
 			case 1:
 //				System.out.println("Player.selectClass " + this.getName() + " will select Class for " + f.getFactionName());
+				// todo playRace.getRaceName(this.RaceID)
 				System.out.println("Player.selectClass The raceID is " + this.RaceID + " or " + playRace.raceID);
+				System.out.println("Player.selectClass " + playRace.getRaceName(this.getFactionID()));
 				pc.ShowAllianceClassesFor( playRace );
 				// PlayerClassID is set into the function above
 				//this.setClassID(pClass);
 				// fixme this.RaceName = null
+				this.RaceName = playRace.getRaceName(getFactionID());
 				System.out.println("Player.selectClass Line 185 " + this.getName() + " is " + this.RaceName + " " + playRace.getRaceName(getFactionID()));
 				break;
 			case 2:

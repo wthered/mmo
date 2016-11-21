@@ -133,7 +133,7 @@ class Race {
 		return this.raceName;
 	}
 
-	private void setAllianceRaceName() {
+	void setAllianceRaceName() {
 		switch (this.getRaceID()) {
 			case 1:
 				this.setRaceName("Human");
