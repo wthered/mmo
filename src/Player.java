@@ -28,6 +28,8 @@ class Player implements playerInterface {
 	// Position Related Stuff
 	private int itsX;
 	private int itsY;
+	private String Position;
+
 	// playerRace Setup
 	private Race racist;
 	private int money;
@@ -48,6 +50,9 @@ class Player implements playerInterface {
 	private int itsSex;
 	private String City;
 	private String Area;
+
+    // Experience Handler
+    static int experience;
 
 	Player(String newName, int newLevel, int FactionID, Race playRace, int classID) {
 		this.setName(newName);
@@ -78,17 +83,18 @@ class Player implements playerInterface {
 	}
 
 	// xAxis of Player
-	private int getItsX() {
-		System.out.println("Player.getItsX Currently X =" + this.itsX);
+	int getItsX() {
+//		System.out.println("Player.getItsX Currently X = " + this.itsX);
 		return this.itsX;
 	}
 
-	private void setItsX(int itsX) {
+	void setItsX(int itsX) {
 		this.itsX = itsX;
 	}
 
 	// yAxis of Player
-	private int getItsY() {
+	int getItsY() {
+//        System.out.println("Player.getItsY Currently Y = " + this.itsY);
 		return this.itsY;
 	}
 
@@ -123,7 +129,7 @@ class Player implements playerInterface {
 		return this.money;
 	}
 
-	private void setMoney(int money) {
+	void setMoney(int money) {
 		this.money = money;
 	}
 
@@ -268,7 +274,11 @@ class Player implements playerInterface {
 	}
 
 	String getPosition() {
-		return "Bridge near Auction House";
+		return this.Position;
+	}
+
+	void setPosition(String position) {
+		this.Position = position;
 	}
 
 	// Area of Interest
@@ -287,7 +297,7 @@ class Player implements playerInterface {
 	}
 
 	// City
-	public void setCity(String cityName) {
+	void setCity(String cityName) {
 		City = cityName;
 	}
 
@@ -329,4 +339,12 @@ class Player implements playerInterface {
 	void setClassID(int classID) {
 		this.ClassID = classID;
 	}
+
+    int getExperience() {
+        return Player.experience;
+    }
+
+    void setExperience(int experience) {
+        Player.experience = experience;
+    }
 }

@@ -20,7 +20,7 @@ interface playerInterface {
 	}
 
 	default int showExperience() {
-		System.out.println("playerInterface.showExperience");
+		System.out.println("playerInterface.showExperience I have " + Player.experience + " experience");
 		return 0;
 	}
 }

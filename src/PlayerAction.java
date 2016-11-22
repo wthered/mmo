@@ -49,7 +49,7 @@ class PlayerAction {
 		System.out.println(myself.getName() + " is level " + myself.level );
 		System.out.println("I currently have " + myself.getItsHealth() + " Health Points of " + myself.maxHealth + " max");
 		System.out.println("I currently have " + myself.getItsMana() + " mana points of " + myself.maxMana + " max");
-		System.out.println("I have " + myself.getMoney() + " coins");
+		System.out.println("I have " + Main.convertMoney(myself.getMoney()));
 		System.out.println("I have " + myself.showExperience() + " experience" );
 		System.out.println("You can find me near " + myself.getPosition() + " of " + myself.getArea() + ", " + myself.getCity());
 		System.out.println("Last Action of " + myself.getName() + " is " + this.lastAction);
@@ -89,8 +89,9 @@ class PlayerAction {
 				}
 				break;
 			case 4:
+				Random questID = new Random();
 				Quest q = new Quest(myself);
-				q.doQuest(1);
+				q.doQuest(questID.nextInt(100));
 				break;
 			case 5:
 				for (int i = 0; i < 5; i++) {
@@ -108,7 +109,15 @@ class PlayerAction {
 				Travel t = new Travel(myself);
 				String destination = t.selectDestination();
 				t.visit(destination);
-//				t.selectDestination();
+//				myself.setArea(destination);
+				myself.setItsX(place.nextInt(100));
+				myself.setItsX(place.nextInt(100));
+				// Βασικά η είσοδος είναι στο 0,0 ή στο 50,0 αλλά τέσπα
+//				myself.setPosition("Entrance");
+				myself.setCity(destination);
+				System.out.println("PlayerAction.doAction Area = " + myself.getArea());
+				System.out.println("PlayerAction.doAction City = " + myself.getCity());
+				System.out.println("PlayerAction.doAction " + myself.getPosition() + " (" + myself.getItsX() + "," + myself.getItsY() + ")");
 				break;
 			case 7:
 				myself.travel(1 + place.nextInt(100), 1 + place.nextInt(100));

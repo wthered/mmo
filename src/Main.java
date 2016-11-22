@@ -101,9 +101,7 @@ class Main {
 					System.out.println("Your health is " + p.getItsHealth() + " health Points");
 					System.out.println("Your Mana is " + p.getItsMana() + " Mana Points");
 
-					int[] m = convertMoney(p.getMoney());
-					String money = m[0] + "g " + m[1] + "s " + m[2] + "c";
-					System.out.println(p.getName() + " has " + money + "! Use them wisely");
+					System.out.println(p.getName() + " has " + Main.convertMoney(p.getMoney()) + "! Use them wisely");
 
 					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(Player.FactionID), p.ClassName, p.getFaction(), p.itsSexName);
 					System.out.println(message);
@@ -129,6 +127,9 @@ class Main {
 					break;
 				case 2:
 					System.out.println("Sending http request to see your old Characters");
+					break;
+				case 3:
+					System.out.println("Main.main line 132 Enter the following random string to delete all your characters");
 					break;
 				default:
 					System.out.println("Invalid option");
@@ -163,6 +164,7 @@ class Main {
 		System.out.println("**************************");
 		System.out.println("** 1) Create Character  **");
 		System.out.println("** 2) Resume saved Game **");
+		System.out.println("** 3) Delete a last game**");
 		System.out.println("**************************");
 		System.out.print("What is your desired action? ");
 		Scanner actScan = new Scanner(System.in);
@@ -173,7 +175,7 @@ class Main {
 			creation = actScan.nextInt();
 		}
 
-		while (creation != 1 && creation != 2 ) {
+		while (creation != 1 && creation != 2 && creation != 3) {
 			System.out.print("What is your desired action? ");
 			actScan = new Scanner(System.in);
 			creation = actScan.nextInt();
@@ -181,8 +183,8 @@ class Main {
 		return creation;
 	}
 
-	private static int[] convertMoney(int money) {
-		int[] data;
+	static String convertMoney(int money) {
+//		int[] data;
 
 		int copper = money % 100;
 
@@ -194,7 +196,7 @@ class Main {
 		int gold = money - amount;
 		gold = gold / 10000;
 
-		data = new int[]{gold, silver, copper};
-		return data;
+//		data = new int[]{gold, silver, copper};
+		return gold + "g " + silver + "s " + copper + "c";
 	}
 }
