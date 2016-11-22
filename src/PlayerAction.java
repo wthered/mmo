@@ -106,7 +106,8 @@ class PlayerAction {
 				break;
 			case 6:
 				Travel t = new Travel(myself);
-				t.visit("Ironforge");
+				String destination = t.selectDestination();
+				t.visit(destination);
 //				t.selectDestination();
 				break;
 			case 7:
