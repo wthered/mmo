@@ -106,6 +106,7 @@ class PlayerAction {
 				}
 				break;
 			case 6:
+				// todo Setting newCity does not work properly
 				Travel t = new Travel(myself);
 				String destination = t.selectDestination();
 				t.visit(destination);
