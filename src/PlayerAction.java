@@ -55,11 +55,11 @@ class PlayerAction {
 		System.out.println("Last Action of " + myself.getName() + " is " + this.lastAction);
 
 		System.out.println("******** Attributes Report Starts here ********");
-		System.out.println("** Strength\t" + myself.getRaceName() + " is " + racist.getRaceStrength());
-		System.out.println("** Agility\t" + myself.getRaceName() + " is " + racist.getRaceAgility());
-		System.out.println("** Stamina\t" + myself.getRaceName() + " is " + racist.getRaceStamina());
+		System.out.println("** Strength\t\t" + myself.getRaceName() + " is " + racist.getRaceStrength());
+		System.out.println("** Agility\t\t" + myself.getRaceName() + " is " + racist.getRaceAgility());
+		System.out.println("** Stamina\t\t" + myself.getRaceName() + " is " + racist.getRaceStamina());
 		System.out.println("** Intellect\t" + myself.getRaceName() + " is " + racist.getRaceSpirit());
-		System.out.println("** Spirit\t" + myself.getRaceName() + " is " + racist.getRaceSpirit());
+		System.out.println("** Spirit\t\t" + myself.getRaceName() + " is " + racist.getRaceSpirit());
 		System.out.println("***********************************************");
 	}
 
@@ -122,6 +122,10 @@ class PlayerAction {
 			case 8:
 				this.report();
 				break;
+			case 9:
+				System.out.println("PlayerAction.doAction Looking into my Inventory");
+				System.out.println("PlayerAction.doAction Found None");
+				break;
 			default:
 				System.out.println("Not implemented yet in PlayerAction.doAction for " + this.lastAction);
 		}
@@ -144,14 +148,12 @@ class PlayerAction {
 			}
 			System.out.println("PlayerAction.eat Consuming a bread from the Inventory");
 		}
-		System.out.println("I currently have " + myself.getItsHealth() + " health points");
-		System.out.println("Is this " + myself.getMaxHealth() + " ?");
 	}
 
 	private void drink() {
 		System.out.println("PlayerAction.drink I can not find any drinks in your Inventory");
 		System.out.println("PlayerAction.drink Visit an Inn to the nearest Town or Capital City");
-		System.out.println("I currently have " + myself.getItsMana() + " with max = " + myself.getMaxMana());
+		System.out.println("I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
 	}
 
 	private class PlayerChat extends TimerTask {

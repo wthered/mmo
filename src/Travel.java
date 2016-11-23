@@ -50,13 +50,12 @@ class Travel {
 		for (int i = 0; i < destination.length(); i++) {
 			try {
 				TimeUnit.SECONDS.sleep(5);
-				System.out.println("Travel.centaur " + i + "Traveling from " + me.getCity() + " to " + destination + " on a centaur");
+				System.out.println("Travel.centaur Traveling from " + me.getCity() + " to " + destination + " on a centaur Step #" + i);
 			} catch (InterruptedException e) {
 				System.out.println("Travel.centaur Exception Line 57");
 				e.printStackTrace();
 			}
 		}
- 		System.out.println("Travel.centaur Traveling from " + me.getCity() + " to " + destination + " on a centaur");
 	}
 
 	private boolean checkMoney(String destination, int travelCost) {
