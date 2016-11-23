@@ -24,7 +24,7 @@ class Quest {
 		me.setMoney(currentMoney + rewardMoney);
 		System.out.println("Quest.doQuest You gained " + rewardXP + " experience");
 		me.setExperience(me.getExperience() + rewardXP);
-		System.out.println("Quest.doQuest You now have " + me.getExperience() + " experience");
+		System.out.println("Quest.doQuest You now have " + me.getExperience() + " experience and " + Main.convertMoney(me.getMoney()));
 		me.showExperience();
 	}
 

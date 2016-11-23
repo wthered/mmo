@@ -1,5 +1,5 @@
-import java.awt.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wthered on 19/11/2016.
@@ -55,11 +55,11 @@ class PlayerAction {
 		System.out.println("Last Action of " + myself.getName() + " is " + this.lastAction);
 
 		System.out.println("******** Attributes Report Starts here ********");
-		System.out.println("** Strength for " + myself.getRaceName() + " is " + racist.getRaceStrength());
-		System.out.println("** Agility for " + myself.getRaceName() + " is " + racist.getRaceAgility());
-		System.out.println("** Stamina for " + myself.getRaceName() + " is " + racist.getRaceStamina());
-		System.out.println("** Intellectual" + myself.getRaceName() + " is " + racist.getRaceSpirit());
-		System.out.println("** Spirit  for " + myself.getRaceName() + " is " + racist.getRaceSpirit());
+		System.out.println("** Strength\t" + myself.getRaceName() + " is " + racist.getRaceStrength());
+		System.out.println("** Agility\t" + myself.getRaceName() + " is " + racist.getRaceAgility());
+		System.out.println("** Stamina\t" + myself.getRaceName() + " is " + racist.getRaceStamina());
+		System.out.println("** Intellect\t" + myself.getRaceName() + " is " + racist.getRaceSpirit());
+		System.out.println("** Spirit\t" + myself.getRaceName() + " is " + racist.getRaceSpirit());
 		System.out.println("***********************************************");
 	}
 
@@ -106,7 +106,6 @@ class PlayerAction {
 				}
 				break;
 			case 6:
-				// todo Setting newCity does not work properly
 				Travel t = new Travel(myself);
 				String destination = t.selectDestination();
 				t.visit(destination);
@@ -129,12 +128,29 @@ class PlayerAction {
 	}
 
 	private void eat() {
-		System.out.println("I currently have " + myself.getItsHealth());
+		if(myself.getItsHealth() == myself.getMaxHealth()) {
+			System.out.println("Already have max Health. Can not eat more");
+		} else {
+			for (int i = 0; i < 24; i++) {
+				try {
+					TimeUnit.SECONDS.sleep(5);
+					// todo ConsumablesEat have property healthPerSecond
+					myself.setItsHealth(myself.getItsHealth() + 4);
+					System.out.println("PlayerAction.eat Your health now is " + myself.getItsHealth());
+				} catch (InterruptedException e) {
+					System.out.println("PlayerAction.eat Interrupting in line 140");
+					e.printStackTrace();
+				}
+			}
+			System.out.println("PlayerAction.eat Consuming a bread from the Inventory");
+		}
+		System.out.println("I currently have " + myself.getItsHealth() + " health points");
 		System.out.println("Is this " + myself.getMaxHealth() + " ?");
-		System.out.println("I maybe should not eat");
 	}
 
 	private void drink() {
+		System.out.println("PlayerAction.drink I can not find any drinks in your Inventory");
+		System.out.println("PlayerAction.drink Visit an Inn to the nearest Town or Capital City");
 		System.out.println("I currently have " + myself.getItsMana() + " with max = " + myself.getMaxMana());
 	}
 
@@ -148,7 +164,6 @@ class PlayerAction {
 
 		public void run() {
 			System.out.println("PlayerChat.run in PlayerAction line 84 LastAction = " + this.lastAction);
-			Toolkit.getDefaultToolkit().beep();
 		}
 	}
 }

@@ -1,7 +1,4 @@
-import java.util.InputMismatchException;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,8 +17,14 @@ class Travel {
 	// The Travel has a Cost
 	private Random randCost = new Random();
 
+	// Each Capital City has a capitalID to prevent traveling from CityID = 3 to CityID = 3 for example
+//	Map<Integer, String> capitalCitiesAlliance = new HashMap<Integer, String>();
+
 	Travel(Player myself) {
 		this.me = myself;
+//		capitalCitiesAlliance.put(1, "Stormwind");
+//		capitalCitiesAlliance.put(2, "Ironforge");
+//		capitalCitiesAlliance.put(3, "Silvanaar");
 	}
 
 	void visit(String destination) {
@@ -29,11 +32,13 @@ class Travel {
 		System.out.println("Traveling from " + me.getCity() + " to " + destination + " with cost " + Main.convertMoney(travelCost));
 		if(this.checkMoney(destination, travelCost) ) {
 			me.setMoney(me.getMoney() - travelCost);
-			System.out.println("Travel.visit \nThis trip is allowed because you have enough money\n");
-			System.out.println("Travel.visit You've been charged with " + travelCost + "c");
-//			System.out.println("Travel.visit You now have " + me.getMoney() + "c");
-			this.centaur(destination);
-			me.setCity(destination);
+			System.out.println("Travel.visit You've been charged with " + Main.convertMoney(travelCost) );
+			System.out.println("Travel.visit You now have " + Main.convertMoney(me.getMoney()) );
+			if(!Objects.equals(me.getCity(), destination)) {
+				System.out.println("Travel.visit traveling from " + me.getCity() + " to " + destination);
+				this.centaur(destination);
+				me.setCity(destination);
+			}
 			System.out.println("Travel.visit You now are in " + me.getCity());
 		} else {
 			System.out.println("Travel.visit You need " + Main.convertMoney(travelCost) + " to do this trip");
@@ -44,12 +49,14 @@ class Travel {
 	private void centaur(String destination) {
 		for (int i = 0; i < destination.length(); i++) {
 			try {
-				TimeUnit.SECONDS.sleep(1);
-				System.out.println("Travel.centaur Traveling from " + me.getCity() + " to " + destination + " on a centaur");
+				TimeUnit.SECONDS.sleep(5);
+				System.out.println("Travel.centaur " + i + "Traveling from " + me.getCity() + " to " + destination + " on a centaur");
 			} catch (InterruptedException e) {
+				System.out.println("Travel.centaur Exception Line 57");
 				e.printStackTrace();
 			}
 		}
+ 		System.out.println("Travel.centaur Traveling from " + me.getCity() + " to " + destination + " on a centaur");
 	}
 
 	private boolean checkMoney(String destination, int travelCost) {
@@ -80,13 +87,13 @@ class Travel {
 	}
 
 	private String showAllianceCapitals() {
-		String city = "Exodar";
+		String capitalCity = "Exodar";
 		System.out.println("******************");
 		System.out.println("** 1) Stormwind **");
 		System.out.println("** 2) Ironforge **");
 		System.out.println("** 3) Silvanaar **");
 		System.out.println("******************");
-		System.out.print("What is your destination, " + me.getName() + "? ");
+		System.out.print("What is your destination, " + me.getName() + " from " + me.getCity() + "? ");
 		cityScan = new Scanner(System.in);
 		try {
 			return this.convertAllianceCity(cityScan.nextInt());
@@ -94,12 +101,15 @@ class Travel {
 			System.out.println("Travel.showAllianceCapitals Invalid Input\t" + cityScan.nextLine());
 			ex.printStackTrace();
 		}
-		return city;
+		return capitalCity;
 	}
 
 	private String convertAllianceCity(int cityID) {
-		String allianceCityName = "Exodar";
+		String allianceCityName = "Darnassus";
 		switch (cityID) {
+			case 0:
+				allianceCityName = "Exodar";
+				break;
 			case 1:
 				allianceCityName = "Stormwind";
 				break;
@@ -110,7 +120,7 @@ class Travel {
 				allianceCityName = "Silvanaar";
 				break;
 			default:
-				if(cityID > 3) { convertAllianceCity(cityID % 3); }
+				if(cityID > 3) { allianceCityName = convertAllianceCity(cityID % 3); }
 				System.out.println("Travel.convertAllianceCity destinationCityID can never be " + cityID);
 		}
 		System.out.println("Travel.convertAllianceCity\t" + allianceCityName);
@@ -161,11 +171,11 @@ class Travel {
 		if(Objects.equals(fromCity, "Stormwind") && destCity.equals("Silvanaar")) { cost = 50; }
 		if(Objects.equals(fromCity, "Silvanaar") && destCity.equals("Stormwind")) { cost = 50; }
 		if(Objects.equals(fromCity, "Silvanaar") && destCity.equals("Ironforge")) { cost = 40; }
-		if(Objects.equals(fromCity, destCity) ) {
-			System.out.println("Travel.calculateCost You already are in " + me.getCity());
-			System.out.println("Can not travel from " + fromCity + " to " + destCity);
-			cost = 0;
-		}
+//		if(Objects.equals(fromCity, destCity) ) {
+//			System.out.println("Travel.calculateCost You already are in " + me.getCity());
+//			System.out.println("Can not travel from " + fromCity + " to " + destCity);
+//			cost = 0;
+//		}
 		return cost;
 	}
 }

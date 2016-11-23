@@ -140,7 +140,7 @@ class Player implements playerInterface {
 		return this.itsHealth;
 	}
 
-	private void setItsHealth(int itsHealth) {
+	void setItsHealth(int itsHealth) {
 		this.itsHealth = itsHealth;
 	}
 
@@ -171,8 +171,8 @@ class Player implements playerInterface {
 
 	// RaceName
 	String getRaceName() {
-		System.out.print("Player.getRaceName reports " + this.getName() + " is " + this.RaceName + " " + this.ClassName);
-		System.out.println(" in " + this.getPosition() + " of " + this.getCity() + " of " + this.getArea());
+//		System.out.print("Player.getRaceName reports " + this.getName() + " is " + this.RaceName + " " + this.getClassName());
+//		System.out.println(" in " + this.getPosition() + " of " + this.getCity() + " of " + this.getArea());
 		return this.RaceName;
 	}
 
@@ -222,7 +222,7 @@ class Player implements playerInterface {
 		switch (this.getFactionID()) {
 			case 1:
 //				System.out.println("Player.selectClass " + this.getName() + " will select Class for " + f.getFactionName());
-				// todo playRace.getRaceName(this.RaceID)
+
 				System.out.println("Player.selectClass The raceID is " + this.RaceID + " or " + playRace.raceID);
 				System.out.println("Player.selectClass " + playRace.getRaceName(this.getFactionID()));
 				pc.ShowAllianceClassesFor( playRace );

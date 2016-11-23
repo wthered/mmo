@@ -2,14 +2,14 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Created by wthered on 18/11/2016.
- * This is not the default Template
+ * Created by wthered on 18/11/2016
  */
 class Human extends Race {
 
-	private static String HumanClass;
+	private String HumanClass;
 	private int HumanClassID;
-	private Player myself;
+
+    private Player myself;
 
 	Human(Player p) {
 		this.myself = p;
@@ -31,13 +31,12 @@ class Human extends Race {
 		System.out.print("Select your Class, Human? ");
 		Scanner humanScan = new Scanner(System.in);
 		try {
-			myself.ClassID = humanScan.nextInt();
-			this.setHumanClassID(myself.ClassID);
+			this.setHumanClassID(humanScan.nextInt());
 		} catch (InputMismatchException ex) {
 			System.out.println("Invalid Input in Human.selectClass");
 			ex.printStackTrace();
 		}
-		return myself.ClassID;
+        return this.getHumanClassID();
 	}
 
 	private void setHumanClassID(int humanClassID) {
@@ -96,12 +95,15 @@ class Human extends Race {
 				break;
 			default:
 				System.out.println("Human.getHumanClass HumanClassID is never " + this.HumanClassID);
-				HumanClass = "StarYoda";
+				this.HumanClass = "StarYoda";
 		}
 	}
 
 	private void setHumanClass(String humanClass) {
-		HumanClass = humanClass;
+		this.HumanClass = humanClass;
 	}
 
+    private int getHumanClassID() {
+        return this.HumanClassID;
+    }
 }

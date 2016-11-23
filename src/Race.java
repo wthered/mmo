@@ -164,6 +164,6 @@ class Race {
 	}
 
 	void setPlayerAttributes(Player p) {
-		System.out.println("Race.setPlayerAttributes Player is " + p.RaceName + " (" + p.RaceID + ")");
+		System.out.println("Race.setPlayerAttributes Player is " + p.getRaceName() );
 	}
 }

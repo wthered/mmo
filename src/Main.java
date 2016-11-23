@@ -137,13 +137,15 @@ class Main {
 					System.out.println("Invalid option");
 					break;
 			}
+		} else {
+			System.out.println("Main.main Line 145 User Authentication Failed. Try Again");
 		}
 		System.out.println("Last action was " + action);
 	}
 
 	private static Player createNewPlayer(Race r) {
 		Random rnd = new Random();
-		Player p = new Player("William", 1, 1 + rnd.nextInt(3), r, 1 + rnd.nextInt(3));
+		Player p = new Player("Anonymous", 1, 1 + rnd.nextInt(3), r, 1 + rnd.nextInt(3));
 
 		p.selectFaction();
 		p.selectRace();
@@ -152,10 +154,12 @@ class Main {
 	}
 
 	private static boolean auth(String username, String password) {
+		Random suck = new Random();
+		Boolean success;
 		System.out.println("Username\t" + username);
 		System.out.println("Password\t" + password);
 		httpAuth auth = new httpAuth();
-		boolean success = auth.send(username, password);
+		success = suck.nextBoolean() && auth.send(username, password);
 		System.out.println("Server Authentication in Main.auth is " + success);
 		return success;
 	}

@@ -19,7 +19,7 @@ class PlayerClass {
 				Human h = new Human(this.myself);
 				myself.ClassID = h.selectClass();
 				h.setHumanAttributes(racist);
-				System.out.println("Humans (ClassID = " + myself.ClassID + ") can be wizards among others");
+				System.out.println("PlayerClass.ShowAvailableClassesFor Humans can be " + myself.getClassName() + " among others");
 //				myself.ClassName = this.getAllianceClassName();
 				break;
 			case 2:
