@@ -2,6 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wthered on 21/11/2016.
@@ -25,22 +26,36 @@ class Travel {
 
 	void visit(String destination) {
 		int travelCost = this.calculateCost(me.getCity(), destination);
-		System.out.println("Traveling from " + me.getCity() + " to " + destination);
+		System.out.println("Traveling from " + me.getCity() + " to " + destination + " with cost " + Main.convertMoney(travelCost));
 		if(this.checkMoney(destination, travelCost) ) {
 			me.setMoney(me.getMoney() - travelCost);
-			System.out.println("This trip is allowed because you have enough money");
+			System.out.println("Travel.visit \nThis trip is allowed because you have enough money\n");
 			System.out.println("Travel.visit You've been charged with " + travelCost + "c");
-			System.out.println("Travel.visit You now have " + me.getMoney() + "c");
+//			System.out.println("Travel.visit You now have " + me.getMoney() + "c");
+			this.centaur(destination);
 			me.setCity(destination);
+			System.out.println("Travel.visit You now are in " + me.getCity());
 		} else {
-			System.out.println("You need " + travelCost + "c to do this trip");
+			System.out.println("Travel.visit You need " + Main.convertMoney(travelCost) + " to do this trip");
 			System.out.println(me.getName() + " is now in City " + me.getCity() + " of " + me.getArea());
 		}
 	}
 
+	private void centaur(String destination) {
+		for (int i = 0; i < destination.length(); i++) {
+			try {
+				TimeUnit.SECONDS.sleep(1);
+				System.out.println("Travel.centaur Traveling from " + me.getCity() + " to " + destination + " on a centaur");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	private boolean checkMoney(String destination, int travelCost) {
-		System.out.println("You already have " + me.getMoney() + "c");
-		System.out.println("This will cost you " + this.calculateCost(me.getCity(), destination) + "c");
+		int theCost = this.calculateCost(me.getCity(), destination);
+		System.out.println("Travel.checkMoney You already have " + Main.convertMoney(me.getMoney()) );
+		System.out.println("Travel.checkMoney This will cost you " + Main.convertMoney(theCost) );
 		return me.getMoney() > travelCost;
 	}
 

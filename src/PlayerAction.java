@@ -110,12 +110,9 @@ class PlayerAction {
 				Travel t = new Travel(myself);
 				String destination = t.selectDestination();
 				t.visit(destination);
-//				myself.setArea(destination);
 				myself.setItsX(place.nextInt(100));
 				myself.setItsX(place.nextInt(100));
-				// Βασικά η είσοδος είναι στο 0,0 ή στο 50,0 αλλά τέσπα
-//				myself.setPosition("Entrance");
-				myself.setCity(destination);
+
 				System.out.println("PlayerAction.doAction Area = " + myself.getArea());
 				System.out.println("PlayerAction.doAction City = " + myself.getCity());
 				System.out.println("PlayerAction.doAction " + myself.getPosition() + " (" + myself.getItsX() + "," + myself.getItsY() + ")");

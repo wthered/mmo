@@ -1,4 +1,6 @@
+import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wthered on 12/11/2016 3:23 μμ
@@ -169,7 +171,8 @@ class Player implements playerInterface {
 
 	// RaceName
 	String getRaceName() {
-		System.out.println("Player.getRaceName reports " + this.getName() + " is " + this.RaceID + " " + this.ClassName);
+		System.out.print("Player.getRaceName reports " + this.getName() + " is " + this.RaceName + " " + this.ClassName);
+		System.out.println(" in " + this.getPosition() + " of " + this.getCity() + " of " + this.getArea());
 		return this.RaceName;
 	}
 
@@ -184,7 +187,8 @@ class Player implements playerInterface {
 				Faction = "Horde";
 				break;
 			default:
-				System.out.println("Neutral in Player.getFaction");
+				Faction = "Neutral";
+				System.out.println("Player.getFaction Faction is never " + Faction + "\nSetting to Neutral");
 		}
 		return Faction;
 	}
@@ -226,7 +230,7 @@ class Player implements playerInterface {
 				//this.setClassID(pClass);
 				// fixme this.RaceName = null
 				this.RaceName = playRace.getRaceName(getFactionID());
-				System.out.println("Player.selectClass Line 185 " + this.getName() + " is " + this.RaceName + " " + playRace.getRaceName(getFactionID()));
+				System.out.println("Player.selectClass Line 185 " + this.getName() + " is " + this.getRaceName() + " " + this.getClassName());
 				break;
 			case 2:
 				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
@@ -277,28 +281,26 @@ class Player implements playerInterface {
 		return this.Position;
 	}
 
-	void setPosition(String position) {
+	private void setPosition(String position) {
 		this.Position = position;
 	}
 
 	// Area of Interest
 	String getArea() {
-		this.Area = "Don Morogh";
 		return this.Area;
 	}
 
-	void setArea(String areaName) {
+	private void setArea(String areaName) {
 		this.Area = areaName;
 	}
 
 	String getCity() {
-		this.City = "Ironforge";
 		return this.City;
 	}
 
 	// City
 	void setCity(String cityName) {
-		City = cityName;
+		this.City = cityName;
 	}
 
 	/*
@@ -347,4 +349,35 @@ class Player implements playerInterface {
     void setExperience(int experience) {
         Player.experience = experience;
     }
+
+    void setStartingCity() {
+		switch (this.getRaceName()) {
+			case "Human":
+				this.setCity("Stormwind");
+				this.setArea("Elwyn Forest");
+				break;
+			case "Gnome":
+			case "Dwarf":
+				this.setCity("Ironforge");
+				this.setArea("Dun Morogh");
+				break;
+			case "Night Elf":
+				this.setCity("Shadowglen");
+				this.setArea("Teldrassil");
+			default:
+				System.out.println("Player.setStartingCity What is your Class Elf? ");
+		}
+
+		// Position in Starting City
+		Random pos = new Random(50);
+		switch (pos.nextInt() % 2) {
+			case 1:
+				this.setPosition("Entrance");
+				break;
+			default:
+				this.setPosition("Auction House");
+				break;
+		}
+		System.out.println("Player.setStartingCity You are a " + this.getRaceName());
+	}
 }

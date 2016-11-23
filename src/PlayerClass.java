@@ -27,6 +27,7 @@ class PlayerClass {
 				myself.ClassID = regan.selectGnomeClass();
 //				myself.ClassName = this.getAllianceClassName();
 				regan.setGnomeAttributes(racist);
+				myself.setCity("Ironforge");
 				System.out.println("Gnome can be Warlocks");
 				break;
 			case 3:

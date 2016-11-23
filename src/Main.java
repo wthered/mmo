@@ -56,7 +56,7 @@ class Main {
 		if (identify) {
 			action = createOrLogin();
 
-			while ((action != 1) && (action != 2)) {
+			while ((action != 1) && (action != 2) && (action != 3)) {
 				System.out.println("Line 39 of Main.main");
 				action = createOrLogin();
 			}
@@ -106,6 +106,8 @@ class Main {
 					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(Player.FactionID), p.ClassName, p.getFaction(), p.itsSexName);
 					System.out.println(message);
 
+//					System.out.println("Main.main line 110");
+					p.setStartingCity();
 					System.out.println("You are ready to quest " + p.getName());
 					PlayerAction a = new PlayerAction(p, r);
 
