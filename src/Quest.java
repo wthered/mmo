@@ -26,6 +26,9 @@ class Quest {
 		me.setExperience(me.getExperience() + rewardXP);
 		System.out.println("Quest.doQuest You now have " + me.getExperience() + " experience and " + Main.convertMoney(me.getMoney()));
 		me.showExperience();
+		//todo Loss of Health depends on level and type of attack, me.defenceType etc of attacking mob
+//		int mobDamage = reward.nextInt(me.getItsHealth());
+		me.setItsHealth(me.getItsHealth() / 2);
 	}
 
 	private int gain(int experience) {

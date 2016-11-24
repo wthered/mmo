@@ -53,8 +53,11 @@ class Player implements playerInterface {
 	private String City;
 	private String Area;
 
-    // Experience Handler
-    static int experience;
+	// Experience Handler
+	 static int experience;
+
+    // Each Player has its Inventory derived from playerInterface
+	static int[] inventory;
 
 	Player(String newName, int newLevel, int FactionID, Race playRace, int classID) {
 		this.setName(newName);
@@ -100,7 +103,7 @@ class Player implements playerInterface {
 		return this.itsY;
 	}
 
-	public void setItsY(int itsY) {
+	void setItsY(int itsY) {
 		this.itsY = itsY;
 	}
 
@@ -149,7 +152,7 @@ class Player implements playerInterface {
 		return this.itsMana;
 	}
 
-	private void setItsMana(int itsMana) {
+	void setItsMana(int itsMana) {
 		this.itsMana = itsMana;
 	}
 

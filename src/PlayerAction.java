@@ -11,6 +11,7 @@ class PlayerAction {
 	private int lastAction;
 	private Player myself;
 	private Race racist;
+	private Random randomAction = new Random();
 
 	PlayerAction(Player actor, Race playRace) {
 		this.lastAction = 0;
@@ -121,6 +122,8 @@ class PlayerAction {
 				break;
 			case 8:
 				this.report();
+				System.out.println("PlayerAction.doAction You have " + myself.getItsHealth() + " health points");
+				System.out.println("PlayerAction.doAction You have " + myself.getItsMana() + " mana");
 				break;
 			case 9:
 				System.out.println("PlayerAction.doAction Looking into my Inventory");
@@ -132,28 +135,49 @@ class PlayerAction {
 	}
 
 	private void eat() {
+		Random amount = new Random();
 		if(myself.getItsHealth() == myself.getMaxHealth()) {
 			System.out.println("Already have max Health. Can not eat more");
 		} else {
 			for (int i = 0; i < 24; i++) {
 				try {
 					TimeUnit.SECONDS.sleep(5);
+					// todo Να παίρνει αντικείμενα από το Player.inventory
+					FoodItem food = new FoodItem("Potato Bread", 24, 24, "Bread");
+					float healthPerSecond = food.getHealthPerSecond(food);
 					// todo ConsumablesEat have property healthPerSecond
-					myself.setItsHealth(myself.getItsHealth() + 4);
-					System.out.println("PlayerAction.eat Your health now is " + myself.getItsHealth());
+					if(myself.getMaxHealth() < myself.getItsHealth()) {
+						myself.setItsHealth(myself.getItsHealth() + Math.round(healthPerSecond));
+					}
+					System.out.println("PlayerAction.eat Your health now is " + myself.getItsHealth() + " health points");
 				} catch (InterruptedException e) {
 					System.out.println("PlayerAction.eat Interrupting in line 140");
 					e.printStackTrace();
 				}
 			}
 			System.out.println("PlayerAction.eat Consuming a bread from the Inventory");
+			FoodItem item = new FoodItem("Sweet Bread", 24, 48, "Bread");
+			myself.putInventory(item.conjure(amount.nextInt()));
+			for (int inv : Player.inventory) {
+				System.out.println("PlayerAction.eat Eating " + inv);
+			}
 		}
 	}
 
 	private void drink() {
+		// ToDo This will work for all players
+		// ToDo Wizards can conjure Drinks, all players can drink items
 		System.out.println("PlayerAction.drink I can not find any drinks in your Inventory");
 		System.out.println("PlayerAction.drink Visit an Inn to the nearest Town or Capital City");
 		System.out.println("I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
+		System.out.println("PlayerAction.drink Inside my Inventory I have");
+		DrinkItem mana = new DrinkItem("Fresh Water", 10, 10, "Water");
+		double[] manaDrinks = mana.createWaterBottle(myself, 15);
+		for (double manaDrink : manaDrinks) {
+			System.out.println("PlayerAction.drink I see " + manaDrink);
+		}
+		mana.useOne(myself, manaDrinks);
+		mana.create(randomAction.nextInt());
 	}
 
 	private class PlayerChat extends TimerTask {

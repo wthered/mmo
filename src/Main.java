@@ -118,9 +118,13 @@ class Main {
 					try {
 						a.doAction();
 						// Repeat until I say so
-						while (lastPlayerAction != 0) {
+						while (lastPlayerAction != 0 && p.getItsHealth() > 0) {
 							lastPlayerAction = a.selectAction();
 							a.doAction();
+						}
+						if(p.getItsHealth() <= 0) {
+							System.out.println("Main.main You died");
+							break;
 						}
 					} catch (InterruptedException ex) {
 						System.out.println("Interrupted in line 93 of Main.main");

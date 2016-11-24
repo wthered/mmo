@@ -1,11 +1,13 @@
 /**
  * Created by wthered on 24/11/2016.
+ * The Package name is ${PACKAGE_NAME}
+ * The Project name is mmo
  */
 public class Wizard {
 
-    Player mage;
+    private Player mage;
 
-    public Wizard(Player mage) {
+    Wizard(Player mage) {
         this.mage = mage;
     }
 
@@ -16,10 +18,15 @@ public class Wizard {
         //todo Cooldown 5 seconds
     }
 
-    public int[] conjureFood() {
-        Food conjuredBread = new Food("ConjuredBread", 16, 18, "Bread");
-        int[] food = conjuredBread.conjure(20);
-        System.out.println("Wizard.conjureFood The new Bread hass been put inside Inventory");
+    public double[] conjureFood() {
+        FoodItem conjuredBread = new FoodItem("ConjuredBread", 16, 18, "Bread");
+        double[] food = conjuredBread.conjure(20);
+        System.out.println("Wizard.conjureFood The new Bread has been put inside Inventory");
         return food;
+    }
+
+    public double[] conjureMana() {
+        DrinkItem conjuredDrink = new DrinkItem("Conjured Water", 150, 18, "Water");
+        return conjuredDrink.createWaterBottle(mage, 20);
     }
 }
