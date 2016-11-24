@@ -96,11 +96,11 @@ class Player implements playerInterface {
 
 	// yAxis of Player
 	int getItsY() {
-//        System.out.println("Player.getItsY Currently Y = " + this.itsY);
+		System.out.println("Player.getItsY Currently Y = " + this.itsY);
 		return this.itsY;
 	}
 
-	private void setItsY(int itsY) {
+	public void setItsY(int itsY) {
 		this.itsY = itsY;
 	}
 
