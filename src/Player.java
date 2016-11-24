@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -57,9 +58,18 @@ class Player implements playerInterface {
 	private static int experience;
 
     // Each Player has its Inventory derived from playerInterface
-	static int[] inventory;
+//	public Collection<Iterable> inventory;
+	List<Item> inventory;
 
 	Player(String newName, int newLevel, int FactionID, Race playRace, int classID) {
+
+		// Start of ForTest Section
+		Item HealPotion = new Item("Health Potion", "Health");
+		Item ManaPotion = new Item("Mana Potion", "Mana");
+		this.inventory.add(HealPotion);
+		this.inventory.add(ManaPotion);
+		// End of ForTest Section
+
 		this.setName(newName);
 		this.setMoney(0);
 		this.setLevel(newLevel);

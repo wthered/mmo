@@ -7,41 +7,41 @@ class Faction {
 	private static int FactionID;
 	private static String FactionName;
 
-    Faction(int factionID) {
-        this.setFactionID(factionID);
+	Faction(int factionID) {
+		this.setFactionID(factionID);
 //	    System.out.println("Faction.Faction #" + this.getFactionID() + " or " + this.getFactionName());
-    }
+	}
 
-    /************************
-     ** Setters and Getters **
-     ************************/
+	/************************
+	 ** Setters and Getters **
+	 ************************/
 
-    // FactionID
-    private int getFactionID() {
-	    return FactionID;
-    }
+	// FactionID
+	private int getFactionID() {
+		return FactionID;
+	}
 
-    private void setFactionID(int factionID) {
-	    FactionID = factionID;
-    }
+	private void setFactionID(int factionID) {
+		FactionID = factionID;
+	}
 
-    // FactionName
-    String getFactionName() {
-        switch (this.getFactionID()) {
-            case 1:
-                this.setFactionName("Alliance");
-                break;
-            case 2:
-                this.setFactionName("Horde");
-                break;
-            default:
-                System.out.println("This is never reached in Faction.getFactionName");
-                break;
-        }
-	    return FactionName;
-    }
+	// FactionName
+	String getFactionName() {
+		switch (this.getFactionID()) {
+			case 1:
+				this.setFactionName("Alliance");
+				break;
+			case 2:
+				this.setFactionName("Horde");
+				break;
+			default:
+				System.out.println("This is never reached in Faction.getFactionName");
+				break;
+		}
+		return FactionName;
+	}
 
-    private void setFactionName(String factionName) {
-	    FactionName = factionName;
-    }
+	private void setFactionName(String factionName) {
+		FactionName = factionName;
+	}
 }

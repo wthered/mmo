@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -24,8 +23,9 @@ interface playerInterface {
 //		System.out.println("playerInterface.showExperience I have " + Player.experience + " experience");
 	}
 
-	default void putInventory(double[] stackItems) {
-		ArrayList<int[]> inv = new ArrayList<>();
-		inv.add(20, Player.inventory);
+	default void putInventory(Player p, Item i ) {
+		System.out.println("playerInterface.putInventory The item name " + i.getClass().toString() + " put in " + p.getName() + " inventory");
+		p.inventory.add(i);
+//		inv.add(20, Player.inventory);
 	}
 }

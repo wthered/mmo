@@ -9,7 +9,7 @@ class Human extends Race {
 	private String HumanClass;
 	private int HumanClassID;
 
-    private Player myself;
+	private Player myself;
 
 	Human(Player p) {
 		this.myself = p;
@@ -36,7 +36,7 @@ class Human extends Race {
 			System.out.println("Invalid Input in Human.selectClass");
 			ex.printStackTrace();
 		}
-        return this.getHumanClassID();
+		return this.getHumanClassID();
 	}
 
 	private void setHumanClassID(int humanClassID) {
@@ -105,7 +105,7 @@ class Human extends Race {
 		this.HumanClass = humanClass;
 	}
 
-    private int getHumanClassID() {
-        return this.HumanClassID;
-    }
+	private int getHumanClassID() {
+		return this.HumanClassID;
+	}
 }
