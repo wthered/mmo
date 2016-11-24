@@ -20,9 +20,8 @@ interface playerInterface {
 		return "InterfacePlayerFactionName";
 	}
 
-	default int showExperience() {
-		System.out.println("playerInterface.showExperience I have " + Player.experience + " experience");
-		return 0;
+	default void showExperience() {
+//		System.out.println("playerInterface.showExperience I have " + Player.experience + " experience");
 	}
 
 	default void putInventory(double[] stackItems) {

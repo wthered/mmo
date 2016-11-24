@@ -28,8 +28,9 @@ class Quest {
 		System.out.println("Quest.doQuest You now have " + me.getExperience() + " experience and " + Main.convertMoney(me.getMoney()));
 		me.showExperience();
 		//todo Loss of Health depends on level and type of attack, me.defenceType etc of attacking mob
-//		int mobDamage = reward.nextInt(me.getItsHealth());
-		me.setItsHealth(me.getItsHealth() / 2);
-		System.out.println("Quest.doQuest You now have " + me.getItsHealth() + " health points");
+		int mobDamage = 1 + reward.nextInt(me.getItsHealth());
+		me.setItsHealth(me.getItsHealth() - mobDamage);
+//		System.out.printf("Quest.doQuest You now have %.2f health points", Double.valueOf(me.getItsHealth()) );
+		System.out.println("Quest.doQuest You lost " + mobDamage + " and now have " + me.getItsHealth() + " health points");
 	}
 }

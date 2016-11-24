@@ -17,6 +17,7 @@ class Player implements playerInterface {
 	int maxHealth;
 	int level;
 	int RaceID;
+
 	String RaceName;
 	// playerClass SetUp
 	int ClassID;
@@ -53,7 +54,7 @@ class Player implements playerInterface {
 	private String Area;
 
 	// Experience Handler
-	 static int experience;
+	private static int experience;
 
     // Each Player has its Inventory derived from playerInterface
 	static int[] inventory;
@@ -180,7 +181,7 @@ class Player implements playerInterface {
 
 	@Override
 	public String getFaction() {
-		System.out.println("Player.getFaction");
+//		System.out.println("Player.getFaction");
 		switch (FactionID) {
 			case 1:
 				Faction = "Alliance";
@@ -225,14 +226,14 @@ class Player implements playerInterface {
 			case 1:
 //				System.out.println("Player.selectClass " + this.getName() + " will select Class for " + f.getFactionName());
 
-				System.out.println("Player.selectClass The raceID is " + this.RaceID + " or " + playRace.raceID);
-				System.out.println("Player.selectClass " + playRace.getRaceName(this.getFactionID()));
+//				System.out.println("Player.selectClass The raceID is " + this.RaceID + " or " + playRace.raceID);
+//				System.out.println("Player.selectClass " + playRace.getRaceName(this.getFactionID()));
 				pc.ShowAllianceClassesFor( playRace );
 				// PlayerClassID is set into the function above
 				//this.setClassID(pClass);
 				// fixme this.RaceName = null
 				this.RaceName = playRace.getRaceName(getFactionID());
-				System.out.println("Player.selectClass Line 185 " + this.getName() + " is " + this.getRaceName() + " " + this.getClassName());
+//				System.out.println("Player.selectClass Line 185 " + this.getName() + " is " + this.getRaceName() + " " + this.getClassName());
 				break;
 			case 2:
 				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
@@ -380,6 +381,10 @@ class Player implements playerInterface {
 				this.setPosition("Auction House");
 				break;
 		}
-		System.out.println("Player.setStartingCity You are a " + this.getRaceName());
+		System.out.println("Player.setStartingCity You are a " + this.getRaceName() + " in " + this.getCity());
+	}
+
+	void setRaceName(String raceName) {
+		this.RaceName = raceName;
 	}
 }

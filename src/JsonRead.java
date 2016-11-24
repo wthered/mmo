@@ -44,8 +44,8 @@ class JsonRead {
 			for (Object MsgObj : msg) {
 				JSONObject job = (JSONObject) MsgObj;
 //				System.out.println("A Message could be " + MsgObj.toString());
-				System.out.println("Weather Prediction for Naxos is " + job.get("description"));
-				System.out.println("Weather Contition for Naxos now " + job.get("main"));
+				System.out.println("Weather Prediction\tfor Naxos is " + job.get("description"));
+				System.out.println("Weather Condition\tfor Naxos now " + job.get("main"));
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

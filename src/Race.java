@@ -151,7 +151,7 @@ class Race {
 				System.out.println("Race.setAllianceRaceName\tRaceID is never " + this.getRaceID());
 				break;
 		}
-		System.out.println("Race.setAllianceRaceName Setting Race as " + this.raceName);
+//		System.out.println("Race.setAllianceRaceName Setting Race as " + this.raceName);
 	}
 
 	private void setHordeRaceName(int raceID) {
@@ -163,7 +163,8 @@ class Race {
 		this.raceName = raceName;
 	}
 
-	void setPlayerAttributes(Player p) {
-		System.out.println("Race.setPlayerAttributes Player is " + p.getRaceName() );
-	}
+//	void setPlayerAttributes(Player p) {
+//		System.out.println("Race.setPlayerAttributes Player is " + p.getRaceName() );
+	// TODO: 24/11/2016 switch(p.getClassID() { .... }
+//	}
 }

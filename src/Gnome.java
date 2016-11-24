@@ -73,6 +73,6 @@ class Gnome {
 		r.setRaceStamina(19);
 		r.setRaceIntellect(23);
 		r.setRaceSpirit(20);
-		System.out.println("Gnome.setGnomeAttributes " + r.getRaceName(Player.FactionID));
+//		System.out.println("Gnome.setGnomeAttributes " + r.getRaceName(Player.FactionID));
 	}
 }

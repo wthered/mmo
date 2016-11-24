@@ -13,7 +13,7 @@ class Human extends Race {
 
 	Human(Player p) {
 		this.myself = p;
-		System.out.println("Human.Human Constructor");
+//		System.out.println("Human.Human Constructor");
 	}
 
 	int selectClass() {

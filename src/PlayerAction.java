@@ -51,7 +51,7 @@ class PlayerAction {
 		System.out.println("I currently have " + myself.getItsHealth() + " Health Points of " + myself.maxHealth + " max");
 		System.out.println("I currently have " + myself.getItsMana() + " mana points of " + myself.maxMana + " max");
 		System.out.println("I have " + Main.convertMoney(myself.getMoney()));
-		System.out.println("I have " + myself.showExperience() + " experience" );
+		System.out.println("I have " + myself.getExperience() + " experience" );
 		System.out.println("You can find me near " + myself.getPosition() + " of " + myself.getArea() + ", " + myself.getCity());
 		System.out.println("Last Action of " + myself.getName() + " is " + this.lastAction);
 
@@ -138,26 +138,24 @@ class PlayerAction {
 		if(myself.getItsHealth() == myself.getMaxHealth()) {
 			System.out.println("Already have max Health. Can not eat more");
 		} else {
-			FoodItem food = new FoodItem("Potato Bread", 24, 24, "Bread");
+			// todo Να παίρνει αντικείμενα από το Player.inventory
+			FoodItem food = new FoodItem("Potato Bread", 24, 18, "Bread");
+			float healthPerSecond = food.getHealthPerTick();
+			int foodGain = Math.round(healthPerSecond);
 			for (int i = 0; i < food.getItemTime(); i++) {
 				try {
 					TimeUnit.SECONDS.sleep(5);
-					// todo Να παίρνει αντικείμενα από το Player.inventory
-					float healthPerSecond = food.getHealthPerTick();
-					// todo ConsumablesEat have property healthPerSecond
-					if(myself.getMaxHealth() < myself.getItsHealth()) {
-						System.out.println("PlayerAction.eat Gained " + healthPerSecond + " health points in " + i + " seconds");
-						myself.setItsHealth(myself.getItsHealth() + Math.round(healthPerSecond));
+					if(myself.getMaxHealth() > myself.getItsHealth()) {
+						myself.setItsHealth(myself.getItsHealth() + foodGain);
+						System.out.println("PlayerAction.eat Gained " + foodGain + " health points");
 					}
-					System.out.println("PlayerAction.eat maxHealth is " + myself.getMaxHealth() + "\tcurHealth is " + myself.getItsHealth());
-					System.out.println("PlayerAction.eat Your health now is " + myself.getItsHealth() + " health points");
 				} catch (InterruptedException e) {
 					System.out.println("PlayerAction.eat Interrupting in line 140");
 					e.printStackTrace();
 				}
 			}
-			System.out.println("PlayerAction.eat Consuming a " + food.getItemType() + " from the Inventory");
-			System.out.println("PlayerAction.eat You gained " + food.getItemHealth() +" health points");
+			System.out.println("PlayerAction.eat Consumed a " + food.getItemType() + " from the Inventory");
+			System.out.println("PlayerAction.eat You gained " + food.getItemHealth() +" health points and now have " + myself.getItsHealth() + " HP");
 		}
 	}
 
@@ -168,10 +166,10 @@ class PlayerAction {
 		System.out.println("PlayerAction.drink Visit an Inn to the nearest Town or Capital City");
 		System.out.println("I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
 		System.out.println("PlayerAction.drink Inside my Inventory I have");
-		DrinkItem mana = new DrinkItem("Fresh Water", 10, 10, "Water");
+		DrinkItem mana = new DrinkItem("Fresh Water", 10, 15, "Water");
 		double[] manaDrinks = mana.createWaterBottle(myself, 15);
 		for (double manaDrink : manaDrinks) {
-			System.out.printf("PlayerAction.drink I see %f into %s inventory", manaDrink, myself.getName());
+			System.out.printf("PlayerAction.drink I see %.2f into %s inventory", manaDrink, myself.getName());
 		}
 		mana.useOne(myself, manaDrinks);
 		mana.create(randomAction.nextInt());

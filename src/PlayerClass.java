@@ -9,43 +9,42 @@ class PlayerClass {
 
 	PlayerClass(Player p) {
 		this.myself = p;
-		System.out.println("PlayerClass.PlayerClass");
+//		System.out.println("PlayerClass.PlayerClass");
 	}
 
 	void ShowAllianceClassesFor(Race racist) {
-		System.out.println("PlayerClass.ShowAvailableClassesFor " + myself.getRaceName());
+//		System.out.println("PlayerClass.ShowAvailableClassesFor " + this.getAllianceClassName());
 		switch (racist.raceID) {
 			case 1:
 				Human h = new Human(this.myself);
 				myself.ClassID = h.selectClass();
 				h.setHumanAttributes(racist);
-				System.out.println("PlayerClass.ShowAvailableClassesFor Humans can be " + myself.getClassName() + " among others");
-//				myself.ClassName = this.getAllianceClassName();
+				myself.setRaceName("Human");
 				break;
 			case 2:
 				Gnome regan = new Gnome(myself);
 				myself.ClassID = regan.selectGnomeClass();
-//				myself.ClassName = this.getAllianceClassName();
 				regan.setGnomeAttributes(racist);
 				myself.setCity("Ironforge");
-				System.out.println("Gnome can be Warlocks");
+				myself.setRaceName("Gnome");
 				break;
 			case 3:
 				// selectDwarfRace();
+				myself.setRaceName("Dwarf");
 				System.out.println("Dwarfs are warriors");
 				break;
 			case 4:
 				// selectElvenRace();
+				myself.setRaceName("Night Elf");
 				System.out.println("Night Elves can be hunters");
 				break;
 			default:
+				myself.RaceName = "defaultClassName";
 				System.out.println("PlayerClass.ShowAvailableClassesFor never reaches " + racist.raceID);
 				break;
 		}
-		// Setting For now
-		// Will change after coding is complete
-		myself.RaceName = "defaultClassName";
-		myself.ClassName = this.getAllianceClassName();
+//		myself.ClassName = this.getAllianceClassName();
+		System.out.println("PlayerClass.ShowAllianceClassesFor " + myself.getRaceName() + " can be " + this.getAllianceClassName());
 	}
 
 	private String getAllianceClassName() {
