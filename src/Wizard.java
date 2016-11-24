@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Created by wthered on 24/11/2016.
  * The Package name is ${PACKAGE_NAME}
@@ -19,8 +21,9 @@ public class Wizard {
     }
 
     public double[] conjureFood() {
+        Random foodStack = new Random();
         FoodItem conjuredBread = new FoodItem("ConjuredBread", 16, 18, "Bread");
-        double[] food = conjuredBread.conjure(20);
+        double[] food = conjuredBread.conjure(foodStack.nextInt());
         System.out.println("Wizard.conjureFood The new Bread has been put inside Inventory");
         return food;
     }

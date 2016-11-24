@@ -27,17 +27,18 @@ class DrinkItem {
     }
 
     void useOne(Player m, double[] inventoryItem) {
-        System.out.println("DrinkItem.use Using the item #" + inventoryItem.length + " from the Inventory of " + m.getName());
-        int len = inventoryItem.length;
-        inventoryItem[len] = 0;
+        System.out.println("DrinkItem.useOne Using the item #" + inventoryItem.length + " from the Inventory of " + m.getName());
+        //todo Pop the last item of array
+//        int len = inventoryItem.length;
+//        inventoryItem[len] = 0;
     }
 
     ArrayList create(int many) {
-        ArrayList<DrinkItem> manaItems = new ArrayList<>(many);
+        ArrayList<DrinkItem> waterItems = new ArrayList<>(many);
         for (int i = 0; i < many; i++) {
             DrinkItem manaItem = new DrinkItem("Fresh Water", 16, 18, "Water");
-            manaItems.add(manaItem);
+            waterItems.add(manaItem);
         }
-        return manaItems;
+        return waterItems;
     }
 }

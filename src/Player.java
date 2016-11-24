@@ -1,6 +1,5 @@
 import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wthered on 12/11/2016 3:23 μμ
@@ -310,9 +309,9 @@ class Player implements playerInterface {
 	** This should be called just after player
 	** advances to next level
 	*/
-	public void setMaxHealth() {
-		this.maxHealth = 100*this.level;
-	}
+//	public void setMaxHealth() {
+//		this.maxHealth = 100*this.level;
+//	}
 
 	int getMaxHealth() {
 		return maxHealth;
@@ -333,9 +332,9 @@ class Player implements playerInterface {
 		return this.ClassName;
 	}
 
-	public void setClassName(String className) {
-		this.ClassName = className;
-	}
+//	public void setClassName(String className) {
+//		this.ClassName = className;
+//	}
 
 	int getClassID() {
 		return this.ClassID;
@@ -345,15 +344,15 @@ class Player implements playerInterface {
 		this.ClassID = classID;
 	}
 
-    int getExperience() {
-        return Player.experience;
-    }
+	int getExperience() {
+		return experience;
+	}
 
-    void setExperience(int experience) {
-        Player.experience = experience;
-    }
+	void setExperience(int experience) {
+		Player.experience = experience;
+	}
 
-    void setStartingCity() {
+	void setStartingCity() {
 		switch (this.getRaceName()) {
 			case "Human":
 				this.setCity("Stormwind");

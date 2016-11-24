@@ -19,24 +19,26 @@ class FoodItem {
         this.itemType = foodType;
     }
 
-//    double[] conjure(int howMany) {
-//        double[] bread = new double[howMany];
-//        for (int i = 0; i < howMany; i++) {
-//            // todo bread[i] = new FoodItem("Bread Name", 3000, 500, "Bread");
-//            bread[i] = Math.pow(i, 3);
-//        }
-//        return bread;
-//    }
+    // Used by Wizard.conjureFood
+    double[] conjure(int howMany) {
+        double[] bread = new double[howMany];
+        for (int i = 0; i < howMany; i++) {
+            // todo bread[i] = new FoodItem("Bread Name", 3000, 500, "Bread");
+            bread[i] = Math.pow(i, 3);
+        }
+        return bread;
+    }
 
-    float getHealthPerSecond() {
-        return this.itemHealth / this.itemTime;
+    int getHealthPerTick() {
+        float hps = this.itemHealth / this.itemTime;
+        return Math.round(hps);
     }
 
     int getItemHealth() {
         return this.itemHealth;
     }
 
-    public int getItemTime() {
+    int getItemTime() {
         return this.itemTime;
     }
 

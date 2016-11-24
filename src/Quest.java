@@ -19,8 +19,9 @@ class Quest {
 		System.out.println("Quest #" + questID + " has been completed for " + me.getName());
 		int currentMoney = me.getMoney();
 		int rewardMoney = reward.nextInt(100);
-		int rewardXP = this.gain(rewardMoney);
-		System.out.println("Quest.doQuest You have been rewarded with " + rewardMoney + "c");
+		// fixme Normalize experience per level
+		int rewardXP = reward.nextInt(1 + me.getItsHealth());
+		System.out.println("Quest.doQuest You have been rewarded with " + Main.convertMoney(rewardMoney) );
 		me.setMoney(currentMoney + rewardMoney);
 		System.out.println("Quest.doQuest You gained " + rewardXP + " experience");
 		me.setExperience(me.getExperience() + rewardXP);
@@ -29,9 +30,6 @@ class Quest {
 		//todo Loss of Health depends on level and type of attack, me.defenceType etc of attacking mob
 //		int mobDamage = reward.nextInt(me.getItsHealth());
 		me.setItsHealth(me.getItsHealth() / 2);
-	}
-
-	private int gain(int experience) {
-		return reward.nextInt(experience);
+		System.out.println("Quest.doQuest You now have " + me.getItsHealth() + " health points");
 	}
 }

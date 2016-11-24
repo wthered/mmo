@@ -139,15 +139,17 @@ class PlayerAction {
 			System.out.println("Already have max Health. Can not eat more");
 		} else {
 			FoodItem food = new FoodItem("Potato Bread", 24, 24, "Bread");
-			for (int i = 0; i < 24; i++) {
+			for (int i = 0; i < food.getItemTime(); i++) {
 				try {
 					TimeUnit.SECONDS.sleep(5);
 					// todo Να παίρνει αντικείμενα από το Player.inventory
-					float healthPerSecond = food.getHealthPerSecond();
+					float healthPerSecond = food.getHealthPerTick();
 					// todo ConsumablesEat have property healthPerSecond
 					if(myself.getMaxHealth() < myself.getItsHealth()) {
+						System.out.println("PlayerAction.eat Gained " + healthPerSecond + " health points in " + i + " seconds");
 						myself.setItsHealth(myself.getItsHealth() + Math.round(healthPerSecond));
 					}
+					System.out.println("PlayerAction.eat maxHealth is " + myself.getMaxHealth() + "\tcurHealth is " + myself.getItsHealth());
 					System.out.println("PlayerAction.eat Your health now is " + myself.getItsHealth() + " health points");
 				} catch (InterruptedException e) {
 					System.out.println("PlayerAction.eat Interrupting in line 140");
@@ -169,7 +171,7 @@ class PlayerAction {
 		DrinkItem mana = new DrinkItem("Fresh Water", 10, 10, "Water");
 		double[] manaDrinks = mana.createWaterBottle(myself, 15);
 		for (double manaDrink : manaDrinks) {
-			System.out.println("PlayerAction.drink I see " + manaDrink);
+			System.out.printf("PlayerAction.drink I see %f into %s inventory", manaDrink, myself.getName());
 		}
 		mana.useOne(myself, manaDrinks);
 		mana.create(randomAction.nextInt());

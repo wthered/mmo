@@ -1,13 +1,10 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by wthered on 17/11/2016 5:49 μμ
@@ -27,8 +24,6 @@ class JsonRead {
 		JSONParser parser = new JSONParser();
 
 		try {
-//			Object obj = parser.parse(new FileReader("/home/wthered/json.txt"));
-//			JSONObject jsonObject = (JSONObject) obj;
 
 			JSONObject jsonObject = (JSONObject) parser.parse(http.sendGet());
 
@@ -38,11 +33,8 @@ class JsonRead {
 			long sunRise = (long) system.get("sunrise");
 			long sunDown = (long) system.get("sunset");
 
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date sunSett = new Date(sunDown);
-
-			System.out.println("Sun rise at " + sunRise + " or " + dateFormat.format(sunRise));
-			System.out.println("Sun sets at " + sunDown + " or " + dateFormat.format(sunSett));
+			System.out.println("JsonRead.read Sun rise at " + sunRise + " or " + this.unix2time(sunRise));
+			System.out.println("JsonRead.read Sun sets at " + sunDown + " or " + this.unix2time(sunDown));
 
 //			long age = (Long) jsonObject.get("age");
 //			System.out.println("Your Age is " + age + " years old");
@@ -58,5 +50,12 @@ class JsonRead {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	private String unix2time(long timestamp) {
+		Date date = new Date(timestamp*1000L);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		sdf.setTimeZone(TimeZone.getTimeZone("Europe/Athens"));
+		return sdf.format(date);
 	}
 }
