@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /**
  * Created by wthered on 24/11/2016.
  * The Package name is ${PACKAGE_NAME}
@@ -10,7 +8,7 @@ class FoodItem {
     private int itemHealth;
     private int itemTime;
 
-    Random amount = new Random();
+    private String itemType;
 
     // http://wowwiki.wikia.com/wiki/Conjure_Food
     FoodItem(String FoodName, int health, int overTime, String foodType) {
@@ -18,17 +16,31 @@ class FoodItem {
         System.out.println("Food.Food This is a type of " + foodType + " food");
         this.itemHealth = health;
         this.itemTime = overTime;
+        this.itemType = foodType;
     }
 
-    double[] conjure(int howMany) {
-        double[] bread = new double[howMany];
-        for (int i = 0; i < howMany; i++) {
-            bread[i] = Math.pow(i, 3);
-        }
-        return bread;
+//    double[] conjure(int howMany) {
+//        double[] bread = new double[howMany];
+//        for (int i = 0; i < howMany; i++) {
+//            // todo bread[i] = new FoodItem("Bread Name", 3000, 500, "Bread");
+//            bread[i] = Math.pow(i, 3);
+//        }
+//        return bread;
+//    }
+
+    float getHealthPerSecond() {
+        return this.itemHealth / this.itemTime;
     }
 
-    float getHealthPerSecond(FoodItem item) {
-        return item.itemHealth / item.itemTime;
+    int getItemHealth() {
+        return this.itemHealth;
+    }
+
+    public int getItemTime() {
+        return this.itemTime;
+    }
+
+    String getItemType() {
+        return this.itemType;
     }
 }

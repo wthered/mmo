@@ -135,16 +135,15 @@ class PlayerAction {
 	}
 
 	private void eat() {
-		Random amount = new Random();
 		if(myself.getItsHealth() == myself.getMaxHealth()) {
 			System.out.println("Already have max Health. Can not eat more");
 		} else {
+			FoodItem food = new FoodItem("Potato Bread", 24, 24, "Bread");
 			for (int i = 0; i < 24; i++) {
 				try {
 					TimeUnit.SECONDS.sleep(5);
 					// todo Να παίρνει αντικείμενα από το Player.inventory
-					FoodItem food = new FoodItem("Potato Bread", 24, 24, "Bread");
-					float healthPerSecond = food.getHealthPerSecond(food);
+					float healthPerSecond = food.getHealthPerSecond();
 					// todo ConsumablesEat have property healthPerSecond
 					if(myself.getMaxHealth() < myself.getItsHealth()) {
 						myself.setItsHealth(myself.getItsHealth() + Math.round(healthPerSecond));
@@ -155,12 +154,8 @@ class PlayerAction {
 					e.printStackTrace();
 				}
 			}
-			System.out.println("PlayerAction.eat Consuming a bread from the Inventory");
-			FoodItem item = new FoodItem("Sweet Bread", 24, 48, "Bread");
-			myself.putInventory(item.conjure(amount.nextInt()));
-			for (int inv : Player.inventory) {
-				System.out.println("PlayerAction.eat Eating " + inv);
-			}
+			System.out.println("PlayerAction.eat Consuming a " + food.getItemType() + " from the Inventory");
+			System.out.println("PlayerAction.eat You gained " + food.getItemHealth() +" health points");
 		}
 	}
 
