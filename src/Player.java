@@ -13,7 +13,7 @@ class Player implements playerInterface {
 	private static String Faction;
 
 	// Player Attributes
-	private static String Name;
+	private String Name;
 	String ClassName;
 	int maxHealth;
 	int level;
@@ -64,10 +64,10 @@ class Player implements playerInterface {
 	Player(String newName, int newLevel, int FactionID, Race playRace, int classID) {
 
 		// Start of ForTest Section
-		Item HealPotion = new Item("Health Potion", "Health");
-		Item ManaPotion = new Item("Mana Potion", "Mana");
-		this.inventory.add(HealPotion);
-		this.inventory.add(ManaPotion);
+//		Item HealPotion = new Item("Health Potion", "Health");
+//		Item ManaPotion = new Item("Mana Potion", "Mana");
+//		this.inventory.add(HealPotion);
+//		this.inventory.add(ManaPotion);
 		// End of ForTest Section
 
 		this.setName(newName);
@@ -127,7 +127,7 @@ class Player implements playerInterface {
 	}
 
 	void setName(String playerName) {
-		Name = playerName;
+		this.Name = playerName;
 	}
 
 	// Level

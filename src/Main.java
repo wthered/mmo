@@ -17,7 +17,7 @@ import static java.text.MessageFormat.format;
 **
 **	example: https://www.youtube.com/watch?v=WrYEZdQZ3aw
 **	class Ogre {
-**		this.level = new RandomBetween(1,2).toInt();
+**		this.level = new RandomBetween(me.getLevel(),me.getLevel() + 1).toInt();
 **		CurrentHealth = 200/200;
 **		minimumDamage = 30;
 **		maximumDamage = 65;
