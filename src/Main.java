@@ -3,8 +3,7 @@ import java.util.Scanner;
 
 import static java.text.MessageFormat.format;
 
-
-/* todo
+/* TODO: 26/11/2016
 **	Players have (maybe 2?) Professions
 **	AttackPower
 **	Block / Parry Abilities
@@ -13,7 +12,7 @@ import static java.text.MessageFormat.format;
 **	Some weapons have spellPower (or addSpellPower() ? ), some Melee (maybe some both?)
 **
 **	All players have explore Abilities. When you explore you might find monsters / gold / weapon
-**	Each Weapon has accuracy (spellAccuracy / MeleeAcc)
+**	Each Weapon has accuracy (spellAccuracy / MeleeAccuracy)
 **	Each weapon has CriticalChance (if succeed { this.damage *= 2; } on this cast of attackAction
 **
 **	example: https://www.youtube.com/watch?v=WrYEZdQZ3aw
@@ -49,9 +48,9 @@ class Main {
 		System.out.print("What is your password? ");
 		password = userScan.nextLine();
 
-		/*
-		** todo while identify != false { auth(username,password); }
-		*/
+		/* **********************************************
+		** TODO: 26/11/2016 while identify != false { auth(username,password); }
+		************************************************/
 		boolean identify = auth(username, password);
 
 		if (identify) {
@@ -99,7 +98,7 @@ class Main {
 
 					System.out.println(p.getName() + " has " + Main.convertMoney(p.getMoney()) + "! Use them wisely");
 
-					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.getFactionID()), p.getClassName(), p.getFaction(), p.itsSexName);
+					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.getFactionID()), p.getClassName(), p.getFaction(), p.getItsSex());
 					System.out.println(message);
 
 //					System.out.println("Main.main line 110");

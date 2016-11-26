@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 class Race {
 
-	int raceID;
+	private int raceID;
 	private String raceName;
 	private int raceStrength;
 	private int raceAgility;
@@ -109,7 +109,7 @@ class Race {
 		return horde;
 	}
 
-	private int getRaceID() {
+	int getRaceID() {
 		return this.raceID;
 	}
 
@@ -167,4 +167,9 @@ class Race {
 //		System.out.println("Race.setPlayerAttributes Player is " + p.getRaceName() );
 	// TODO: 24/11/2016 switch(p.getClassID() { .... }
 //	}
+
+	public String getRaceName() {
+		System.out.println("Race.getRaceName " + this.raceName);
+		return this.raceName;
+	}
 }

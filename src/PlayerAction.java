@@ -99,6 +99,7 @@ class PlayerAction {
 				// TODO: 26/11/2016 Create a function that returns array of Quest like this
 				quest.doQuest(myself.getName().length());
 				System.out.println("PlayerAction.doAction " + myself.getName() + " is around? " + quest.playerIsAround(questID.nextInt(5)));
+				this.fun(questID);
 				break;
 			case 5:
 				for (int i = 0; i < 5; i++) {
@@ -132,13 +133,14 @@ class PlayerAction {
 				System.out.println("PlayerAction.doAction You have " + myself.getItsMana() + " mana");
 				break;
 			case 9:
+				PlayerInventory myInventory = myself.getInventory();
 				System.out.println("PlayerAction.doAction Looking into my Inventory");
-				System.out.println("PlayerAction.doAction Found " + myself.inventory.getPotions().size());
+				System.out.println("PlayerAction.doAction Found " + myInventory.getPotions().size());
 				// TODO: 26/11/2016 myself.getInventory();
 				FoodItem bread = new FoodItem("Minor Healing Bread", 61, 18, "food");
 				FoodItem loaf = new FoodItem("Major Healing Loaf", 243, 21, "food");
-				myself.inventory.insertFood(bread, 10);
-				myself.inventory.insertFood(loaf, 1);
+				myInventory.insertFood(bread, 10);
+				myInventory.insertFood(loaf, 1);
 				myself.seeInsideInv();
 				break;
 			default:
@@ -146,6 +148,17 @@ class PlayerAction {
 				InterruptedException ex = new InterruptedException(reason);
 				ex.printStackTrace();
 		}
+	}
+
+	private void fun(Random r) {
+		List<Quest> quests = new ArrayList<>(5);
+		for (Quest quest : quests) {
+			quest = new Quest(myself, r.nextInt(100), r.nextInt(100), "Elwyn Forest");
+			quest.doQuest(quests.size());
+			quests.remove(quests.size());
+			System.out.println("PlayerAction.fun Have done with quest #" + quests.size());
+		}
+		System.out.println("PlayerAction.fun Have done some quests");
 	}
 
 	private void eat() {
@@ -181,6 +194,7 @@ class PlayerAction {
 	}
 
 	private void drink() {
+		PlayerInventory myInv = myself.getInventory();
 		// TODO: 26/11/2016 This will work for all players
 		// TODO: 26/11/2016 Wizards can conjure Drinks, all players can drink items
 		System.out.println("PlayerAction.drink I can not find any drinks in your Inventory");
@@ -189,7 +203,7 @@ class PlayerAction {
 		System.out.println("PlayerAction.drink Inside my Inventory I have");
 		DrinkItem mana = new DrinkItem("Fresh Water", 90, 15, "Water");
 		// TODO: 26/11/2016 All bags are unified and we should use the unified inventory
-		Hashtable<DrinkItem, Integer> manaDrinks = myself.inventory.getManaBag();
+		Hashtable<DrinkItem, Integer> manaDrinks = myInv.getManaBag();
 		manaDrinks.put(mana, 20);
 		myself.seeInsideInv();
 		mana.useOne(myself);

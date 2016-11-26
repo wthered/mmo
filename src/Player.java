@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 class Player implements playerInterface {
 
-    // playerFaction Setup
+	// playerFaction Setup
 	private int FactionID;
 	private String Faction;
 
@@ -23,9 +23,8 @@ class Player implements playerInterface {
 	private String RaceName;
 	// playerClass SetUp
 	private int ClassID;
-	String itsSexName;
 
-    // placeHolder for later (see toDo section in Main.java)
+	// placeHolder for later (see toDo section in Main.java)
 	private boolean inBattle = false;
 
 	// Position Related Stuff
@@ -34,7 +33,6 @@ class Player implements playerInterface {
 	private String Position;
 
 	// playerRace Setup
-	private Race racist;
 	private int money;
 	// Health Variables
 	/* *************************************************
@@ -59,16 +57,21 @@ class Player implements playerInterface {
 	private String Area;
 
 	// Experience Handler
-	private static int experience;
-
-	// Food Inventory
-	private Hashtable<Item, Integer> foodHashTab;
+	private int experience;
 
 	// TODO: 26/11/2016 Add Potions Bag that Accepts only Potions (l8r extra herbsBag)
-	 private Hashtable<Potion, Integer> potionsTable;
 
 	// my Inventory implementation
-	PlayerInventory inventory;
+	private PlayerInventory inventory;
+
+	private Race playerRace;
+
+	// Player Basic Attributes
+	private int strength;
+	private int agility;
+	private int stamina;
+	private int intellect;
+	private int spirit;
 
 	Player(String newName, int newLevel, int FactionID, Race playRace, int classID) {
 
@@ -86,19 +89,22 @@ class Player implements playerInterface {
 
 		// Faction Initializer
 		this.setFaction(FactionID);
-		Faction = "Alliance";
+//		Faction = "Alliance";
 
 		/* *******************
 		** Race Initializer **
 		** It is not sync'd **
 		** with race Class  **
 		*********************/
-        // TODO: 26/11/2016 Do the Sync (read above)
-        this.RaceID = playRace.raceID;
+		// TODO: 26/11/2016 Do the Sync (read above)
+		this.playerRace = playRace;
+		this.setRaceID(playRace.getRaceID());
 		this.ClassID = classID;
 
-        Bag foods = new Bag("FoodBag", 4, 4, foodHashTab);
-        this.inventory = new PlayerInventory(foods);
+		// All the foods that mobs drop are here
+		Hashtable<Item, Integer> foodHashTab = new Hashtable<>();
+		Bag foods = new Bag("FoodBag", 4, 8, foodHashTab);
+		this.inventory = new PlayerInventory(foods);
 //		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
 	}
 
@@ -172,7 +178,7 @@ class Player implements playerInterface {
 	}
 
 	// Faction
-    int getFactionID() {
+	int getFactionID() {
 		return this.FactionID;
 	}
 
@@ -237,26 +243,20 @@ class Player implements playerInterface {
 		playRace.setAllianceRaceName();
 
 		PlayerClass pc = new PlayerClass(this);
+		pc.ShowAllianceClassesFor( playRace );
 		switch (this.getFactionID()) {
 			case 1:
-//				System.out.println("Player.selectClass " + this.getName() + " will select Class for " + f.getFactionName());
-
-//				System.out.println("Player.selectClass The raceID is " + this.RaceID + " or " + playRace.raceID);
-//				System.out.println("Player.selectClass " + playRace.getRaceName(this.getFactionID()));
-				pc.ShowAllianceClassesFor( playRace );
-				// PlayerClassID is set into the function above
-				//this.setClassID(pClass);
-				// fixme this.RaceName = null
-				this.RaceName = playRace.getRaceName(getFactionID());
-//				System.out.println("Player.selectClass Line 185 " + this.getName() + " is " + this.getRaceName() + " " + this.getClassName());
+//				pc.ShowAllianceClassesFor( playRace );
+				// FIXME: 26/11/2016 this.getRaceName() = null
+				System.out.println("Player.selectClass Line 244 " + this.getName() + " is " + this.getRaceName() + "\t" + this.getClassName());
 				break;
 			case 2:
-				System.out.println(this.getName() + " will select Class for " + f.getFactionName() );
-				System.out.println("Player.selectClass Line 158");
+				System.out.println("Player.selectClass " + this.getName() + " will select Class for " + f.getFactionName() );
 				break;
 			default:
 				System.out.println("Player.selectClass Invalid Option " + this.getFactionID());
 		}
+		this.RaceName = playRace.getRaceName(this.getFactionID());
 	}
 
 	void selectRace() {
@@ -281,18 +281,16 @@ class Player implements playerInterface {
 //		System.out.println("Player.selectRace is " + r.getRaceName(this.getFactionID()) + " from " + this.getFaction());
 	}
 
-	void setSex(int sex) {
-		switch (this.itsSex % 2) {
+	void setSex(int newSex) {
+		switch (newSex % 2) {
 			case 0:
-				this.itsSexName = "Female";
 				break;
 			case 1:
-				this.itsSexName = "Male";
 				break;
 			default:
-				System.out.println("Player sex is never " + this.itsSex + " in Player.setSex");
+				System.out.println("Player.setSex Player sex is never " + this.itsSex);
 		}
-		this.itsSex = sex;
+		this.itsSex = newSex;
 	}
 
 	String getPosition() {
@@ -338,19 +336,15 @@ class Player implements playerInterface {
 	}
 
 	void travel(int newX, int newY) {
-		System.out.println("Travelling from (" + this.getItsX() + "," + this.getItsY() + ")");
+		System.out.println("Player.travel Travelling from (" + this.getItsX() + "," + this.getItsY() + ") to (" + newX + ", " + newY + ")");
 		this.setItsX(newX);
 		this.setItsY(newY);
-		System.out.println("Player.travel Reports (" + newX + ", " + newY + ")");
+		System.out.println("Player.travel " + this.getName() + " is at (" + this.getItsX() + "," + this.getItsY() + ")");
 	}
 
 	String getClassName() {
 		return this.ClassName;
 	}
-
-//	public void setClassName(String className) {
-//		this.ClassName = className;
-//	}
 
 	int getClassID() {
 		return this.ClassID;
@@ -361,11 +355,11 @@ class Player implements playerInterface {
 	}
 
 	int getExperience() {
-		return experience;
+		return this.experience;
 	}
 
 	void setExperience(int experience) {
-		Player.experience = experience;
+		this.experience = experience;
 	}
 
 	void setStartingCity() {
@@ -382,12 +376,31 @@ class Player implements playerInterface {
 			case "Night Elf":
 				this.setCity("Shadowglen");
 				this.setArea("Teldrassil");
+				break;
+			case "Orc":
+				this.setCity("Orgrimmar");
+				this.setArea("Durotar");
+				break;
+			case "Undead":
+				this.setCity("Deathknell");
+				this.setArea("Tirisfal Glades");
+				break;
+			case "Troll":
+				this.setCity("Valley of Trials");
+				this.setArea("Durotar");
+				break;
+			case "Blood Elf":
+				this.setCity("Sunstrider Isle");
+				this.setArea("Eversong Woods");
+				break;
 			default:
-				System.out.println("Player.setStartingCity What is your Class Elf? ");
+				System.out.println("Player.setStartingCity You can't be a " + this.getRaceName() + "!!");
+				this.setCity("CityName");
+				this.setArea("AreaName");
 		}
 
 		// Position in Starting City
-		Random pos = new Random(50);
+		Random pos = new Random();
 		switch (pos.nextInt() % 2) {
 			case 1:
 				this.setPosition("Entrance");
@@ -396,7 +409,7 @@ class Player implements playerInterface {
 				this.setPosition("Auction House");
 				break;
 		}
-		System.out.println("Player.setStartingCity You are a " + this.getRaceName() + " in " + this.getCity());
+		System.out.println("Player.setStartingCity You are a " + this.getRaceName() + " in " + this.getCity() + " of " + this.getArea());
 	}
 
 	void setRaceName(String raceName) {
@@ -405,20 +418,104 @@ class Player implements playerInterface {
 
 	void seeInsideInv() {
 		Hashtable<FoodItem, Integer> invFoods = this.inventory.getFoodBag();
-		System.out.println("Player.seeInsideInv Start");
+		Hashtable<DrinkItem,Integer> invDrink = this.inventory.getManaBag();
+		Hashtable<Potion, Integer> invPotions = this.inventory.getPotions();
+		System.out.println("Player.seeInsideInv Start Food");
 		inventory.selectFood();
-		System.out.println("Player.seeInsideInv *End*");
+		inventory.selectMana();
+		inventory.selectPots();
+		System.out.println("Player.seeInsideInv *End* Food");
 	}
 
 	void setClassName(String className) {
 		this.ClassName = className;
 	}
 
-    public boolean isInBattle() {
-        return this.inBattle;
-    }
+	public boolean isInBattle() {
+		return this.inBattle;
+	}
 
-    void setInBattle(boolean inBattle) {
-        this.inBattle = inBattle;
-    }
+	void setInBattle(boolean inBattle) {
+		this.inBattle = inBattle;
+	}
+
+	int getItsSex() {
+		return this.itsSex;
+	}
+
+	public void setItsSex(int itsSex) {
+		this.itsSex = itsSex;
+	}
+
+	public Race getPlayerRace() {
+		return this.playerRace;
+	}
+
+	public void setFactionID(int factionID) {
+		FactionID = factionID;
+	}
+
+	public void setFaction(String faction) {
+		this.Faction = faction;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
+	}
+
+	public void setMaxMana(int maxMana) {
+		this.maxMana = maxMana;
+	}
+
+	PlayerInventory getInventory() {
+		return this.inventory;
+	}
+
+	public void setInventory(PlayerInventory inventory) {
+		this.inventory = inventory;
+	}
+
+	public void setPlayerRace(Race playerRace) {
+		this.playerRace = playerRace;
+	}
+
+	int getStrength() {
+		return this.strength;
+	}
+
+	void setStrength(int strength) {
+		this.strength = strength;
+	}
+
+	int getAgility() {
+		return this.agility;
+	}
+
+	void setAgility(int agility) {
+		this.agility = agility;
+	}
+
+	int getStamina() {
+		return this.stamina;
+	}
+
+	void setStamina(int stamina) {
+		this.stamina = stamina;
+	}
+
+	int getIntellect() {
+		return this.intellect;
+	}
+
+	void setIntellect(int intellect) {
+		this.intellect = intellect;
+	}
+
+	int getSpirit() {
+		return this.spirit;
+	}
+
+	void setSpirit(int spirit) {
+		this.spirit = spirit;
+	}
 }

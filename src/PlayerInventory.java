@@ -33,10 +33,18 @@ class PlayerInventory {
         }
     }
 
-    public void selectMana() {
+    void selectMana() {
         for(Map.Entry<DrinkItem, Integer> mItem : this.getManaBag().entrySet()) {
             DrinkItem tmpDrink = mItem.getKey();
             System.out.println("PlayerInventory.selectMana I have " + mItem.getValue() + " inside Mana Bag of " + tmpDrink.getWater());
+        }
+    }
+
+    // See all the Potions I have
+    void selectPots() {
+        for(Map.Entry<Potion, Integer> pItem : this.getPotions().entrySet()) {
+            Potion potion = pItem.getKey();
+            System.out.println("PlayerInventory.selectPots I have " + pItem.getValue() + " potions that are labeled " + potion.getName());
         }
     }
 
@@ -58,7 +66,7 @@ class PlayerInventory {
         return this.manaBag;
     }
 
-    Hashtable getPotions() {
-        return potions;
+    Hashtable<Potion, Integer> getPotions() {
+        return this.potions;
     }
 }
