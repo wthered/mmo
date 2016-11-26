@@ -420,11 +420,11 @@ class Player implements playerInterface {
 		Hashtable<FoodItem, Integer> invFoods = this.inventory.getFoodBag();
 		Hashtable<DrinkItem,Integer> invDrink = this.inventory.getManaBag();
 		Hashtable<Potion, Integer> invPotions = this.inventory.getPotions();
-		System.out.println("Player.seeInsideInv Start Food");
+		System.out.println("Player.seeInsideInv Start");
 		inventory.selectFood();
 		inventory.selectMana();
 		inventory.selectPots();
-		System.out.println("Player.seeInsideInv *End* Food");
+		System.out.println("Player.seeInsideInv *End*");
 	}
 
 	void setClassName(String className) {
