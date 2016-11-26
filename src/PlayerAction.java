@@ -128,6 +128,7 @@ class PlayerAction {
 			case 9:
 				System.out.println("PlayerAction.doAction Looking into my Inventory");
 				System.out.println("PlayerAction.doAction Found None");
+				// TODO: 26/11/2016 myself.getInventory();
 				break;
 			default:
 				System.out.println("Not implemented yet in PlayerAction.doAction for " + this.lastAction);
@@ -172,7 +173,6 @@ class PlayerAction {
 			System.out.printf("PlayerAction.drink I see %.2f into %s inventory", manaDrink, myself.getName());
 		}
 		mana.useOne(myself, manaDrinks);
-		mana.create(randomAction.nextInt());
 	}
 
 	private class PlayerChat extends TimerTask {

@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.Hashtable;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -57,9 +57,9 @@ class Player implements playerInterface {
 	// Experience Handler
 	private static int experience;
 
-    // Each Player has its Inventory derived from playerInterface
-//	public Collection<Iterable> inventory;
-	List<Item> inventory;
+	private Hashtable<FoodItem, Integer> foodHashTab;
+	// Each Player has its Inventory derived from playerInterface
+	private Bag foods = new Bag("FoodBag", 4, 4, foodHashTab);
 
 	Player(String newName, int newLevel, int FactionID, Race playRace, int classID) {
 
@@ -95,6 +95,8 @@ class Player implements playerInterface {
 		this.ClassID = classID;
 
 //		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
+
+		PlayerInventory inv = new PlayerInventory(this, foods);
 	}
 
 	// xAxis of Player
