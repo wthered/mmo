@@ -10,9 +10,9 @@ public class Bag {
     private String Name;
     private int rows;
     private int columns;
-    private Hashtable<FoodItem, Integer> foods;
+    private Hashtable<Item, Integer> foods;
 
-    Bag(String bagName, int rows, int cols, Hashtable<FoodItem, Integer> hashTableToContain) {
+    Bag(String bagName, int rows, int cols, Hashtable<Item, Integer> hashTableToContain) {
         this.Name = bagName;
         this.rows = rows;
         this.columns = cols;
@@ -20,10 +20,10 @@ public class Bag {
     }
 
     public void seeInside() {
-        for (Map.Entry<FoodItem, Integer> container : foods.entrySet()) {
-            FoodItem tmpFoodItem = container.getKey();
+        for (Map.Entry<Item, Integer> container : foods.entrySet()) {
+            Item tmpItem = container.getKey();
             System.out.println("Bag.seeInside Inside I see many food Items");
-            System.out.println("Bag.seeInside Type " + tmpFoodItem.getItemType() + " you have " + container.getValue() + " foods");
+            System.out.println("Bag.seeInside Type " + tmpItem.getItemType() + " you have " + container.getValue() + " foods");
         }
     }
 

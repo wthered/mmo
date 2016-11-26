@@ -25,7 +25,7 @@ interface playerInterface {
 
 	default void putInventory(Player p, Item i ) {
 		System.out.println("playerInterface.putInventory The item name " + i.getClass().toString() + " put in " + p.getName() + " inventory");
-		p.inventory.add(i);
+//		p.inventory.add(i);
 //		inv.add(20, Player.inventory);
 	}
 }

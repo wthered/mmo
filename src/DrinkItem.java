@@ -1,3 +1,4 @@
+import java.util.Hashtable;
 import java.util.Random;
 
 /**
@@ -6,7 +7,7 @@ import java.util.Random;
  * Later we will implement alcohol Drinks and
  * drinks that do nothing
  */
-class DrinkItem {
+class DrinkItem extends Item {
 
     private Random manaGain = new Random();
 
@@ -23,7 +24,8 @@ class DrinkItem {
     private String type;
 
 	DrinkItem(String waterName, int mana, int overTime, String type) {
-		System.out.println("DrinkItem.DrinkItem A stack of 20 " + waterName + " has been made with type " + type);
+        super(waterName, type);
+        System.out.println("DrinkItem.DrinkItem A stack of 20 " + waterName + " has been made with type " + type);
 		System.out.println("DrinkItem.DrinkItem Each of them gives you " + mana + " over " + overTime + " seconds");
 
 		// Initialisation
@@ -33,28 +35,35 @@ class DrinkItem {
 		this.type = type;
     }
 
-	double[] createWaterBottle(Player mage, int amount) {
-		double[] bottles = new double[amount];
-		for (int i = 0; i < amount; i++) {
-			// TODO: 26/11/2016 Create ManaDrinks instead of integers
-			bottles[i] = Math.pow(i, 2);
-		}
-		mage.setItsMana(mage.getItsMana() - 80);
-		return bottles;
+	Hashtable createWaterBottle(Player mage, int amount, boolean isMage) {
+		Hashtable<DrinkItem, Integer> created = mage.inventory.getManaBag();
+		if(isMage) {
+		    for(int i=0; i<amount; i++) {
+		        DrinkItem drink = new DrinkItem("Conjured Water", 120, 30, "Water");
+                System.out.println("DrinkItem.createWaterBottle Created " + created.put(drink, i) + " items");
+            }
+        } else {
+            System.out.println("DrinkItem.createWaterBottle Only mages can conjure Water" );
+        }
+        System.out.println("DrinkItem.createWaterBottle " + mage.getName() + " is wizard? " + mage.getClassName());
+        return created;
 	}
 
-	void useOne(Player m, double[] inventoryItem) {
+	Hashtable useOne(Player m) {
         // TODO: 26/11/2016 Global Cooldown timer
 
         // Generate 10 to 30 mana
 		int manaGained = 10 + manaGain.nextInt(20);
 
 		m.setItsMana(m.getItsMana() + manaGained);
-		System.out.println("DrinkItem.useOne Using the item #" + inventoryItem.length + " from the Inventory of " + m.getName());
-		// TODO: 26/11/2016 Pop the last item of array
+		Hashtable<DrinkItem, Integer> manaBag = m.inventory.getManaBag();
 
-//		int len = inventoryItem.length;
-//		inventoryItem[len] = 0;
+        System.out.println("DrinkItem.useOne Removing the " + manaBag.size() + "th item of the Bag from the Inventory of " + m.getName());
+        // TODO: 26/11/2016 Implement the consuming function { manaBag.remove( Object o); }
+        System.out.println("DrinkItem.useOne The bag now has " + manaBag.size() + " items");
+
+        // Return the rest of the Bag Contents
+        return manaBag;
 	}
 
     String getWater() {

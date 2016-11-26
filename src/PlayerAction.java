@@ -127,8 +127,13 @@ class PlayerAction {
 				break;
 			case 9:
 				System.out.println("PlayerAction.doAction Looking into my Inventory");
-				System.out.println("PlayerAction.doAction Found None");
+				System.out.println("PlayerAction.doAction Found " + myself.inventory.getPotions().size());
 				// TODO: 26/11/2016 myself.getInventory();
+				FoodItem bread = new FoodItem("Minor Healing Bread", 61, 18, "food");
+				FoodItem loaf = new FoodItem("Major Healing Loaf", 243, 21, "food");
+				myself.inventory.insertFood(bread, 10);
+				myself.inventory.insertFood(loaf, 1);
+				myself.seeInsideInv();
 				break;
 			default:
 				System.out.println("Not implemented yet in PlayerAction.doAction for " + this.lastAction);
@@ -136,13 +141,14 @@ class PlayerAction {
 	}
 
 	private void eat() {
-		if(myself.getItsHealth() == myself.getMaxHealth()) {
+		int oldPlayerHealth = myself.getItsHealth();
+		if(myself.getItsHealth() >= myself.getMaxHealth()) {
+			myself.setItsHealth(myself.getMaxHealth());
 			System.out.println("Already have max Health. Can not eat more");
 		} else {
-			// todo Να παίρνει αντικείμενα από το Player.inventory
-			FoodItem food = new FoodItem("Potato Bread", 24, 18, "Bread");
-			float healthPerSecond = food.getHealthPerTick();
-			int foodGain = Math.round(healthPerSecond);
+			// TODO: 26/11/2016 Να παίρνει αντικείμενα από το Player.inventory
+			FoodItem food = new FoodItem("Potato Bread", 54, 18, "Bread");
+			int foodGain = Math.round(food.getHealthPerTick());
 			for (int i = 0; i < food.getItemTime(); i++) {
 				try {
 					TimeUnit.SECONDS.sleep(5);
@@ -155,24 +161,27 @@ class PlayerAction {
 					e.printStackTrace();
 				}
 			}
+			int newPlayerHealth = myself.getItsHealth();
+			int gainedHealth = newPlayerHealth - oldPlayerHealth;
 			System.out.println("PlayerAction.eat Consumed a " + food.getItemType() + " from the Inventory");
-			System.out.println("PlayerAction.eat You gained " + food.getItemHealth() +" health points and now have " + myself.getItsHealth() + " HP");
+			System.out.println("PlayerAction.eat You gained " + gainedHealth +" health points and now have " + myself.getItsHealth() + " HP");
 		}
 	}
 
 	private void drink() {
-		// ToDo This will work for all players
-		// ToDo Wizards can conjure Drinks, all players can drink items
+		// TODO: 26/11/2016 This will work for all players
+		// TODO: 26/11/2016 Wizards can conjure Drinks, all players can drink items
 		System.out.println("PlayerAction.drink I can not find any drinks in your Inventory");
 		System.out.println("PlayerAction.drink Visit an Inn to the nearest Town or Capital City");
-		System.out.println("I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
+		System.out.println("PlayerAction.drink I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
 		System.out.println("PlayerAction.drink Inside my Inventory I have");
-		DrinkItem mana = new DrinkItem("Fresh Water", 10, 15, "Water");
-		double[] manaDrinks = mana.createWaterBottle(myself, 15);
-		for (double manaDrink : manaDrinks) {
-			System.out.printf("PlayerAction.drink I see %.2f into %s inventory", manaDrink, myself.getName());
-		}
-		mana.useOne(myself, manaDrinks);
+		DrinkItem mana = new DrinkItem("Fresh Water", 90, 15, "Water");
+		// TODO: 26/11/2016 All bags are unified and we should use the unified inventory
+		Hashtable<DrinkItem, Integer> manaDrinks = myself.inventory.getManaBag();
+		manaDrinks.put(mana, 20);
+		myself.seeInsideInv();
+		mana.useOne(myself);
+		System.out.println("PlayerAction.drink I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
 	}
 
 	private class PlayerChat extends TimerTask {

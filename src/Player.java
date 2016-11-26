@@ -57,9 +57,18 @@ class Player implements playerInterface {
 	// Experience Handler
 	private static int experience;
 
-	private Hashtable<FoodItem, Integer> foodHashTab;
+	// Food Inventory
+	private Hashtable<Item, Integer> foodHashTab;
+
+    // TODO: 26/11/2016 Add Potions Bag that Accepts only Potions (l8r extra herbsBag)
+//    private Hashtable<Potion, Integer> potionsTable;
+
 	// Each Player has its Inventory derived from playerInterface
 	private Bag foods = new Bag("FoodBag", 4, 4, foodHashTab);
+//	private Bag pouch = new Bag("Pouch", 4,3, potionsTable);
+
+	// my Inventory impementation
+    PlayerInventory inventory;
 
 	Player(String newName, int newLevel, int FactionID, Race playRace, int classID) {
 
@@ -86,17 +95,16 @@ class Player implements playerInterface {
 		Player.FactionID = FactionID;
 		Faction = "Alliance";
 
-		/*
+		/* *******************
 		** Race Initializer **
 		** It is not sync'd **
 		** with race Class  **
-		*/
+		*********************/
 		this.RaceID = playRace.raceID;
 		this.ClassID = classID;
 
+		this.inventory = new PlayerInventory(this.foods);
 //		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
-
-		PlayerInventory inv = new PlayerInventory(this, foods);
 	}
 
 	// xAxis of Player
@@ -398,5 +406,12 @@ class Player implements playerInterface {
 
 	void setRaceName(String raceName) {
 		this.RaceName = raceName;
+	}
+
+	void seeInsideInv() {
+		Hashtable<FoodItem, Integer> invFoods = this.inventory.getFoodBag();
+		System.out.println("Player.seeInsideInv Start");
+		inventory.selectFood();
+		System.out.println("Player.seeInsideInv *End*");
 	}
 }

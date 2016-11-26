@@ -1,3 +1,4 @@
+import java.util.Hashtable;
 import java.util.Random;
 
 /**
@@ -28,8 +29,9 @@ public class Wizard {
 		return food;
 	}
 
-	public double[] conjureMana() {
+	public Hashtable conjureMana() {
+		Random mageBool = new Random();
 		DrinkItem conjuredDrink = new DrinkItem("Conjured Water", 150, 18, "Water");
-		return conjuredDrink.createWaterBottle(mage, 20);
+		return conjuredDrink.createWaterBottle(mage, mageBool.nextInt(20), mageBool.nextBoolean());
 	}
 }

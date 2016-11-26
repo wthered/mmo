@@ -31,12 +31,12 @@ class PlayerClass {
 			case 3:
 				// selectDwarfRace();
 				myself.setRaceName("Dwarf");
-				System.out.println("Dwarfs are warriors");
+				System.out.println("PlayerClass.ShowAllianceClassesFor " + myself.getRaceName() + " are warriors");
 				break;
 			case 4:
 				// selectElvenRace();
 				myself.setRaceName("Night Elf");
-				System.out.println("Night Elves can be hunters");
+				System.out.println("PlayerClass.ShowAllianceClassesFor " + myself.getRaceName() + " can be hunters");
 				break;
 			default:
 				myself.RaceName = "defaultClassName";

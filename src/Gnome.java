@@ -31,14 +31,14 @@ class Gnome {
 		System.out.print("What is your Class " + me.getClassName() + "? ");
 		Scanner gScan = new Scanner(System.in);
 		try {
-			gnomeClass = this.setGnomeClass(gScan.nextInt());
+			gnomeClass = this.setGnomeClass(gScan.nextInt() % 7);
 			me.setClassID(gnomeClass);
 		} catch (InputMismatchException ex) {
 			System.out.println("Gnome.selectGnomeClass Exception");
 			ex.printStackTrace();
 		}
 		// Setting our Gnome to be Monk
-		System.out.println("Gnome.selectGnomeClass Your Gnome has been set to " + me.getClassID() + " or " + me.getClassName());
+		System.out.println("Gnome.selectGnomeClass Your Gnome class is #" + me.getClassID() + " or " + me.getClassName());
 		return me.getClassID();
 	}
 

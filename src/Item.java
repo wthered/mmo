@@ -5,10 +5,13 @@
  */
 class Item {
 
+    private String itemType;
+
     Item(String Name, String Type) {
         System.out.println("Item.Item Item " + Name + " of type " + Type);
     }
 
-//    Item ManaPotion = new Item("Mana Potion", "Mana");
-//    Item HealPotion = new Item("Health Potion", "Health");
+    public String getItemType() {
+        return itemType;
+    }
 }
