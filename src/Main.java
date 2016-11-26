@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import static java.text.MessageFormat.format;
 
+
 /* todo
 **	Players have (maybe 2?) Professions
 **	AttackPower
