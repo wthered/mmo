@@ -17,6 +17,7 @@ class PlayerInventory {
         this.foodBag = new Hashtable<>();
         this.manaBag = new Hashtable<>();
         this.potions = new Hashtable<>();
+        b.getDimensions();
         System.out.println("playerInventory.playerInventory Inventory of Player");
     }
 

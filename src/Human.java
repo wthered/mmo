@@ -44,7 +44,7 @@ class Human extends Race {
 	}
 
 	void setHumanAttributes(Race human) {
-		switch (myself.ClassID) {
+		switch (myself.getClassID()) {
 			case 1:
 				// ToDo what the general ClassID for Wizard?
 				myself.setClassID(1);
@@ -96,7 +96,7 @@ class Human extends Race {
 				this.setHumanClass("Monk");
 				break;
 			default:
-				System.out.println("Human.getHumanClass HumanClassID is never " + this.HumanClassID);
+				System.out.println("Human.getHumanClass HumanClassID is never " + this.getHumanClassID());
 				this.HumanClass = "StarYoda";
 		}
 	}

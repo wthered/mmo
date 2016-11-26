@@ -8,25 +8,25 @@ import java.util.Scanner;
  */
 class Player implements playerInterface {
 
-	// playerFaction Setup
-	static int FactionID;
-	private static String Faction;
+    // playerFaction Setup
+	private int FactionID;
+	private String Faction;
 
 	// Player Attributes
 	private String Name;
-	String ClassName;
-	int maxHealth;
-	int level;
-	int RaceID;
 
-	String RaceName;
+	private String ClassName;
+	private int maxHealth;
+	private int level;
+	private int RaceID;
+
+	private String RaceName;
 	// playerClass SetUp
-	int ClassID;
+	private int ClassID;
 	String itsSexName;
-	int maxMana;
 
-	// placeHolder for later (see toDo section in Main.java)
-	boolean inBattle = false;
+    // placeHolder for later (see toDo section in Main.java)
+	private boolean inBattle = false;
 
 	// Position Related Stuff
 	private int itsX;
@@ -37,7 +37,8 @@ class Player implements playerInterface {
 	private Race racist;
 	private int money;
 	// Health Variables
-	/* The maximum amount of health a player
+	/* *************************************************
+	** The maximum amount of health a player
 	** character has is determined by a
 	** combination of the character's
 	** level and stamina
@@ -45,10 +46,13 @@ class Player implements playerInterface {
 	** currentStamina = baseStamina + 2*level
 	** Stamina provides 1 health per stamina for the first 20 points of stamina, and 14 health per point of stamina thereafter.
 	** http://www.wowpedia.org/Attributes#Stamina
-	*/
+	***************************************************/
 	private int itsHealth;
+
 	// mana Variables
 	private int itsMana;
+	private int maxMana;
+
 	// Sex setup
 	private int itsSex;
 	private String City;
@@ -60,24 +64,13 @@ class Player implements playerInterface {
 	// Food Inventory
 	private Hashtable<Item, Integer> foodHashTab;
 
-    // TODO: 26/11/2016 Add Potions Bag that Accepts only Potions (l8r extra herbsBag)
-//    private Hashtable<Potion, Integer> potionsTable;
+	// TODO: 26/11/2016 Add Potions Bag that Accepts only Potions (l8r extra herbsBag)
+	 private Hashtable<Potion, Integer> potionsTable;
 
-	// Each Player has its Inventory derived from playerInterface
-	private Bag foods = new Bag("FoodBag", 4, 4, foodHashTab);
-//	private Bag pouch = new Bag("Pouch", 4,3, potionsTable);
-
-	// my Inventory impementation
-    PlayerInventory inventory;
+	// my Inventory implementation
+	PlayerInventory inventory;
 
 	Player(String newName, int newLevel, int FactionID, Race playRace, int classID) {
-
-		// Start of ForTest Section
-//		Item HealPotion = new Item("Health Potion", "Health");
-//		Item ManaPotion = new Item("Mana Potion", "Mana");
-//		this.inventory.add(HealPotion);
-//		this.inventory.add(ManaPotion);
-		// End of ForTest Section
 
 		this.setName(newName);
 		this.setMoney(0);
@@ -92,7 +85,7 @@ class Player implements playerInterface {
 		this.maxMana = 150;
 
 		// Faction Initializer
-		Player.FactionID = FactionID;
+		this.setFaction(FactionID);
 		Faction = "Alliance";
 
 		/* *******************
@@ -100,16 +93,18 @@ class Player implements playerInterface {
 		** It is not sync'd **
 		** with race Class  **
 		*********************/
-		this.RaceID = playRace.raceID;
+        // TODO: 26/11/2016 Do the Sync (read above)
+        this.RaceID = playRace.raceID;
 		this.ClassID = classID;
 
-		this.inventory = new PlayerInventory(this.foods);
+        Bag foods = new Bag("FoodBag", 4, 4, foodHashTab);
+        this.inventory = new PlayerInventory(foods);
 //		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
 	}
 
 	// xAxis of Player
 	int getItsX() {
-//		System.out.println("Player.getItsX Currently X = " + this.itsX);
+		System.out.println("Player.getItsX Currently X = " + this.itsX);
 		return this.itsX;
 	}
 
@@ -177,14 +172,14 @@ class Player implements playerInterface {
 	}
 
 	// Faction
-	private int getFactionID() {
-		return FactionID;
+    int getFactionID() {
+		return this.FactionID;
 	}
 
 	// Methods inherited from playerInterface
 
 	// Race ID
-	private int getRaceID() {
+	int getRaceID() {
 		return this.RaceID;
 	}
 
@@ -269,11 +264,11 @@ class Player implements playerInterface {
 		Race r = new Race();
 		switch (this.getFactionID()) {
 			case 1:
-				System.out.println("You will select from Alliance Races");
+				System.out.println("Player.selectRace You will select from Alliance Races");
 				raceID = r.selectAllianceRace();
 				break;
 			case 2:
-				System.out.println("You will select from Horde Races");
+				System.out.println("Player.selectRace You will select from Horde Races");
 				raceID = r.selectHordeRace();
 				break;
 			default:
@@ -313,7 +308,7 @@ class Player implements playerInterface {
 		return this.Area;
 	}
 
-	private void setArea(String areaName) {
+	void setArea(String areaName) {
 		this.Area = areaName;
 	}
 
@@ -414,4 +409,16 @@ class Player implements playerInterface {
 		inventory.selectFood();
 		System.out.println("Player.seeInsideInv *End*");
 	}
+
+	void setClassName(String className) {
+		this.ClassName = className;
+	}
+
+    public boolean isInBattle() {
+        return this.inBattle;
+    }
+
+    void setInBattle(boolean inBattle) {
+        this.inBattle = inBattle;
+    }
 }

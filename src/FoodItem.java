@@ -13,8 +13,7 @@ class FoodItem extends Item{
 	// http://wowwiki.wikia.com/wiki/Conjure_Food
 	FoodItem(String foodName, int health, int overTime, String foodType) {
 		super(foodName, foodType);
-		System.out.println("Food.Food A pack of 20 " + foodName + " that restores " + health + " over " + overTime + " seconds");
-//		System.out.println("Food.Food This is a type of " + foodType + " food");
+		System.out.println("FoodItem.FoodItem A pack of 20 " + foodName + " that restores " + health + " over " + overTime + " clock ticks");
 		this.itemHealth = health;
 		this.itemTime = overTime;
 		this.itemType = foodType;

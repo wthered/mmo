@@ -17,15 +17,17 @@ class PlayerClass {
 		switch (racist.raceID) {
 			case 1:
 				Human h = new Human(this.myself);
-				myself.ClassID = h.selectClass();
+				myself.setClassID(h.selectClass());
 				h.setHumanAttributes(racist);
 				myself.setRaceName("Human");
+				myself.setArea("Elwyn Forest");
 				break;
 			case 2:
 				Gnome regan = new Gnome(myself);
-				myself.ClassID = regan.selectGnomeClass();
+				myself.setClassID(regan.selectGnomeClass());
 				regan.setGnomeAttributes(racist);
 				myself.setCity("Ironforge");
+				myself.setArea("Dun Morogh");
 				myself.setRaceName("Gnome");
 				break;
 			case 3:
@@ -39,7 +41,7 @@ class PlayerClass {
 				System.out.println("PlayerClass.ShowAllianceClassesFor " + myself.getRaceName() + " can be hunters");
 				break;
 			default:
-				myself.RaceName = "defaultClassName";
+				myself.setRaceName("defaultRaceName");
 				System.out.println("PlayerClass.ShowAvailableClassesFor never reaches " + racist.raceID);
 				break;
 		}
@@ -48,44 +50,44 @@ class PlayerClass {
 	}
 
 	private String getAllianceClassName() {
-		switch (myself.ClassID) {
+		switch (myself.getClassID()) {
 			case 1:
-				myself.ClassName = "Wizard";
+				myself.setClassName("Wizard");
 				break;
 			case 2:
-				myself.ClassName = "Paladin";
+				myself.setClassName("Paladin");
 				break;
 			case 3:
-				myself.ClassName = "Priest";
+				myself.setClassName("Priest");
 				break;
 			case 4:
-				myself.ClassName = "Rogue";
+				myself.setClassName("Rogue");
 				break;
 			case 5:
-				myself.ClassName = "Warrior";
+				myself.setClassName("Warrior");
 				break;
 			case 6:
-				myself.ClassName = "Druid";
+				myself.setClassName("Druid");
 				break;
 			case 7:
-				myself.ClassName = "Hunter";
+				myself.setClassName("Hunter");
 				break;
 			case 8:
-				myself.ClassName = "Warlock";
+				myself.setClassName("Warlock");
 				break;
 			case 9:
-				myself.ClassName = "Shaman";
+				myself.setClassName("Shaman");
 				break;
 			case 10:
-				myself.ClassName = "Monk";
+				myself.setClassName("Monk");
 				break;
 			case 11:
-				myself.ClassName = "Death Knight";
+				myself.setClassName("Death Knight");
 				break;
 			default:
-				myself.ClassName = "someAllianceClassName";
-				System.out.println("PlayerClass.getAllianceClassName ClassID is never " + myself.ClassID);
+				myself.setClassName("defaultClassName");
+				System.out.println("PlayerClass.getAllianceClassName ClassID is never " + myself.getClassID());
 		}
-		return myself.ClassName;
+		return myself.getClassName();
 	}
 }

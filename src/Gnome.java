@@ -16,9 +16,6 @@ class Gnome {
 	}
 
 	int selectGnomeClass() {
-		// Mage Rogue Warlock Warrior Monk DeathKnights
-		PlayerClass pc = new PlayerClass(me);
-
 		int gnomeClass;
 		System.out.println("**********************");
 		System.out.println("** 1) Wizard / Mage **");
@@ -28,7 +25,7 @@ class Gnome {
 		System.out.println("** 5) Monk          **");
 		System.out.println("** 6) Death Knight  **");
 		System.out.println("**********************");
-		System.out.print("What is your Class " + me.getClassName() + "? ");
+		System.out.print("What is your class " + me.getRaceName() + "? ");
 		Scanner gScan = new Scanner(System.in);
 		try {
 			gnomeClass = this.setGnomeClass(gScan.nextInt() % 7);
@@ -38,7 +35,7 @@ class Gnome {
 			ex.printStackTrace();
 		}
 		// Setting our Gnome to be Monk
-		System.out.println("Gnome.selectGnomeClass Your Gnome class is #" + me.getClassID() + " or " + me.getClassName());
+		System.out.println("Gnome.selectGnomeClass Your Gnome class is #" + me.getClassID() + " or " + this.setGnomeClass(me.getClassID()));
 		return me.getClassID();
 	}
 

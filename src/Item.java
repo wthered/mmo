@@ -5,13 +5,20 @@
  */
 class Item {
 
+    private String itemName;
     private String itemType;
 
     Item(String Name, String Type) {
-        System.out.println("Item.Item Item " + Name + " of type " + Type);
+        this.itemName = Name;
+        this.itemType = Type;
+        System.out.println("Item.Item Constructor for " + this.getItemName() + " of type " + this.getItemType());
     }
 
     public String getItemType() {
-        return itemType;
+        return this.itemType;
+    }
+
+    private String getItemName() {
+        return itemName;
     }
 }

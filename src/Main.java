@@ -68,15 +68,10 @@ class Main {
 					Player p = createNewPlayer(r);
 
 					// Init these vars or reset Project
-//					System.out.println("Main.main Before line 51\n");
-					p.setClassID(p.ClassID);
-//					System.out.println("Main.main After Line 51\n");
-					r.setRaceID(p.RaceID);
-//					System.out.println("Main.main Setting Player Attributes in line 73");
-//					r.setPlayerAttributes(p);
+					r.setRaceID(p.getRaceID());
 
 					// Setting PlayerName
-					System.out.printf("What is your name " + r.getRaceName(Player.FactionID) + "? ");
+					System.out.printf("What is your name " + r.getRaceName(p.getFactionID()) + "? ");
 
 					Scanner playerInfo = new Scanner(System.in);
 					String playerName = playerInfo.nextLine();
@@ -104,7 +99,7 @@ class Main {
 
 					System.out.println(p.getName() + " has " + Main.convertMoney(p.getMoney()) + "! Use them wisely");
 
-					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(Player.FactionID), p.ClassName, p.getFaction(), p.itsSexName);
+					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.getFactionID()), p.getClassName(), p.getFaction(), p.itsSexName);
 					System.out.println(message);
 
 //					System.out.println("Main.main line 110");

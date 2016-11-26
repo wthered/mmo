@@ -17,7 +17,7 @@ class Travel {
 	// The Travel has a Cost
 	private Random randCost = new Random();
 
-	// Each Capital City has a capitalID to prevent traveling from CityID = 3 to CityID = 3 for example
+	// FIXME: 26/11/2016 Each Capital City has a capitalID to prevent traveling from CityID = 3 to CityID = 3 for example
 //	Map<Integer, String> capitalCitiesAlliance = new HashMap<Integer, String>();
 
 	Travel(Player myself) {
@@ -66,9 +66,9 @@ class Travel {
 	}
 
 	String selectDestination() {
-		System.out.println("The faction of " + me.getName() + " is " + me.getFaction() + " or " + Player.FactionID);
+		System.out.println("The faction of " + me.getName() + " is " + me.getFaction() + " or " + me.getFactionID());
 		String travelDestination;
-		switch (Player.FactionID) {
+		switch (me.getFactionID()) {
 			case 1:
 				travelDestination = this.showAllianceCapitals();
 				break;
@@ -80,7 +80,7 @@ class Travel {
 				break;
 			default:
 				travelDestination = "Daralan";
-				System.out.println("Travel.selectDestination The PlayerFaction can not be " + Player.FactionID);
+				System.out.println("Travel.selectDestination The PlayerFaction can not be " + me.getFactionID());
 		}
 		return travelDestination;
 	}
@@ -90,9 +90,10 @@ class Travel {
 		System.out.println("******************");
 		System.out.println("** 1) Stormwind **");
 		System.out.println("** 2) Ironforge **");
-		System.out.println("** 3) Silvanaar **");
+		System.out.println("** 3) Darnassus **");
 		System.out.println("******************");
-		System.out.print("What is your destination, " + me.getName() + " from " + me.getCity() + "? ");
+		System.out.println("Travel.showAllianceCapitals Currently at " + me.getCity() + " of " + me.getArea());
+		System.out.print("What is your destination, " + me.getName() + "? ");
 		cityScan = new Scanner(System.in);
 		try {
 			return this.convertAllianceCity(cityScan.nextInt());
@@ -104,22 +105,25 @@ class Travel {
 	}
 
 	private String convertAllianceCity(int cityID) {
-		String allianceCityName = "Darnassus";
-		switch (cityID) {
+		String allianceCityName = "Sylvanaar";
+		switch (cityID % 4) {
 			case 0:
 				allianceCityName = "Exodar";
+				me.setArea("Azuremyst Isle");
 				break;
 			case 1:
 				allianceCityName = "Stormwind";
+				me.setArea("Elwyn Forest");
 				break;
 			case 2:
 				allianceCityName = "Ironforge";
+				me.setArea("Dun Morogh");
 				break;
 			case 3:
-				allianceCityName = "Silvanaar";
+				allianceCityName = "Darnassus";
+				me.setArea("Teldrassil");
 				break;
 			default:
-				if(cityID > 3) { allianceCityName = convertAllianceCity(cityID % 3); }
 				System.out.println("Travel.convertAllianceCity destinationCityID can never be " + cityID);
 		}
 		System.out.println("Travel.convertAllianceCity\t" + allianceCityName);

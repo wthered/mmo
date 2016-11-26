@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +13,6 @@ class PlayerAction {
 	private int lastAction;
 	private Player myself;
 	private Race racist;
-	private Random randomAction = new Random();
 
 	PlayerAction(Player actor, Race playRace) {
 		this.lastAction = 0;
@@ -27,7 +28,7 @@ class PlayerAction {
 		System.out.println("** 3) Fuck                                 **");
 		System.out.println("** 4) Quest                                **");
 		System.out.println("** 5) Sleep for 5 seconds until reach City **");
-		System.out.println("** 6) Go to Area                           **");
+		System.out.println("** 6) Go to City                           **");
 		System.out.println("** 7) Go to Location (x,y) of current Area **");
 		System.out.println("** 8) Report yourself (Position and Stats) **");
 		System.out.println("** 9) See what I have in Inventory / Bank  **");
@@ -47,14 +48,16 @@ class PlayerAction {
 	}
 
 	private void report() {
-		System.out.println(myself.getName() + " is level " + myself.level );
-		System.out.println("I currently have " + myself.getItsHealth() + " Health Points of " + myself.maxHealth + " max");
-		System.out.println("I currently have " + myself.getItsMana() + " mana points of " + myself.maxMana + " max");
+		System.out.println(myself.getName() + " is level " + myself.getLevel() );
+		System.out.println("I currently have " + myself.getItsHealth() + " Health Points of " + myself.getMaxHealth()+ " max");
+		System.out.println("I currently have " + myself.getItsMana() + " mana points of " + myself.getMaxMana() + " max");
 		System.out.println("I have " + Main.convertMoney(myself.getMoney()));
 		System.out.println("I have " + myself.getExperience() + " experience" );
-		System.out.println("You can find me near " + myself.getPosition() + " of " + myself.getArea() + ", " + myself.getCity());
-		System.out.println("Last Action of " + myself.getName() + " is " + this.lastAction);
+		System.out.println("You can find me near " + myself.getPosition() + " of " + myself.getCity() + ", " + myself.getArea());
+		System.out.println("My exact Location is (" + myself.getItsX() + "," + myself.getItsY() + ")");
+		System.out.println("Last Action of " + myself.getName() + " is " + this.getLastAction());
 
+		// TODO: 26/11/2016 cout << ... << " and 25 Intellect from Armory"
 		System.out.println("******** Attributes Report Starts here ********");
 		System.out.println("** Strength\t\t" + myself.getRaceName() + " is " + racist.getRaceStrength());
 		System.out.println("** Agility\t\t" + myself.getRaceName() + " is " + racist.getRaceAgility());
@@ -66,11 +69,12 @@ class PlayerAction {
 
 	void doAction() throws InterruptedException {
 		Random place = new Random(100);
-		/*
-		** todo 1) look into Inventory to see if foodIsAvailable()
-		** todo 2) look into Inventory to see if drinkIsAvailable()
-		*/
-		switch (this.lastAction) {
+
+		/* **********************************************************************
+		** TODO: 2/11/2016 1) look into Inventory to see if foodIsAvailable()
+		** TODO: 2/11/2016 2) look into Inventory to see if drinkIsAvailable()
+		************************************************************************/
+		switch (this.getLastAction()) {
 			case 0:
 				System.out.println("Exiting....");
 				break;
@@ -91,8 +95,10 @@ class PlayerAction {
 				break;
 			case 4:
 				Random questID = new Random();
-				Quest q = new Quest(myself);
-				q.doQuest(questID.nextInt(100));
+				Quest quest = new Quest(myself, questID.nextInt(100), questID.nextInt(100), "Elwyn Forest");
+				// TODO: 26/11/2016 Create a function that returns array of Quest like this
+				quest.doQuest(myself.getName().length());
+				System.out.println("PlayerAction.doAction " + myself.getName() + " is around? " + quest.playerIsAround(questID.nextInt(5)));
 				break;
 			case 5:
 				for (int i = 0; i < 5; i++) {
@@ -136,25 +142,31 @@ class PlayerAction {
 				myself.seeInsideInv();
 				break;
 			default:
-				System.out.println("Not implemented yet in PlayerAction.doAction for " + this.lastAction);
+				String reason = "Not implemented yet in PlayerAction.doAction for " + this.getLastAction();
+				InterruptedException ex = new InterruptedException(reason);
+				ex.printStackTrace();
 		}
 	}
 
 	private void eat() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		int oldPlayerHealth = myself.getItsHealth();
 		if(myself.getItsHealth() >= myself.getMaxHealth()) {
 			myself.setItsHealth(myself.getMaxHealth());
 			System.out.println("Already have max Health. Can not eat more");
 		} else {
 			// TODO: 26/11/2016 Να παίρνει αντικείμενα από το Player.inventory
-			FoodItem food = new FoodItem("Potato Bread", 54, 18, "Bread");
+			FoodItem food = new FoodItem("Potato Bread", 61, 18, "Bread");
 			int foodGain = Math.round(food.getHealthPerTick());
 			for (int i = 0; i < food.getItemTime(); i++) {
 				try {
 					TimeUnit.SECONDS.sleep(5);
+					Date date = new Date();
 					if(myself.getMaxHealth() > myself.getItsHealth()) {
 						myself.setItsHealth(myself.getItsHealth() + foodGain);
-						System.out.println("PlayerAction.eat Gained " + foodGain + " health points");
+						System.out.println("PlayerAction.eat Gained " + foodGain + " health points on time " + dateFormat.format(date));
+					} else {
+						System.out.println("PlayerAction.eat You have max health (" + myself.getItsHealth() + ") and feeling well");
 					}
 				} catch (InterruptedException e) {
 					System.out.println("PlayerAction.eat Interrupting in line 140");
@@ -195,5 +207,9 @@ class PlayerAction {
 		public void run() {
 			System.out.println("PlayerChat.run in PlayerAction line 84 LastAction = " + this.lastAction);
 		}
+	}
+
+	private int getLastAction() {
+		return lastAction;
 	}
 }
