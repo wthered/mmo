@@ -63,10 +63,8 @@ class Quest {
 		return this.Area;
 	}
 
-	Hashtable<Quest, Integer> create(Quest q, int questID) {
-//		Quest q = new Quest(me, reward.nextInt(100), reward.nextInt(100), this.getArea());
-		Hashtable<Quest, Integer> qTable = new Hashtable<>();
-		qTable.put(q,questID);
+	Hashtable<Quest, Integer> create(Quest q, Hashtable<Quest, Integer> qTable, int questID ) {
+		qTable.put(q, questID);
 		return qTable;
 	}
 
