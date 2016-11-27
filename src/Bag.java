@@ -27,8 +27,16 @@ public class Bag {
         }
     }
 
-    public void getDimensions() {
-        System.out.println("Bag.getDimensions The Bag named " + Name + " has " + rows + " rows and " + columns + " columns");
+    int getDimensions() {
+        System.out.println("Bag.getDimensions The Bag named " + this.Name + " has " + this.rows + " rows and " + this.columns + " columns");
+        return this.rows * this.columns;
     }
 
+    Hashtable<Item, Integer> getFoods() {
+        return this.foods;
+    }
+
+    public void setFoods(Hashtable<Item, Integer> foods) {
+        this.foods = foods;
+    }
 }

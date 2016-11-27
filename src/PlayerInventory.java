@@ -9,15 +9,20 @@ import java.util.Map;
 class PlayerInventory {
 
     // The Inventory
-    private Hashtable<FoodItem, Integer> foodBag;
-    private Hashtable<DrinkItem, Integer> manaBag;
+    private Hashtable<Item, Integer> foodBag;
+    private Hashtable<Item, Integer> manaBag;
     private Hashtable<Potion, Integer> potions;
+    private Bag[] bags;
 
-    PlayerInventory(Bag b) {
-        this.foodBag = new Hashtable<>();
+    PlayerInventory(Bag food, Bag mana, Bag pots, Bag herbs) {
+        this.foodBag = food.getFoods();
         this.manaBag = new Hashtable<>();
         this.potions = new Hashtable<>();
-        b.getDimensions();
+        // TODO: 27/11/2016 later. Now you get the idea
+        bags[0] = food;
+        bags[1] = mana;
+        bags[2] = pots;
+        bags[3] = herbs;
         System.out.println("playerInventory.playerInventory Inventory of Player");
     }
 
@@ -27,15 +32,15 @@ class PlayerInventory {
     }
 
     void selectFood() {
-        for (Map.Entry<FoodItem, Integer> fItem : this.getFoodBag().entrySet()) {
-            FoodItem tmpFood = fItem.getKey();
+        for (Map.Entry<Item, Integer> fItem : this.getFoodBag().entrySet()) {
+            Item tmpFood = fItem.getKey();
             System.out.println("PlayerInventory.selectFood I have " + fItem.getValue() + " inside Food Bag of " + tmpFood.getItemType());
         }
     }
 
     void selectMana() {
-        for(Map.Entry<DrinkItem, Integer> mItem : this.getManaBag().entrySet()) {
-            DrinkItem tmpDrink = mItem.getKey();
+        for (Map.Entry<Item, Integer> mItem : this.getManaBag().entrySet()) {
+            Item tmpDrink = mItem.getKey();
             System.out.println("PlayerInventory.selectMana I have " + mItem.getValue() + " inside Mana Bag of " + tmpDrink.getWater());
         }
     }
@@ -58,11 +63,20 @@ class PlayerInventory {
         System.out.println("PlayerInventory.insertPotion " + q + " items of " + p.getName() + " has been put");
     }
 
-    Hashtable<FoodItem, Integer> getFoodBag() {
+    // Checks if Player Inventory is full
+    public boolean isFull() {
+        boolean foodFull = foodBag.size() == bags[0].getDimensions();
+        boolean manaFull = manaBag.size() == bags[1].getDimensions();
+        boolean potsFull = potions.size() == bags[2].getDimensions();
+        boolean herbFull = potions.size() == bags[3].getDimensions();
+        return foodFull && manaFull && potsFull && herbFull;
+    }
+
+    Hashtable<Item, Integer> getFoodBag() {
         return this.foodBag;
     }
 
-    Hashtable<DrinkItem, Integer> getManaBag() {
+    Hashtable<Item, Integer> getManaBag() {
         return this.manaBag;
     }
 

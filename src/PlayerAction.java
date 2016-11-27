@@ -137,8 +137,8 @@ class PlayerAction {
 				System.out.println("PlayerAction.doAction Looking into my Inventory");
 				System.out.println("PlayerAction.doAction Found " + myInventory.getPotions().size());
 				// TODO: 26/11/2016 myself.getInventory();
-				FoodItem bread = new FoodItem("Minor Healing Bread", 61, 18, "food");
-				FoodItem loaf = new FoodItem("Major Healing Loaf", 243, 21, "food");
+				FoodItem bread = new FoodItem("Minor Healing Bread", 61, 18, 0);
+				FoodItem loaf = new FoodItem("Major Healing Loaf", 243, 21, 0);
 				myInventory.insertFood(bread, 10);
 				myInventory.insertFood(loaf, 1);
 				myself.seeInsideInv();
@@ -169,7 +169,7 @@ class PlayerAction {
 			System.out.println("Already have max Health. Can not eat more");
 		} else {
 			// TODO: 26/11/2016 Να παίρνει αντικείμενα από το Player.inventory
-			FoodItem food = new FoodItem("Potato Bread", 61, 18, "Bread");
+			FoodItem food = new FoodItem("Potato Bread", 61, 18, 0);
 			int foodGain = Math.round(food.getHealthPerTick());
 			for (int i = 0; i < food.getItemTime(); i++) {
 				try {
@@ -201,13 +201,17 @@ class PlayerAction {
 		System.out.println("PlayerAction.drink Visit an Inn to the nearest Town or Capital City");
 		System.out.println("PlayerAction.drink I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
 		System.out.println("PlayerAction.drink Inside my Inventory I have");
-		DrinkItem mana = new DrinkItem("Fresh Water", 90, 15, "Water");
+		DrinkItem mana = new DrinkItem("Fresh Water", 90, 15);
 		// TODO: 26/11/2016 All bags are unified and we should use the unified inventory
-		Hashtable<DrinkItem, Integer> manaDrinks = myInv.getManaBag();
+		Hashtable<Item, Integer> manaDrinks = myInv.getManaBag();
 		manaDrinks.put(mana, 20);
 		myself.seeInsideInv();
 		mana.useOne(myself);
 		System.out.println("PlayerAction.drink I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
+	}
+
+	private int getLastAction() {
+		return lastAction;
 	}
 
 	private class PlayerChat extends TimerTask {
@@ -221,9 +225,5 @@ class PlayerAction {
 		public void run() {
 			System.out.println("PlayerChat.run in PlayerAction line 84 LastAction = " + this.lastAction);
 		}
-	}
-
-	private int getLastAction() {
-		return lastAction;
 	}
 }

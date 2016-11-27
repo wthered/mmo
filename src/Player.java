@@ -103,8 +103,18 @@ class Player implements playerInterface {
 
 		// All the foods that mobs drop are here
 		Hashtable<Item, Integer> foodHashTab = new Hashtable<>();
+		Hashtable<Item, Integer> drinksTabs = new Hashtable<>();
+		Hashtable<Item, Integer> potionHashtable = new Hashtable<>();
+
+		// TODO: 27/11/2016 if(Player.getProfession() == "Alchemy") { ... }
+		Hashtable<Herb, Integer> herbsHashtable = new Hashtable<>();
+
+		// We define the bags each Player (actually the slots into the inventory) has
 		Bag foods = new Bag("FoodBag", 4, 8, foodHashTab);
-		this.inventory = new PlayerInventory(foods);
+		Bag drinks = new Bag("Drinks", 3, 4, drinksTabs);
+		Bag potion = new Bag("Potions Bag", 4, 3, potionHashtable);
+		Bag herbs = new herbalismBag("Herbalism Bag", 4, 4, herbsHashtable);
+		this.inventory = new PlayerInventory(foods, drinks, potion, herbs);
 //		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
 	}
 
@@ -184,6 +194,10 @@ class Player implements playerInterface {
 
 	// Methods inherited from playerInterface
 
+	public void setFactionID(int factionID) {
+		FactionID = factionID;
+	}
+
 	// Race ID
 	int getRaceID() {
 		return this.RaceID;
@@ -198,6 +212,10 @@ class Player implements playerInterface {
 //		System.out.print("Player.getRaceName reports " + this.getName() + " is " + this.RaceName + " " + this.getClassName());
 //		System.out.println(" in " + this.getPosition() + " of " + this.getCity() + " of " + this.getArea());
 		return this.RaceName;
+	}
+
+	void setRaceName(String raceName) {
+		this.RaceName = raceName;
 	}
 
 	@Override
@@ -215,6 +233,10 @@ class Player implements playerInterface {
 				System.out.println("Player.getFaction Faction is never " + Faction + "\nSetting to Neutral");
 		}
 		return Faction;
+	}
+
+	public void setFaction(String faction) {
+		this.Faction = faction;
 	}
 
 	private void setFaction(int faction) {
@@ -306,6 +328,14 @@ class Player implements playerInterface {
 		return this.Area;
 	}
 
+	/*
+	** This should be called just after player
+	** advances to next level
+	*/
+//	public void setMaxHealth() {
+//		this.maxHealth = 100*this.level;
+//	}
+
 	void setArea(String areaName) {
 		this.Area = areaName;
 	}
@@ -319,20 +349,20 @@ class Player implements playerInterface {
 		this.City = cityName;
 	}
 
-	/*
-	** This should be called just after player
-	** advances to next level
-	*/
-//	public void setMaxHealth() {
-//		this.maxHealth = 100*this.level;
-//	}
-
 	int getMaxHealth() {
 		return maxHealth;
 	}
 
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
+	}
+
 	int getMaxMana() {
 		return this.maxMana;
+	}
+
+	public void setMaxMana(int maxMana) {
+		this.maxMana = maxMana;
 	}
 
 	void travel(int newX, int newY) {
@@ -344,6 +374,10 @@ class Player implements playerInterface {
 
 	String getClassName() {
 		return this.ClassName;
+	}
+
+	void setClassName(String className) {
+		this.ClassName = className;
 	}
 
 	int getClassID() {
@@ -412,23 +446,15 @@ class Player implements playerInterface {
 		System.out.println("Player.setStartingCity You are a " + this.getRaceName() + " in " + this.getCity() + " of " + this.getArea());
 	}
 
-	void setRaceName(String raceName) {
-		this.RaceName = raceName;
-	}
-
 	void seeInsideInv() {
-		Hashtable<FoodItem, Integer> invFoods = this.inventory.getFoodBag();
-		Hashtable<DrinkItem,Integer> invDrink = this.inventory.getManaBag();
+		Hashtable<Item, Integer> invFoods = this.inventory.getFoodBag();
+		Hashtable<Item, Integer> invDrink = this.inventory.getManaBag();
 		Hashtable<Potion, Integer> invPotions = this.inventory.getPotions();
 		System.out.println("Player.seeInsideInv Start");
 		inventory.selectFood();
 		inventory.selectMana();
 		inventory.selectPots();
 		System.out.println("Player.seeInsideInv *End*");
-	}
-
-	void setClassName(String className) {
-		this.ClassName = className;
 	}
 
 	public boolean isInBattle() {
@@ -451,20 +477,8 @@ class Player implements playerInterface {
 		return this.playerRace;
 	}
 
-	public void setFactionID(int factionID) {
-		FactionID = factionID;
-	}
-
-	public void setFaction(String faction) {
-		this.Faction = faction;
-	}
-
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
-	}
-
-	public void setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
+	public void setPlayerRace(Race playerRace) {
+		this.playerRace = playerRace;
 	}
 
 	PlayerInventory getInventory() {
@@ -473,10 +487,6 @@ class Player implements playerInterface {
 
 	public void setInventory(PlayerInventory inventory) {
 		this.inventory = inventory;
-	}
-
-	public void setPlayerRace(Race playerRace) {
-		this.playerRace = playerRace;
 	}
 
 	int getStrength() {

@@ -6,19 +6,44 @@
 class Item {
 
     private String itemName;
-    private String itemType;
 
-    Item(String Name, String Type) {
+    /* ***************
+    ** 0    -> Food
+    ** 1    -> Drink / Mana
+    ** 2    -> Both
+    ************************/
+    private int itemType;
+
+    // How much health the item gives
+    private int health;
+
+    // How much mana the item gives
+    private int thirst;
+
+    Item(String Name, int Type, int healGain, int manaGain) {
         this.itemName = Name;
         this.itemType = Type;
+        this.health = healGain;
+        this.thirst = manaGain;
         System.out.println("Item.Item Constructor for " + this.getItemName() + " of type " + this.getItemType());
     }
 
-    public String getItemType() {
+    public int getItemType() {
         return this.itemType;
     }
 
     private String getItemName() {
         return itemName;
+    }
+
+    int getWater() {
+        return this.thirst;
+    }
+
+    public int getFood(FoodItem f) {
+        if (this.getItemType() == 1) {
+            return f.getItemHealth();
+        }
+        return 0;
     }
 }

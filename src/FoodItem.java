@@ -3,16 +3,16 @@
  * The Package name is ${PACKAGE_NAME}
  * The Project name is mmo
  */
-class FoodItem extends Item{
+class FoodItem extends Item {
 
 	private int itemHealth;
 	private int itemTime;
 
-	private String itemType;
+	private int itemType;
 
 	// http://wowwiki.wikia.com/wiki/Conjure_Food
-	FoodItem(String foodName, int health, int overTime, String foodType) {
-		super(foodName, foodType);
+	FoodItem(String foodName, int health, int overTime, int foodType) {
+		super(foodName, 0, 0, 0);
 		System.out.println("FoodItem.FoodItem A pack of 20 " + foodName + " that restores " + health + " over " + overTime + " clock ticks");
 		this.itemHealth = health;
 		this.itemTime = overTime;
@@ -34,6 +34,7 @@ class FoodItem extends Item{
 		return Math.round(hps);
 	}
 
+	// How much Health the item gives
 	int getItemHealth() {
 		return this.itemHealth;
 	}
@@ -42,7 +43,7 @@ class FoodItem extends Item{
 		return this.itemTime;
 	}
 
-	public String getItemType() {
+	public int getItemType() {
 		return this.itemType;
 	}
 }
