@@ -28,11 +28,11 @@ class Item {
         System.out.println("Item.Item Constructor for " + this.getItemName() + " of type " + this.getItemType());
     }
 
-    public int getItemType() {
+    int getItemType() {
         return this.itemType;
     }
 
-    private String getItemName() {
+    String getItemName() {
         return itemName;
     }
 

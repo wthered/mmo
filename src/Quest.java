@@ -5,6 +5,7 @@ import java.util.Random;
  * The Package Name is PACKAGE_NAME
  * Feel Free to Edit mmo
  */
+// TODO: 27/11/2016 On each quest the armour durability gets less. Also mana is consumed
 class Quest {
 	private Player me;
 	private Random reward = new Random();

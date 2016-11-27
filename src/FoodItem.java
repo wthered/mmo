@@ -5,18 +5,17 @@
  */
 class FoodItem extends Item {
 
+	private String itemName;
 	private int itemHealth;
 	private int itemTime;
 
-	private int itemType;
-
 	// http://wowwiki.wikia.com/wiki/Conjure_Food
-	FoodItem(String foodName, int health, int overTime, int foodType) {
+	FoodItem(String foodName, int health, int overTime) {
 		super(foodName, 0, 0, 0);
 		System.out.println("FoodItem.FoodItem A pack of 20 " + foodName + " that restores " + health + " over " + overTime + " clock ticks");
+		this.itemName = foodName;
 		this.itemHealth = health;
 		this.itemTime = overTime;
-		this.itemType = foodType;
 	}
 
 	// Used by Wizard.conjureFood
@@ -43,7 +42,7 @@ class FoodItem extends Item {
 		return this.itemTime;
 	}
 
-	public int getItemType() {
-		return this.itemType;
-	}
+//	public int getItemType() {
+//		return this.itemType;
+//	}
 }

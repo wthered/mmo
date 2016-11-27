@@ -22,18 +22,18 @@ class PlayerAction {
 
 	int selectAction() {
 		int thisAction = 0;
-		System.out.println("*********************************************");
-		System.out.println("** 1) Eat                                  **");
-		System.out.println("** 2) Drink                                **");
-		System.out.println("** 3) Fuck                                 **");
-		System.out.println("** 4) Quest                                **");
-		System.out.println("** 5) Sleep for 5 seconds until reach City **");
-		System.out.println("** 6) Go to City                           **");
-		System.out.println("** 7) Go to Location (x,y) of current Area **");
-		System.out.println("** 8) Report yourself (Position and Stats) **");
-		System.out.println("** 9) See what I have in Inventory / Bank  **");
-		System.out.println("** 0) Fly me to the moon among the stars   **");
-		System.out.println("*********************************************");
+		System.out.println("**********************************************");
+		System.out.println("** 1) Eat									**");
+		System.out.println("** 2) Drink									**");
+		System.out.println("** 3) Create Food / Water Items 			**");
+		System.out.println("** 4) Quest									**");
+		System.out.println("** 5) Sleep for 5 seconds until reach City	**");
+		System.out.println("** 6) Go to City							**");
+		System.out.println("** 7) Go to Location (x,y) of current Area	**");
+		System.out.println("** 8) Report yourself (Position and Stats)	**");
+		System.out.println("** 9) See what I have in Inventory / Bank	**");
+		System.out.println("** 0) Fly me to the moon among the stars	**");
+		System.out.println("**********************************************");
 		System.out.print("What is your desire, " + myself.getName() + "? ");
 		Scanner actionScanner = new Scanner(System.in);
 		try {
@@ -82,24 +82,26 @@ class PlayerAction {
 				this.eat();
 				break;
 			case 2:
-				this.drink();
+				this.WeaponEquip();
 				break;
 			case 3:
 				// Looking to find another player (thru http) for " + myself.getName() + " in PlayerAction.doAction;
 				Timer timer = new Timer();
 				timer.schedule(new PlayerChat(this.lastAction), 0, 5000);
-				if (this.lastAction == 0) {
+				if (this.getLastAction() == 0) {
 					timer.cancel();
 					timer.purge();
 				}
 				break;
 			case 4:
-				Random questID = new Random();
-				Quest quest = new Quest(myself, questID.nextInt(100), questID.nextInt(100), "Elwyn Forest");
-				// TODO: 26/11/2016 Create a function that returns array of Quest like this
-				quest.doQuest(myself.getName().length());
-				System.out.println("PlayerAction.doAction " + myself.getName() + " is around? " + quest.playerIsAround(questID.nextInt(5)));
-				this.fun(questID);
+				// If I am in a city, there are no Quests to do
+				if (!myself.isInCity()) {
+					this.fun(new Random());
+				} else {
+					// I am in the wild, so maybe there are some things I can do near here
+					System.out.println("PlayerAction.doAction You can do Quests only in the wild");
+					System.out.println("PlayerAction.doAction You are in " + myself.getCity() + " City");
+				}
 				break;
 			case 5:
 				for (int i = 0; i < 5; i++) {
@@ -115,8 +117,8 @@ class PlayerAction {
 				break;
 			case 6:
 				Travel t = new Travel(myself);
-				String destination = t.selectDestination();
-				t.visit(destination);
+				String[] destination = t.selectDestination();
+				t.visit(destination[0], destination[1]);
 				myself.setItsX(place.nextInt(100));
 				myself.setItsX(place.nextInt(100));
 
@@ -126,6 +128,7 @@ class PlayerAction {
 				break;
 			case 7:
 				myself.travel(1 + place.nextInt(100), 1 + place.nextInt(100));
+				myself.setInCity(false);
 				break;
 			case 8:
 				this.report();
@@ -135,12 +138,12 @@ class PlayerAction {
 			case 9:
 				PlayerInventory myInventory = myself.getInventory();
 				System.out.println("PlayerAction.doAction Looking into my Inventory");
-				System.out.println("PlayerAction.doAction Found " + myInventory.getPotions().size());
-				// TODO: 26/11/2016 myself.getInventory();
-				FoodItem bread = new FoodItem("Minor Healing Bread", 61, 18, 0);
-				FoodItem loaf = new FoodItem("Major Healing Loaf", 243, 21, 0);
+
+				FoodItem bread = new FoodItem("Minor Healing Bread", 61, 18);
+				FoodItem loaf = new FoodItem("Major Healing Loaf", 243, 21);
 				myInventory.insertFood(bread, 10);
 				myInventory.insertFood(loaf, 1);
+				System.out.println("PlayerAction.doAction Found " + myInventory.getPotions().size());
 				myself.seeInsideInv();
 				break;
 			default:
@@ -150,12 +153,22 @@ class PlayerAction {
 		}
 	}
 
-	private void fun(Random r) {
-		List<Quest> quests = new ArrayList<>(5);
-		for (Quest quest : quests) {
-			quest = new Quest(myself, r.nextInt(100), r.nextInt(100), "Elwyn Forest");
-			quest.doQuest(quests.size());
-			quests.remove(quests.size());
+	// This function is for fun and will be replaced l8r
+	// TODO: 27/11/2016 Read Quests from somewhere (sql or text or whatever) and kill the mobs there
+	private void fun(Random rnd) {
+		// Quests is a Hashmap that maps quest into questID
+		Hashtable<Quest, Integer> quests = new Hashtable<>();
+		quests.put(new Quest(myself, 30, 90, myself.getArea()), 1);
+		quests.put(new Quest(myself, 80, 90, myself.getArea()), 2);
+		quests.put(new Quest(myself, 50, 50, myself.getArea()), 3);
+		quests.put(new Quest(myself, 20, 10, myself.getArea()), 4);
+		quests.put(new Quest(myself, 80, 10, myself.getArea()), 5);
+		// TODO: 26/11/2016 Create a function that returns array of Quest like this
+		for (Map.Entry<Quest, Integer> quest : quests.entrySet()) {
+			Quest q = quest.getKey();
+//			System.out.println("PlayerAction.doAction Is " + myself.getName() + " around? " + quest.playerIsAround(rnd.nextInt(5)));
+			q.doQuest(quest.getValue());
+			quests.remove(quest.getKey());
 			System.out.println("PlayerAction.fun Have done with quest #" + quests.size());
 		}
 		System.out.println("PlayerAction.fun Have done some quests");
@@ -169,7 +182,7 @@ class PlayerAction {
 			System.out.println("Already have max Health. Can not eat more");
 		} else {
 			// TODO: 26/11/2016 Να παίρνει αντικείμενα από το Player.inventory
-			FoodItem food = new FoodItem("Potato Bread", 61, 18, 0);
+			FoodItem food = new FoodItem("Potato Bread", 61, 18);
 			int foodGain = Math.round(food.getHealthPerTick());
 			for (int i = 0; i < food.getItemTime(); i++) {
 				try {
@@ -193,7 +206,7 @@ class PlayerAction {
 		}
 	}
 
-	private void drink() {
+	private void WeaponEquip() {
 		PlayerInventory myInv = myself.getInventory();
 		// TODO: 26/11/2016 This will work for all players
 		// TODO: 26/11/2016 Wizards can conjure Drinks, all players can drink items
@@ -201,17 +214,19 @@ class PlayerAction {
 		System.out.println("PlayerAction.drink Visit an Inn to the nearest Town or Capital City");
 		System.out.println("PlayerAction.drink I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
 		System.out.println("PlayerAction.drink Inside my Inventory I have");
-		DrinkItem mana = new DrinkItem("Fresh Water", 90, 15);
+		WeaponBonus b = new WeaponBonus(1, 2, 3, 4, 10, 100);
+		ItemQuality i = new ItemQuality(4);
+		Weapon bonus = new Weapon("Weapon Name", "head", b, i);
 		// TODO: 26/11/2016 All bags are unified and we should use the unified inventory
-		Hashtable<Item, Integer> manaDrinks = myInv.getManaBag();
-		manaDrinks.put(mana, 20);
+		Hashtable<Weapon, Integer> manaDrinks = myInv.getWeaponBag();
+		manaDrinks.put(bonus, 20);
 		myself.seeInsideInv();
-		mana.useOne(myself);
+		bonus.equip(myself);
 		System.out.println("PlayerAction.drink I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
 	}
 
 	private int getLastAction() {
-		return lastAction;
+		return this.lastAction;
 	}
 
 	private class PlayerChat extends TimerTask {

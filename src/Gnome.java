@@ -42,6 +42,9 @@ class Gnome {
 	private int setGnomeClass(int gone) {
 		int properClassID = 1;
 		switch (gone) {
+			case 1:
+				properClassID = 1;
+				break;
 			case 2:
 				properClassID = 4;
 				break;
@@ -70,6 +73,6 @@ class Gnome {
 		r.setRaceStamina(19);
 		r.setRaceIntellect(23);
 		r.setRaceSpirit(20);
-		System.out.println("Gnome.setGnomeAttributes " + r.getRaceName(me.getFactionID()));
+		System.out.println("Gnome.setGnomeAttributes " + r.getRaceName(me.getFactionID()) + " attributes have been set");
 	}
 }

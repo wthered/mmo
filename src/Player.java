@@ -10,7 +10,6 @@ class Player implements playerInterface {
 
 	// playerFaction Setup
 	private int FactionID;
-	private String Faction;
 
 	// Player Attributes
 	private String Name;
@@ -55,6 +54,7 @@ class Player implements playerInterface {
 	private int itsSex;
 	private String City;
 	private String Area;
+	private boolean inCity;
 
 	// Experience Handler
 	private int experience;
@@ -103,17 +103,17 @@ class Player implements playerInterface {
 
 		// All the foods that mobs drop are here
 		Hashtable<Item, Integer> foodHashTab = new Hashtable<>();
-		Hashtable<Item, Integer> drinksTabs = new Hashtable<>();
-		Hashtable<Item, Integer> potionHashtable = new Hashtable<>();
+		Hashtable<Weapon, Integer> drinksTabs = new Hashtable<>();
+		Hashtable<Potion, Integer> potionHashtable = new Hashtable<>();
 
 		// TODO: 27/11/2016 if(Player.getProfession() == "Alchemy") { ... }
 		Hashtable<Herb, Integer> herbsHashtable = new Hashtable<>();
 
 		// We define the bags each Player (actually the slots into the inventory) has
 		Bag foods = new Bag("FoodBag", 4, 8, foodHashTab);
-		Bag drinks = new Bag("Drinks", 3, 4, drinksTabs);
-		Bag potion = new Bag("Potions Bag", 4, 3, potionHashtable);
-		Bag herbs = new herbalismBag("Herbalism Bag", 4, 4, herbsHashtable);
+		weaponBag drinks = new weaponBag("Drinks", 3, 4, drinksTabs);
+		potionBag potion = new potionBag("Potions Bag", 4, 3, potionHashtable);
+		herbalismBag herbs = new herbalismBag("Herbalism Bag", 4, 4, herbsHashtable);
 		this.inventory = new PlayerInventory(foods, drinks, potion, herbs);
 //		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
 	}
@@ -195,7 +195,7 @@ class Player implements playerInterface {
 	// Methods inherited from playerInterface
 
 	public void setFactionID(int factionID) {
-		FactionID = factionID;
+		this.FactionID = factionID;
 	}
 
 	// Race ID
@@ -221,26 +221,23 @@ class Player implements playerInterface {
 	@Override
 	public String getFaction() {
 //		System.out.println("Player.getFaction");
+		String faction;
 		switch (FactionID) {
 			case 1:
-				Faction = "Alliance";
+				faction = "Alliance";
 				break;
 			case 2:
-				Faction = "Horde";
+				faction = "Horde";
 				break;
 			default:
-				Faction = "Neutral";
-				System.out.println("Player.getFaction Faction is never " + Faction + "\nSetting to Neutral");
+				faction = "Neutral";
+				System.out.println("Player.getFaction Faction is never " + faction + "\nSetting to Neutral");
 		}
-		return Faction;
-	}
-
-	public void setFaction(String faction) {
-		this.Faction = faction;
+		return faction;
 	}
 
 	private void setFaction(int faction) {
-		FactionID = faction;
+		this.FactionID = faction;
 	}
 
 	// The Game has started and we set the new created Player
@@ -251,12 +248,11 @@ class Player implements playerInterface {
 		System.out.println("*****************");
 		System.out.print("What Faction you want to join? ");
 		Scanner faction = new Scanner(System.in);
-		int selectedFaction = faction.nextInt();
-		this.setFaction(selectedFaction);
+		this.setFaction(faction.nextInt());
 	}
 
 	void selectClass(Race playRace) {
-		Faction f = new Faction(getFactionID());
+		Faction f = new Faction(this.getFactionID());
 
 		// Set the RaceID Properly
 		playRace.setRaceID(this.RaceID);
@@ -434,25 +430,21 @@ class Player implements playerInterface {
 		}
 
 		// Position in Starting City
-		Random pos = new Random();
-		switch (pos.nextInt() % 2) {
-			case 1:
-				this.setPosition("Entrance");
-				break;
-			default:
-				this.setPosition("Auction House");
-				break;
+		if (new Random().nextBoolean()) {
+			this.setPosition("Entrance");
+		} else {
+			this.setPosition("Auction House");
 		}
 		System.out.println("Player.setStartingCity You are a " + this.getRaceName() + " in " + this.getCity() + " of " + this.getArea());
 	}
 
 	void seeInsideInv() {
-		Hashtable<Item, Integer> invFoods = this.inventory.getFoodBag();
-		Hashtable<Item, Integer> invDrink = this.inventory.getManaBag();
+		Hashtable<Item, Integer> invFoods = this.inventory.getItemBag();
+		Hashtable<Weapon, Integer> weapons = this.inventory.getWeaponBag();
 		Hashtable<Potion, Integer> invPotions = this.inventory.getPotions();
 		System.out.println("Player.seeInsideInv Start");
-		inventory.selectFood();
-		inventory.selectMana();
+		inventory.selectItem();
+		inventory.selectWeapon();
 		inventory.selectPots();
 		System.out.println("Player.seeInsideInv *End*");
 	}
@@ -527,5 +519,13 @@ class Player implements playerInterface {
 
 	void setSpirit(int spirit) {
 		this.spirit = spirit;
+	}
+
+	boolean isInCity() {
+		return this.inCity;
+	}
+
+	void setInCity(boolean inCity) {
+		this.inCity = inCity;
 	}
 }

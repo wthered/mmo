@@ -14,8 +14,8 @@ class PlayerClass {
 
 	void ShowAllianceClassesFor(Race racist) {
 //		System.out.println("PlayerClass.ShowAvailableClassesFor " + this.getAllianceClassName());
-		switch (racist.raceID) {
-			case 1:
+        switch (racist.getRaceID()) {
+            case 1:
 				Human h = new Human(this.myself);
 				myself.setClassID(h.selectClass());
 				h.setHumanAttributes(racist);
@@ -42,8 +42,8 @@ class PlayerClass {
 				break;
 			default:
 				myself.setRaceName("defaultRaceName");
-				System.out.println("PlayerClass.ShowAvailableClassesFor never reaches " + racist.raceID);
-				break;
+                System.out.println("PlayerClass.ShowAvailableClassesFor never reaches " + racist.getRaceID());
+                break;
 		}
 //		myself.ClassName = this.getAllianceClassName();
 		System.out.println("PlayerClass.ShowAllianceClassesFor " + myself.getRaceName() + " can be " + this.getAllianceClassName());

@@ -98,7 +98,7 @@ class Main {
 
 					System.out.println(p.getName() + " has " + Main.convertMoney(p.getMoney()) + "! Use them wisely");
 
-					String message = format("Main.main says {0} is {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.getFactionID()), p.getClassName(), p.getFaction(), p.getItsSex());
+					String message = format("Main.main says {0} is level {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.getFactionID()), p.getClassName(), p.getFaction(), p.getItsSex());
 					System.out.println(message);
 
 //					System.out.println("Main.main line 110");
