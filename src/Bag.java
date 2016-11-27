@@ -10,17 +10,18 @@ public class Bag {
     private String Name;
     private int rows;
     private int columns;
-    private Hashtable<Item, Integer> foods;
+    private Hashtable<Item, Integer> items;
+    private Hashtable<Potion, Integer> potions;
 
     Bag(String bagName, int rows, int cols, Hashtable<Item, Integer> hashTableToContain) {
         this.Name = bagName;
         this.rows = rows;
         this.columns = cols;
-        this.foods = hashTableToContain;
+        this.items = hashTableToContain;
     }
 
     public void seeInside() {
-        for (Map.Entry<Item, Integer> container : foods.entrySet()) {
+        for (Map.Entry<Item, Integer> container : items.entrySet()) {
             Item tmpItem = container.getKey();
             System.out.println("Bag.seeInside Inside I see many food Items");
             System.out.println("Bag.seeInside Type " + tmpItem.getItemType() + " you have " + container.getValue() + " foods");
@@ -32,11 +33,11 @@ public class Bag {
         return this.rows * this.columns;
     }
 
-    Hashtable<Item, Integer> getFoods() {
-        return this.foods;
+    Hashtable<Item, Integer> getItems() {
+        return this.items;
     }
 
     public void setFoods(Hashtable<Item, Integer> foods) {
-        this.foods = foods;
+        this.items = foods;
     }
 }
