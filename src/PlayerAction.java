@@ -95,8 +95,8 @@ class PlayerAction {
 				break;
 			case 4:
 				// If I am in a city, there are no Quests to do
-				if (!myself.isInCity()) {
-					this.fun(new Random());
+				if ( !myself.isInCity() ) {
+					this.fun();
 				} else {
 					// I am in the wild, so maybe there are some things I can do near here
 					System.out.println("PlayerAction.doAction You can do Quests only in the wild");
@@ -155,21 +155,24 @@ class PlayerAction {
 
 	// This function is for fun and will be replaced l8r
 	// TODO: 27/11/2016 Read Quests from somewhere (sql or text or whatever) and kill the mobs there
-	private void fun(Random rnd) {
-		// Quests is a Hashmap that maps quest into questID
+	private void fun() {
+		Quest initQuest = new Quest(myself, 0,0, myself.getArea());
 		Hashtable<Quest, Integer> quests = new Hashtable<>();
-		quests.put(new Quest(myself, 30, 90, myself.getArea()), 1);
-		quests.put(new Quest(myself, 80, 90, myself.getArea()), 2);
-		quests.put(new Quest(myself, 50, 50, myself.getArea()), 3);
-		quests.put(new Quest(myself, 20, 10, myself.getArea()), 4);
-		quests.put(new Quest(myself, 80, 10, myself.getArea()), 5);
+
+		for(int i = 1; i < 10; i++) {
+			// Quests is a hashMap that maps quest into questID
+			quests = initQuest.create(i);
+		}
 		// TODO: 26/11/2016 Create a function that returns array of Quest like this
 		for (Map.Entry<Quest, Integer> quest : quests.entrySet()) {
 			Quest q = quest.getKey();
-//			System.out.println("PlayerAction.doAction Is " + myself.getName() + " around? " + quest.playerIsAround(rnd.nextInt(5)));
-			q.doQuest(quest.getValue());
-			quests.remove(quest.getKey());
-			System.out.println("PlayerAction.fun Have done with quest #" + quests.size());
+			if (q.playerIsAround(new Random().nextInt(5))) { q.doQuest(quest.getValue()); }
+			else {
+				String qPost = " or not near (" + q.getCenterX() + "," + q.getCenterY()+")";
+				String qDesc = "PlayerAction.fun " + myself.getName() + " is not in " + q.getArea() + qPost;
+				System.out.println(qDesc);
+			}
+			System.out.println("PlayerAction.fun Have done with quest #" + quest.getValue() + " and now the Hash is size " + quests.size());
 		}
 		System.out.println("PlayerAction.fun Have done some quests");
 	}

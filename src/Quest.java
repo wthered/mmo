@@ -1,17 +1,23 @@
+import java.util.Hashtable;
+import java.util.Objects;
 import java.util.Random;
 
 /**
  * Created by wthered on 21/11/2016.
  * The Package Name is PACKAGE_NAME
  * Feel Free to Edit mmo
+ * https://www.youtube.com/watch?v=uR94mZAWhxs&t=400s
  */
 // TODO: 27/11/2016 On each quest the armour durability gets less. Also mana is consumed
 class Quest {
 	private Player me;
 	private Random reward = new Random();
 
+	// The small area where the quest is done ("Northshire Vineyards")
 	private int centerX;
 	private int centerY;
+
+	// The Large Area ("Elwynn Forest" for example)
 	private String Area;
 
 	Quest(Player myself, int aroundX, int aroundY, String questArea) {
@@ -47,24 +53,28 @@ class Quest {
 	}
 
 	boolean playerIsAround(int radius) {
+		boolean play = Objects.equals(me.getArea(), this.getArea());
 		boolean seex = Math.abs(me.getItsX() - this.centerX) < radius;
 		boolean seey = Math.abs(me.getItsY() - this.centerY) < radius;
-		return seex && seey;
+		return seex && seey && play;
 	}
 
-	public void setCenterX(int centerX) {
-		this.centerX = centerX;
-	}
-
-	public void setCenterY(int centerY) {
-		this.centerY = centerY;
-	}
-
-	public String getArea() {
+	String getArea() {
 		return this.Area;
 	}
 
-	Quest[] create() {
-		return new Quest[4];
+	Hashtable<Quest, Integer> create(int questID) {
+		Quest q = new Quest(me, reward.nextInt(100), reward.nextInt(100), this.getArea());
+		Hashtable<Quest, Integer> qTable = new Hashtable<>();
+		qTable.put(q,questID);
+		return qTable;
+	}
+
+	int getCenterX() {
+		return centerX;
+	}
+
+	int getCenterY() {
+		return centerY;
 	}
 }

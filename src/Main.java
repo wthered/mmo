@@ -7,7 +7,7 @@ import static java.text.MessageFormat.format;
 **	Players have (maybe 2?) Professions
 **	AttackPower
 **	Block / Parry Abilities
-**	Wizards / Warlocks use SpellPower
+**	Wizards / Warlocks / etc use SpellPower
 **	Rogue / Warriors use MeleePower
 **	Some weapons have spellPower (or addSpellPower() ? ), some Melee (maybe some both?)
 **

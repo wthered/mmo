@@ -104,6 +104,7 @@ class Travel {
 		System.out.print("What is your destination, " + me.getName() + "? ");
 		cityScan = new Scanner(System.in);
 		try {
+			System.out.println("Travel.showAllianceCapitals " + me.getPosition());
 			return this.convertAllianceCity(cityScan.nextInt());
 		} catch (InputMismatchException ex) {
 			System.out.println("Travel.showAllianceCapitals Invalid Input\t" + cityScan.nextLine());
