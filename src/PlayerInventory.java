@@ -9,39 +9,39 @@ import java.util.Map;
 class PlayerInventory {
 
     // The Inventory
-    private Hashtable<Item, Integer> foodBag;
-    private Hashtable<Item, Integer> manaBag;
+    private Hashtable<Item, Integer> itemBag;
+    private Hashtable<Weapon, Integer> weaponTable;
     private Hashtable<Potion, Integer> potions;
+    private Hashtable<Herb, Integer> herbalBag;
     private Bag[] bags;
 
-    PlayerInventory(Bag food, Bag mana, Bag pots, Bag herbs) {
-        this.foodBag = food.getFoods();
-        this.manaBag = new Hashtable<>();
-        this.potions = new Hashtable<>();
-        // TODO: 27/11/2016 later. Now you get the idea
-        bags[0] = food;
-        bags[1] = mana;
-        bags[2] = pots;
-        bags[3] = herbs;
+    // TODO: 27/11/2016 Create weaponBag share space with ArmorBag (Στην ίδια και Armour & Weapons)
+    PlayerInventory(Bag food, weaponBag weapons, potionBag pots, herbalismBag herbs) {
+        this.itemBag = food.getItems();
+        this.weaponTable = weapons.getWeaponIntegerHashtable();
+        this.potions = pots.getPotions();
+        this.herbalBag = herbs.getHerbs();
+
+        this.bags = new Bag[]{food, weapons, pots, herbs};
         System.out.println("playerInventory.playerInventory Inventory of Player");
     }
 
     void insertFood(FoodItem f, int quantity) {
-        System.out.println("PlayerInventory.insertFood " + quantity + " item(s) of " + f.getItemType() + " has been put");
-        this.foodBag.put(f, quantity);
+        System.out.println("PlayerInventory.insertFood " + quantity + " item(s) of " + f.getItemName() + " has been put");
+        this.getItemBag().put(f, quantity);
     }
 
-    void selectFood() {
-        for (Map.Entry<Item, Integer> fItem : this.getFoodBag().entrySet()) {
+    void selectItem() {
+        for (Map.Entry<Item, Integer> fItem : this.getItemBag().entrySet()) {
             Item tmpFood = fItem.getKey();
             System.out.println("PlayerInventory.selectFood I have " + fItem.getValue() + " inside Food Bag of " + tmpFood.getItemType());
         }
     }
 
-    void selectMana() {
-        for (Map.Entry<Item, Integer> mItem : this.getManaBag().entrySet()) {
-            Item tmpDrink = mItem.getKey();
-            System.out.println("PlayerInventory.selectMana I have " + mItem.getValue() + " inside Mana Bag of " + tmpDrink.getWater());
+    void selectWeapon() {
+        for (Map.Entry<Weapon, Integer> mItem : this.getWeaponBag().entrySet()) {
+            Weapon theWeapon = mItem.getKey();
+            System.out.println("PlayerInventory.selectWeapon I have " + mItem.getValue() + " weapons in my WeaponBag");
         }
     }
 
@@ -53,11 +53,6 @@ class PlayerInventory {
         }
     }
 
-    public void insertMana(DrinkItem d, int q) {
-        this.manaBag.put(d, q);
-        System.out.println("PlayerInventory.insertMana" + q + " item(s) of " + d.getWater() + " has been put");
-    }
-
     public void insertPotion(Potion p, int q) {
         this.potions.put(p,q);
         System.out.println("PlayerInventory.insertPotion " + q + " items of " + p.getName() + " has been put");
@@ -65,22 +60,33 @@ class PlayerInventory {
 
     // Checks if Player Inventory is full
     public boolean isFull() {
-        boolean foodFull = foodBag.size() == bags[0].getDimensions();
-        boolean manaFull = manaBag.size() == bags[1].getDimensions();
+        boolean foodFull = itemBag.size() == bags[0].getDimensions();
+        boolean armories = weaponTable.size() == bags[1].getDimensions();
         boolean potsFull = potions.size() == bags[2].getDimensions();
         boolean herbFull = potions.size() == bags[3].getDimensions();
-        return foodFull && manaFull && potsFull && herbFull;
+        return foodFull && armories && potsFull && herbFull;
     }
 
-    Hashtable<Item, Integer> getFoodBag() {
-        return this.foodBag;
+    Hashtable<Item, Integer> getItemBag() {
+        // TODO: 27/11/2016 Show all Items
+        return this.itemBag;
     }
 
-    Hashtable<Item, Integer> getManaBag() {
-        return this.manaBag;
+    Hashtable<Weapon, Integer> getWeaponBag() {
+        // TODO: 27/11/2016 show all milk
+        return this.weaponTable;
     }
 
     Hashtable<Potion, Integer> getPotions() {
+        // TODO: 27/11/2016 Show All Potions
         return this.potions;
+    }
+
+    public Hashtable<Herb, Integer> getHerbalBag() {
+        return herbalBag;
+    }
+
+    public void setHerbalBag(Hashtable<Herb, Integer> herbalBag) {
+        this.herbalBag = herbalBag;
     }
 }

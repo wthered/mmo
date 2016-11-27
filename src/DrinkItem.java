@@ -32,7 +32,7 @@ class DrinkItem extends Item {
     }
 
 	Hashtable createWaterBottle(Player mage, int amount, boolean isMage) {
-        Hashtable<Item, Integer> created = mage.getInventory().getManaBag();
+        Hashtable<Item, Integer> created = mage.getInventory().getItemBag();
         if (isMage) {
             for (int i = 0; i < amount; i++) {
                 DrinkItem drink = new DrinkItem("Conjured Water", 120, 30);
@@ -52,7 +52,7 @@ class DrinkItem extends Item {
 		int manaGained = 10 + manaGain.nextInt(20);
 
 		m.setItsMana(m.getItsMana() + manaGained);
-        Hashtable<Item, Integer> manaBag = m.getInventory().getManaBag();
+        Hashtable<Item, Integer> manaBag = m.getInventory().getItemBag();
 
         System.out.println("DrinkItem.useOne Removing the " + manaBag.size() + "th item of the Bag from the Inventory of " + m.getName());
         // TODO: 26/11/2016 Implement the consuming function { manaBag.remove( Object o); }
@@ -73,5 +73,9 @@ class DrinkItem extends Item {
     // The mana above is given into these clock Ticks (5 seconds until changed)
     public int getOver() {
         return this.over;
+    }
+
+    public void setWater(String water) {
+        this.water = water;
     }
 }

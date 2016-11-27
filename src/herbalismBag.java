@@ -17,7 +17,7 @@ public class herbalismBag extends Bag {
     }
 
     public String getHerbsBagName() {
-        return herbsBagName;
+        return this.herbsBagName;
     }
 
     public void setHerbsBagName(String herbsBagName) {
@@ -25,7 +25,7 @@ public class herbalismBag extends Bag {
     }
 
     public int getHerbRows() {
-        return herbRows;
+        return this.herbRows;
     }
 
     public void setHerbRows(int herbRows) {
@@ -33,15 +33,15 @@ public class herbalismBag extends Bag {
     }
 
     public int getHerbColumns() {
-        return herbColumns;
+        return this.herbColumns;
     }
 
     public void setHerbColumns(int herbColumns) {
         this.herbColumns = herbColumns;
     }
 
-    public Hashtable<Herb, Integer> getHerbs() {
-        return herbs;
+    Hashtable<Herb, Integer> getHerbs() {
+        return this.herbs;
     }
 
     public void setHerbs(Hashtable<Herb, Integer> herbs) {
