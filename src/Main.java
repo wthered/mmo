@@ -153,12 +153,11 @@ class Main {
 	}
 
 	private static boolean auth(String username, String password) {
-		Random suck = new Random();
-		Boolean success;
 		System.out.println("Username\t" + username);
 		System.out.println("Password\t" + password);
 		httpAuth auth = new httpAuth();
-		success = suck.nextBoolean() && auth.send(username, password);
+//		boolean success = new Random().nextBoolean();
+		boolean success = auth.send(username, password);
 		System.out.println("Server Authentication in Main.auth is " + success);
 		return success;
 	}

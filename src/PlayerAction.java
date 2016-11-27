@@ -161,13 +161,16 @@ class PlayerAction {
 
 		for(int i = 1; i < 10; i++) {
 			// Quests is a hashMap that maps quest into questID
-			quests = initQuest.create(i);
+			Quest lorem = new Quest(myself, 10*i, 10*i, myself.getArea());
+			quests = initQuest.create(lorem, i);
 		}
 		// TODO: 26/11/2016 Create a function that returns array of Quest like this
 		for (Map.Entry<Quest, Integer> quest : quests.entrySet()) {
 			Quest q = quest.getKey();
-			if (q.playerIsAround(new Random().nextInt(5))) { q.doQuest(quest.getValue()); }
-			else {
+			if (q.playerIsAround(new Random().nextInt(5))) {
+				System.out.println("PlayerAction.fun The quest #" + quest.getValue() + " is done");
+				q.doQuest(quest.getValue());
+			} else {
 				String qPost = " or not near (" + q.getCenterX() + "," + q.getCenterY()+")";
 				String qDesc = "PlayerAction.fun " + myself.getName() + " is not in " + q.getArea() + qPost;
 				System.out.println(qDesc);
