@@ -29,7 +29,7 @@ class FoodItem extends Item {
 	Hashtable conjure(Player wizard, int howMany) {
 		Hashtable<Item, Integer> bread = wizard.getInventory().getItemBag();
 		for (int i = 1; i <= howMany; i++) {
-			Item tempLoaf = new Item("Apple Muffin", 0, 61, 0);
+			Item tempLoaf = new Item(this.getItemName(), 0, 61, 0);
 			FoodItem realLoaf = new FoodItem(tempLoaf, 18);
 			bread.put(realLoaf, i);
 		}

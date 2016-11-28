@@ -88,6 +88,8 @@ class PlayerAction {
 			case 3:
 				// Looking to find another player (through http) for " + myself.getName() + " in PlayerAction.doAction;
 				System.out.println("PlayerAction.doAction Line 96 I am a " + myself.getClassName());
+				FoodItem food = new FoodItem("Conjured Apple Pie", 36,18,1);
+				food.conjure(myself, 20);
 				break;
 			case 4:
 				// If I am in a city, there are no Quests to do

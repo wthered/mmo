@@ -1,6 +1,7 @@
 import java.util.Hashtable;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wthered on 12/11/2016 3:23 μμ
@@ -386,8 +387,16 @@ class Player implements playerInterface {
 		this.maxMana = maxMana;
 	}
 
-	void travel(int newX, int newY) {
+	void travel(int newX, int newY) throws InterruptedException {
 		System.out.println("Player.travel Travelling from (" + this.getItsX() + "," + this.getItsY() + ") to (" + newX + ", " + newY + ")");
+		for(int x = this.getItsX(); x < newX; x++) {
+			TimeUnit.SECONDS.wait(5);
+			for (int y = 0; y < newY; y++) {
+				TimeUnit.SECONDS.wait(5);
+				this.setItsY(y);
+			}
+			this.setItsX(x);
+		}
 		this.setItsX(newX);
 		this.setItsY(newY);
 		System.out.println("Player.travel " + this.getName() + " is at (" + this.getItsX() + "," + this.getItsY() + ")");

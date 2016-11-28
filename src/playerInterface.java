@@ -20,7 +20,7 @@ interface playerInterface {
 	}
 
 	default void showExperience() {
-//		System.out.println("playerInterface.showExperience I have " + Player.experience + " experience");
+		System.out.println("playerInterface.showExperience I have some experience in this game");
 	}
 
 	default void putInventory(Player p, Item i ) {

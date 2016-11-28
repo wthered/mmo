@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class Wizard extends Player {
 
-	private Player me;
+	private static Player me;
 
 	Wizard(String newName, int newLevel, int FactionID, Race playRace, int classID) {
 		super(newName, newLevel, FactionID, playRace, classID);
