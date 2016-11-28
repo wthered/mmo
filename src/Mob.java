@@ -11,6 +11,11 @@ public class Mob {
 	private String mobType;
 	private Player target;
 
+	// Self Explanatory Variables
+	private int itsX;
+	private int itsY;
+	private double LineOfSight;
+
 	public Mob(String mobName, int mobHealth, int mobMana, String mobType) {
 		System.out.println("Mob.Mob You found a " + mobType + " named " + mobName);
 	}
@@ -55,5 +60,35 @@ public class Mob {
 	// Maybe later
 	public void setMobType(String mobType) {
 		this.mobType = mobType;
+	}
+
+    double getItsX() {
+		return 0;
+	}
+
+	double getItsY() {
+		return itsY;
+	}
+
+	public Player getTarget() {
+		return target;
+	}
+
+	public void setTarget(Player target) {
+		this.target = target;
+	}
+
+	public void setItsX(int itsX) {
+		this.itsX = itsX;
+	}
+
+	double getLineOfSight() {
+		return this.LineOfSight;
+	}
+
+	// How many squares the mob is seeing around him
+	// 1 means that it sees the 8 squares around him
+	void setLineOfSight(double lineOfSight) {
+		this.LineOfSight = lineOfSight;
 	}
 }

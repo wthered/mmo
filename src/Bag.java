@@ -40,4 +40,20 @@ public class Bag {
     public void setFoods(Hashtable<Item, Integer> foods) {
         this.items = foods;
     }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setItems(Hashtable<Item, Integer> items) {
+        this.items = items;
+    }
+
+    Hashtable<Potion, Integer> getPotions() {
+        return this.potions;
+    }
+
+    public void setPotions(Hashtable<Potion, Integer> potions) {
+        this.potions = potions;
+    }
 }

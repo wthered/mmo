@@ -17,9 +17,9 @@ public class Herb {
         return herbName;
     }
 
-//    public void setHerbName(String herbName) {
-//        this.herbName = herbName;
-//    }
+    public void setHerbName(String herbName) {
+        this.herbName = herbName;
+    }
 
     public boolean isCollected() {
         return this.collected;

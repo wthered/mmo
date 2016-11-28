@@ -23,6 +23,14 @@ class PlayerInventory {
         this.herbalBag = herbs.getHerbs();
 
         this.bags = new Bag[]{food, weapons, pots, herbs};
+
+//        this.initialize();
+        Item newItem = new Item("Item Name", 1, 50, 60);
+        food.getItems().put(newItem, 1);
+
+//        Potion potion= new Potion("Minor Rejuvenation Potion", 40, 0);
+//        pots.getPotions().put(potion, 15);
+
         System.out.println("playerInventory.playerInventory Inventory of Player");
     }
 
@@ -39,10 +47,13 @@ class PlayerInventory {
     }
 
     void selectWeapon() {
-        for (Map.Entry<Weapon, Integer> mItem : this.getWeaponBag().entrySet()) {
+        int weaponCounter = 0;
+        for (Map.Entry<Weapon, Integer> mItem : this.getWeapons().entrySet()) {
             Weapon theWeapon = mItem.getKey();
-            System.out.println("PlayerInventory.selectWeapon I have " + mItem.getValue() + " weapons in my WeaponBag");
+            System.out.println("PlayerInventory.selectWeapon I have " + mItem.getValue() + " " + theWeapon.getWeaponName() + " weapons found");
+            weaponCounter += mItem.getValue();
         }
+        System.out.println("PlayerInventory.selectWeapon I have " + weaponCounter + " weapons in " + this.getWeapons().size() + " slots");
     }
 
     // See all the Potions I have
@@ -53,13 +64,14 @@ class PlayerInventory {
         }
     }
 
-    public void insertPotion(Potion p, int q) {
-        this.potions.put(p,q);
+    void insertPotion(Potion p, int q) {
+//        this.getPotions().put(p, q);
+//        System.out.println("PlayerInventory.insertPotion I now have " + this.getPotions().size() + " potions");
         System.out.println("PlayerInventory.insertPotion " + q + " items of " + p.getName() + " has been put");
     }
 
     // Checks if Player Inventory is full
-    public boolean isFull() {
+    boolean isFull() {
         boolean foodFull = itemBag.size() == bags[0].getDimensions();
         boolean armories = weaponTable.size() == bags[1].getDimensions();
         boolean potsFull = potions.size() == bags[2].getDimensions();
@@ -72,7 +84,7 @@ class PlayerInventory {
         return this.itemBag;
     }
 
-    Hashtable<Weapon, Integer> getWeaponBag() {
+    Hashtable<Weapon, Integer> getWeapons() {
         // TODO: 27/11/2016 show all milk
         return this.weaponTable;
     }
@@ -88,5 +100,25 @@ class PlayerInventory {
 
     public void setHerbalBag(Hashtable<Herb, Integer> herbalBag) {
         this.herbalBag = herbalBag;
+    }
+
+    public Hashtable<Weapon, Integer> getWeaponTable() {
+        return this.weaponTable;
+    }
+
+    // Used by playerInventory.playerInventory and only by playerInventory.playerInventory
+    private void initialize() {
+        Item i = new Item("Smashing Pumpkin", 1,61,0);
+        Item j = new Item("Tiny Glass of Milk", 1,0,100);
+        Potion k=new Potion("minor Healing potion", 75, 1);
+
+        WeaponBonus wb = new WeaponBonus(10,10,50,40,30, 10);
+        ItemQuality iq = new ItemQuality(0);
+        Weapon z    = new Weapon("Tiny Sword", "Hand", wb, iq);
+
+        this.getItemBag().putIfAbsent(i,1);
+        this.getItemBag().putIfAbsent(j,2);
+        this.getPotions().putIfAbsent(k,3);
+        this.getWeapons().putIfAbsent(z,4);
     }
 }

@@ -1,3 +1,5 @@
+import java.util.Hashtable;
+
 /**
  * Created by wthered on 24/11/2016.
  * The Package name is ${PACKAGE_NAME}
@@ -5,25 +7,31 @@
  */
 class FoodItem extends Item {
 
-	private String itemName;
 	private int itemHealth;
 	private int itemTime;
+	private int overTime;
 
 	// http://wowwiki.wikia.com/wiki/Conjure_Food
-	FoodItem(String foodName, int health, int overTime) {
+	FoodItem(String foodName, int health, int overTime, int minItemLevel) {
 		super(foodName, 0, 0, 0);
 		System.out.println("FoodItem.FoodItem A pack of 20 " + foodName + " that restores " + health + " over " + overTime + " clock ticks");
-		this.itemName = foodName;
 		this.itemHealth = health;
 		this.itemTime = overTime;
 	}
 
+	private FoodItem(Item food, int overTime) {
+		super(food.getItemName(), food.getItemType(), food.getHealth(), food.getWater());
+		this.setOverTime(overTime);
+	}
+
 	// Used by Wizard.conjureFood
-	double[] conjure(int howMany) {
-		double[] bread = new double[howMany];
-		for (int i = 0; i < howMany; i++) {
-			// todo bread[i] = new FoodItem("Bread Name", 3000, 15, "Bread");
-			bread[i] = Math.pow(i, 3);
+	// TODO: 28/11/2016 implement the minimum minPlayerLevel
+	Hashtable conjure(Player wizard, int howMany) {
+		Hashtable<Item, Integer> bread = wizard.getInventory().getItemBag();
+		for (int i = 1; i <= howMany; i++) {
+			Item tempLoaf = new Item("Apple Muffin", 0, 61, 0);
+			FoodItem realLoaf = new FoodItem(tempLoaf, 18);
+			bread.put(realLoaf, i);
 		}
 		return bread;
 	}
@@ -38,11 +46,16 @@ class FoodItem extends Item {
 		return this.itemHealth;
 	}
 
+	// How many seconds does it take to eat the foodItem
 	int getItemTime() {
 		return this.itemTime;
 	}
 
-//	public int getItemType() {
-//		return this.itemType;
-//	}
+	public int getOverTime() {
+		return this.overTime;
+	}
+
+	private void setOverTime(int overTime) {
+		this.overTime = overTime;
+	}
 }

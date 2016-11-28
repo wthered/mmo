@@ -311,6 +311,31 @@ class Player implements playerInterface {
 		this.itsSex = newSex;
 	}
 
+	// TODO: 28/11/2016 Look around this.getPosition() και αν βρεις τέρατα μετρησέ τα και πες μου πόσα είναι
+	public int lookAround(Mob ogre, int areaSize) {
+		int mobsAround = 0;
+		double distance;
+//		double doubleX = this.itsX;
+//		double doubleY = this.itsY;
+
+		// Area size is what we call radius is that other function
+		ogre.setLineOfSight( Math.sqrt( 2 * Math.pow(  areaSize, 2) ) );
+
+		for (int i = 0; i < areaSize; i++) {
+			for (int j = 0; j < areaSize; j++) {
+				distance = Math.sqrt( Math.pow(this.getItsX() - ogre.getItsX(), 2) + Math.pow(this.getItsY() - ogre.getItsY(), 2) );
+
+				// If the mob is in one of the 8 neighboring squares, the mob is near the Player and should Attack him
+				if(distance > Math.sqrt(ogre.getLineOfSight())) {
+					System.out.println("Player.lookAround Mob Found in (" + i + "," + j + ")");
+					System.out.println("Player.lookAround You are at (" + this.getItsX() + "," + this.getItsY() + ")");
+					mobsAround++;
+				}
+			}
+		}
+		return mobsAround;
+	}
+
 	String getPosition() {
 		return this.Position;
 	}
@@ -440,7 +465,7 @@ class Player implements playerInterface {
 
 	void seeInsideInv() {
 		Hashtable<Item, Integer> invFoods = this.inventory.getItemBag();
-		Hashtable<Weapon, Integer> weapons = this.inventory.getWeaponBag();
+		Hashtable<Weapon, Integer> weapons = this.inventory.getWeapons();
 		Hashtable<Potion, Integer> invPotions = this.inventory.getPotions();
 		System.out.println("Player.seeInsideInv Start");
 		inventory.selectItem();
@@ -465,7 +490,7 @@ class Player implements playerInterface {
 		this.itsSex = itsSex;
 	}
 
-	public Race getPlayerRace() {
+	Race getPlayerRace() {
 		return this.playerRace;
 	}
 

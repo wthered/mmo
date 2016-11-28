@@ -80,18 +80,14 @@ class PlayerAction {
 				break;
 			case 1:
 				this.eat();
+				this.drink();
 				break;
 			case 2:
 				this.WeaponEquip();
 				break;
 			case 3:
-				// Looking to find another player (thru http) for " + myself.getName() + " in PlayerAction.doAction;
-				Timer timer = new Timer();
-				timer.schedule(new PlayerChat(this.lastAction), 0, 5000);
-				if (this.getLastAction() == 0) {
-					timer.cancel();
-					timer.purge();
-				}
+				// Looking to find another player (through http) for " + myself.getName() + " in PlayerAction.doAction;
+				System.out.println("PlayerAction.doAction Line 96 I am a " + myself.getClassName());
 				break;
 			case 4:
 				// If I am in a city, there are no Quests to do
@@ -127,7 +123,12 @@ class PlayerAction {
 				System.out.println("PlayerAction.doAction " + myself.getPosition() + " (" + myself.getItsX() + "," + myself.getItsY() + ")");
 				break;
 			case 7:
-				myself.travel(1 + place.nextInt(100), 1 + place.nextInt(100));
+//				myself.travel( place.nextInt(100), place.nextInt(100));
+//				TimeUnit.SECONDS.wait(5);
+				int position = 50;
+				if(place.nextBoolean()) { position += 1; }
+				else { position -=1; }
+				myself.travel(position,position);
 				myself.setInCity(false);
 				break;
 			case 8:
@@ -138,19 +139,24 @@ class PlayerAction {
 			case 9:
 				PlayerInventory myInventory = myself.getInventory();
 				System.out.println("PlayerAction.doAction Looking into my Inventory");
-
-				FoodItem bread = new FoodItem("Minor Healing Bread", 61, 18);
-				FoodItem loaf = new FoodItem("Major Healing Loaf", 243, 21);
-				myInventory.insertFood(bread, 10);
-				myInventory.insertFood(loaf, 1);
-				System.out.println("PlayerAction.doAction Found " + myInventory.getPotions().size());
 				myself.seeInsideInv();
+				if(myInventory.isFull()) {
+					System.out.println("PlayerAction.doAction Your Inventory is Full");
+				}
 				break;
 			default:
 				String reason = "Not implemented yet in PlayerAction.doAction for " + this.getLastAction();
 				InterruptedException ex = new InterruptedException(reason);
 				ex.printStackTrace();
 		}
+	}
+
+	private void drink() {
+		/* ************** Algorithm **************
+		** Look Into the Inventory				**
+		** IF i have a DrinkItem, consume it	**
+		*****************************************/
+		System.out.println("PlayerAction.drink Called for " + myself.getName());
 	}
 
 	// This function is for fun and will be replaced l8r
@@ -170,11 +176,11 @@ class PlayerAction {
 				System.out.println("PlayerAction.fun The quest #" + quest.getValue() + " is done");
 				q.doQuest(quest.getValue());
 			} else {
-				String qPost = " or not near (" + q.getCenterX() + "," + q.getCenterY()+")";
+				String qPost = " or not near (" + q.getCenterX() + "," + q.getCenterY() + ")";
 				String qDesc = "PlayerAction.fun " + myself.getName() + " is not in " + q.getArea() + qPost;
 				System.out.println(qDesc);
 			}
-			System.out.println("PlayerAction.fun Have done with quest #" + quest.getValue() + " and now the Hash is size " + quests.size());
+			System.out.println("PlayerAction.fun Have done quest #" + quest.getValue() + " and now the Hash is size " + quests.size());
 		}
 		System.out.println("PlayerAction.fun Have done some quests");
 	}
@@ -187,7 +193,7 @@ class PlayerAction {
 			System.out.println("Already have max Health. Can not eat more");
 		} else {
 			// TODO: 26/11/2016 Να παίρνει αντικείμενα από το Player.inventory
-			FoodItem food = new FoodItem("Potato Bread", 61, 18);
+			FoodItem food = new FoodItem("Potato Bread", 61, 18, myself.getLevel());
 			int foodGain = Math.round(food.getHealthPerTick());
 			for (int i = 0; i < food.getItemTime(); i++) {
 				try {
@@ -195,6 +201,7 @@ class PlayerAction {
 					Date date = new Date();
 					if(myself.getMaxHealth() > myself.getItsHealth()) {
 						myself.setItsHealth(myself.getItsHealth() + foodGain);
+						System.out.println("PlayerAction.eat Eating a " + food.getItemName());
 						System.out.println("PlayerAction.eat Gained " + foodGain + " health points on time " + dateFormat.format(date));
 					} else {
 						System.out.println("PlayerAction.eat You have max health (" + myself.getItsHealth() + ") and feeling well");
@@ -223,8 +230,8 @@ class PlayerAction {
 		ItemQuality i = new ItemQuality(4);
 		Weapon bonus = new Weapon("Weapon Name", "head", b, i);
 		// TODO: 26/11/2016 All bags are unified and we should use the unified inventory
-		Hashtable<Weapon, Integer> manaDrinks = myInv.getWeaponBag();
-		manaDrinks.put(bonus, 20);
+		Hashtable<Weapon, Integer> weapons = myInv.getWeapons();
+		weapons.put(bonus, 20);
 		myself.seeInsideInv();
 		bonus.equip(myself);
 		System.out.println("PlayerAction.drink I currently have " + myself.getItsMana() + " / " + myself.getMaxMana() + " Mana Points");
@@ -232,6 +239,17 @@ class PlayerAction {
 
 	private int getLastAction() {
 		return this.lastAction;
+	}
+
+	// This is never used (as you can see)
+	// If and when will be used, it created a deadom that runs every 5 sex
+	private void runDaemon() {
+		Timer timer = new Timer();
+		timer.schedule(new PlayerChat(this.lastAction), 0, 5000);
+		if (this.getLastAction() == 0) {
+			timer.cancel();
+			timer.purge();
+		}
 	}
 
 	private class PlayerChat extends TimerTask {

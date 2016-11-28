@@ -6,31 +6,31 @@ import java.util.Random;
  * The Package name is ${PACKAGE_NAME}
  * The Project name is mmo
  */
-public class Wizard {
+public class Wizard extends Player {
 
-	private Player w;
+	private Player me;
 
-	Wizard(Player mage) {
-		this.w = mage;
+	Wizard(String newName, int newLevel, int FactionID, Race playRace, int classID) {
+		super(newName, newLevel, FactionID, playRace, classID);
 	}
 
 	public void blink() {
 		System.out.println("Wizard.blink The Wizard has blinked");
-		w.setItsX(w.getItsX() + 10);
-		w.setItsY(w.getItsY() + 10);
+		me.setItsX(me.getItsX() + 10);
+		me.setItsY(me.getItsY() + 10);
 		//todo Cooldown 5 seconds
 	}
 
-	public double[] conjureFood() {
+	public Hashtable conjureFood() {
 		Random foodStack = new Random();
-		FoodItem conjuredBread = new FoodItem("ConjuredBread", 16, 18);
-		double[] food = conjuredBread.conjure(foodStack.nextInt());
+		FoodItem conjuredBread = new FoodItem("ConjuredBread", 16, 18, me.getLevel());
+		Hashtable food = conjuredBread.conjure(me, foodStack.nextInt(20));
 		System.out.println("Wizard.conjureFood The new Bread has been put inside Inventory");
 		return food;
 	}
 
 	public Hashtable conjureMana() {
-		DrinkItem conjuredDrink = new DrinkItem("Conjured Water", 150, 18);
-		return conjuredDrink.createWaterBottle(w, new Random().nextInt(20), new Random().nextBoolean());
+		DrinkItem conjuredDrink = new DrinkItem("Conjured Water", 150, 18, true);
+		return conjuredDrink.createWaterBottle(me, new Random().nextInt(20) );
 	}
 }

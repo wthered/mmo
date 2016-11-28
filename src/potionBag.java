@@ -46,10 +46,6 @@ public class potionBag extends Bag {
         this.thirsty = thirsty;
     }
 
-    Hashtable<Potion, Integer> getPotions() {
-        return this.potions;
-    }
-
     public void setPotions(Hashtable<Potion, Integer> potions) {
         this.potions = potions;
     }

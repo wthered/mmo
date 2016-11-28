@@ -25,7 +25,7 @@ class Item {
         this.itemType = Type;
         this.health = healGain;
         this.thirst = manaGain;
-        System.out.println("Item.Item Constructor for " + this.getItemName() + " of type " + this.getItemType());
+        System.out.println("Item.Item Constructor for " + this.getItemName() + " of type " + this.getItemTypeName());
     }
 
     int getItemType() {
@@ -33,17 +33,40 @@ class Item {
     }
 
     String getItemName() {
-        return itemName;
+        return this.itemName;
     }
 
     int getWater() {
         return this.thirst;
     }
 
-    public int getFood(FoodItem f) {
+    int getFoodFromItem(FoodItem f) {
         if (this.getItemType() == 1) {
             return f.getItemHealth();
         }
         return 0;
+    }
+
+    int getHealth() {
+        return health;
+    }
+
+    private String getItemTypeName() {
+        String typeName;
+        switch (this.getItemType()) {
+            case 0:
+                typeName = "Food";
+                break;
+            case 1:
+                typeName = "Drink";
+                break;
+            case 2:
+                typeName = "Both";
+                break;
+            default:
+                typeName = "Unknown";
+                break;
+        }
+        return typeName;
     }
 }
