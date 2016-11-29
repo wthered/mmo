@@ -23,8 +23,8 @@ class PlayerAction {
 	int selectAction() {
 		int thisAction = 0;
 		System.out.println("**********************************************");
-		System.out.println("** 1) Eat									**");
-		System.out.println("** 2) Drink									**");
+		System.out.println("** 1) Eat and Drink until Full				**");
+		System.out.println("** 2) Equip one / all Weapons				**");
 		System.out.println("** 3) Create Food / Water Items 			**");
 		System.out.println("** 4) Quest									**");
 		System.out.println("** 5) Sleep for 5 seconds until reach City	**");

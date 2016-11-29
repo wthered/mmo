@@ -46,7 +46,7 @@ class Human extends Race {
 	void setHumanAttributes(Race human) {
 		switch (myself.getClassID()) {
 			case 1:
-				// ToDo what the general ClassID for Wizard?
+				// TODO: 29/11/2016 what the general ClassID for Wizard?
 				myself.setClassID(1);
 				this.setHumanClass("Mage");
 				human.setRaceIntellect(23);

@@ -7,23 +7,25 @@ import java.util.Scanner;
  */
 class userAuth {
 
-	private final ThreadLocal<String> name;
+	private String username;
 
 	userAuth(String username) {
-		name = new ThreadLocal<>();
-		this.name.set(username);
+		this.username = username;
 	}
 
 	boolean validateName() {
-		String name = this.name.get();
 		Boolean valid = false;
-		if (name.matches("^[a-zA-Z]{1,}")) { valid = true; }
+		if (this.username.matches("^[a-zA-Z]+")) { valid = true; }
 		return valid;
 	}
 
-	void getNewName(Scanner userScan) {
+	String getUserName(Scanner userScan) {
 		System.out.println("invalid Username! redo from start");
 		System.out.print("What is you username? ");
-		this.name.set(userScan.nextLine());
+		return this.username;
+	}
+
+	void setUsername(String username) {
+		this.username = username;
 	}
 }

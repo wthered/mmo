@@ -42,7 +42,8 @@ class Main {
 		** While username not contains numbers
 		*/
 		while( !usr.validateName() ) {
-			usr.getNewName(userScan);
+			username = usr.getUserName(userScan);
+			usr.setUsername(username);
 		}
 
 		System.out.print("What is your password? ");
