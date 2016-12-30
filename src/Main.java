@@ -64,14 +64,14 @@ class Main {
 			switch (action) {
 				case 1:
 					System.out.println("You will create a new Player");
-					Race r = new Race();
-					Player p = createNewPlayer(r);
+					Race playerRace = new Race();
+					Player p = createNewPlayer(playerRace);
 
 					// Init these vars or reset Project
-					r.setRaceID(p.getRaceID());
+					playerRace.setRaceID(p.getRaceID());
 
 					// Setting PlayerName
-					System.out.printf("What is your name " + r.getRaceName(p.getFactionID()) + "? ");
+					System.out.printf("What is your name " + playerRace.getRaceName(p.getFactionID()) + "? ");
 
 					Scanner playerInfo = new Scanner(System.in);
 					String playerName = playerInfo.nextLine();
@@ -99,13 +99,13 @@ class Main {
 
 					System.out.println(p.getName() + " has " + Main.convertMoney(p.getMoney()) + "! Use them wisely");
 
-					String message = format("Main.main says {0} is level {4} {1} {2} from {3}", p.getName(), r.getRaceName(p.getFactionID()), p.getClassName(), p.getFaction(), p.getItsSex());
+					String message = format("Main.main says {0} is level {4} {1} {2} from {3}", p.getName(), playerRace.getRaceName(p.getFactionID()), p.getClassName(), p.getFaction(), p.getItsSex());
 					System.out.println(message);
 
 //					System.out.println("Main.main line 110");
 					p.setStartingCity();
 					System.out.println("You are ready to quest " + p.getName());
-					PlayerAction a = new PlayerAction(p, r);
+					PlayerAction a = new PlayerAction(p, playerRace);
 
 					// Select What to do and do it
 					int lastPlayerAction = a.selectAction();
@@ -144,8 +144,9 @@ class Main {
 	}
 
 	private static Player createNewPlayer(Race r) {
-		Random rnd = new Random();
-		Player p = new Player("Anonymous", 1, 1 + rnd.nextInt(3), r, 1 + rnd.nextInt(3));
+//		Random rnd = new Random();
+//		Player p = new Player("Anonymous", 1, 1 + rnd.nextInt(3), r, 1 + rnd.nextInt(3));
+		Player p = new Player("Anonymous",1,1, new Race(),2);
 
 		p.selectFaction();
 		p.selectRace();

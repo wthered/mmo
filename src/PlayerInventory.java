@@ -22,7 +22,10 @@ class PlayerInventory {
 		this.potions = pots.getPotions();
 		this.herbalBag = herbs.getHerbs();
 
-		this.bags = new Bag[]{food, weapons, pots, herbs};
+		for (Bag newBag : this.bags = new Bag[]{food, weapons, pots, herbs}) {
+			newBag.setFoods(itemBag);
+			newBag.setPotions(potions);
+		}
 
 		this.initialize();
 		Item newItem = new Item("Item Name", 1, 50, 60);
@@ -39,7 +42,7 @@ class PlayerInventory {
 	void selectItem() {
 		for (Map.Entry<Item, Integer> fItem : this.getItemBag().entrySet()) {
 			Item tmpFood = fItem.getKey();
-			System.out.println("PlayerInventory.selectFood I have " + fItem.getValue() + " inside Food Bag of " + tmpFood.getItemType());
+			System.out.println("PlayerInventory.selectItem I have " + fItem.getValue() + " item(s) inside Food Bag of name " + tmpFood.getItemName());
 		}
 	}
 
@@ -86,18 +89,18 @@ class PlayerInventory {
 		return this.weaponTable;
 	}
 
-	Hashtable<Potion, Integer> getPotions() {
+	private Hashtable<Potion, Integer> getPotions() {
 		// TODO: 27/11/2016 Show All Potions
 		return this.potions;
 	}
 
-	public Hashtable<Herb, Integer> getHerbalBag() {
-		return herbalBag;
-	}
+//	public Hashtable<Herb, Integer> getHerbalBag() {
+//		return herbalBag;
+//	}
 
-	public void setHerbalBag(Hashtable<Herb, Integer> herbalBag) {
-		this.herbalBag = herbalBag;
-	}
+//	public void setHerbalBag(Hashtable<Herb, Integer> herbalBag) {
+//		this.herbalBag = herbalBag;
+//	}
 
 	public Hashtable<Weapon, Integer> getWeaponTable() {
 		return this.weaponTable;
@@ -112,12 +115,12 @@ class PlayerInventory {
 
 		WeaponBonus wb = new WeaponBonus(10,10,50,40,30, 10);
 		ItemQuality iq = new ItemQuality(0);
-		Weapon z    = new Weapon("Tiny Sword", "Hand", wb, iq);
+		Weapon z = new Weapon("Tiny Sword", "Hand", wb, iq);
 
-		this.getItemBag().putIfAbsent(i,1);
-		this.getItemBag().putIfAbsent(j,2);
-		this.getPotions().putIfAbsent(k,3);
-		this.getPotions().putIfAbsent(p,5);
-		this.getWeapons().putIfAbsent(z,4);
+//		this.getItemBag().putIfAbsent(i,1);
+//		this.getItemBag().putIfAbsent(j,2);
+//		this.getPotions().putIfAbsent(k,3);
+//		this.getPotions().putIfAbsent(p,5);
+//		this.getWeapons().putIfAbsent(z,4);
 	}
 }

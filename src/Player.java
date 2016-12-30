@@ -108,13 +108,13 @@ class Player implements playerInterface {
 		Hashtable<Potion, Integer> potionHashtable = new Hashtable<>();
 
 		// TODO: 27/11/2016 if(Player.getProfession() == "Alchemy") { ... }
-		Hashtable<Herb, Integer> herbsHashtable = new Hashtable<>();
+		Hashtable<Herb, Integer> herbsHashTable = new Hashtable<>();
 
 		// We define the bags each Player (actually the slots into the inventory) has
 		Bag foods = new Bag("FoodBag", 4, 8, foodHashTab);
 		weaponBag drinks = new weaponBag("Drinks", 3, 4, drinksTabs);
 		potionBag potion = new potionBag("Potions Bag", 4, 3, potionHashtable);
-		herbalismBag herbs = new herbalismBag("Herbalism Bag", 4, 4, herbsHashtable);
+		herbalismBag herbs = new herbalismBag("Herbalism Bag", 4, 4, herbsHashTable);
 		this.inventory = new PlayerInventory(foods, drinks, potion, herbs);
 //		System.out.println("Player.Player Faction #" + FactionID + ", race = " + this.RaceID + ", Class = " + classID);
 	}
@@ -195,9 +195,9 @@ class Player implements playerInterface {
 
 	// Methods inherited from playerInterface
 
-	public void setFactionID(int factionID) {
-		this.FactionID = factionID;
-	}
+//	public void setFactionID(int factionID) {
+//		this.FactionID = factionID;
+//	}
 
 	// Race ID
 	int getRaceID() {
@@ -210,8 +210,8 @@ class Player implements playerInterface {
 
 	// RaceName
 	String getRaceName() {
-//		System.out.print("Player.getRaceName reports " + this.getName() + " is " + this.RaceName + " " + this.getClassName());
-//		System.out.println(" in " + this.getPosition() + " of " + this.getCity() + " of " + this.getArea());
+		System.out.print("Player.getRaceName reports " + this.getName() + " is " + this.RaceName + " " + this.getClassName());
+		System.out.println(" in " + this.getPosition() + " of " + this.getCity() + " of " + this.getArea());
 		return this.RaceName;
 	}
 
@@ -375,17 +375,17 @@ class Player implements playerInterface {
 		return maxHealth;
 	}
 
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
-	}
+//	public void setMaxHealth(int maxHealth) {
+//		this.maxHealth = maxHealth;
+//	}
 
 	int getMaxMana() {
 		return this.maxMana;
 	}
 
-	public void setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
-	}
+//	public void setMaxMana(int maxMana) {
+//		this.maxMana = maxMana;
+//	}
 
 	void travel(int newX, int newY) throws InterruptedException {
 		System.out.println("Player.travel Travelling from (" + this.getItsX() + "," + this.getItsY() + ") to (" + newX + ", " + newY + ")");
@@ -473,9 +473,9 @@ class Player implements playerInterface {
 	}
 
 	void seeInsideInv() {
-		Hashtable<Item, Integer> invFoods = this.inventory.getItemBag();
-		Hashtable<Weapon, Integer> weapons = this.inventory.getWeapons();
-		Hashtable<Potion, Integer> invPotions = this.inventory.getPotions();
+//		Hashtable<Item, Integer> invFoods = this.inventory.getItemBag();
+//		Hashtable<Weapon, Integer> weapons = this.inventory.getWeapons();
+//		Hashtable<Potion, Integer> invPotions = this.inventory.getPotions();
 		System.out.println("Player.seeInsideInv Start");
 		inventory.selectItem();
 		inventory.selectWeapon();
@@ -483,9 +483,9 @@ class Player implements playerInterface {
 		System.out.println("Player.seeInsideInv *End*");
 	}
 
-	public boolean isInBattle() {
-		return this.inBattle;
-	}
+//	public boolean isInBattle() {
+//		return this.inBattle;
+//	}
 
 	void setInBattle(boolean inBattle) {
 		this.inBattle = inBattle;
@@ -495,25 +495,25 @@ class Player implements playerInterface {
 		return this.itsSex;
 	}
 
-	public void setItsSex(int itsSex) {
-		this.itsSex = itsSex;
-	}
+//	public void setItsSex(int itsSex) {
+//		this.itsSex = itsSex;
+//	}
 
 	Race getPlayerRace() {
 		return this.playerRace;
 	}
 
-	public void setPlayerRace(Race playerRace) {
-		this.playerRace = playerRace;
-	}
+//	public void setPlayerRace(Race playerRace) {
+//		this.playerRace = playerRace;
+//	}
 
 	PlayerInventory getInventory() {
 		return this.inventory;
 	}
 
-	public void setInventory(PlayerInventory inventory) {
-		this.inventory = inventory;
-	}
+//	public void setInventory(PlayerInventory inventory) {
+//		this.inventory = inventory;
+//	}
 
 	int getStrength() {
 		return this.strength;

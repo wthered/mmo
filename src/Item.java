@@ -40,9 +40,9 @@ class Item {
         return this.thirst;
     }
 
-    int getFoodFromItem(FoodItem f) {
+    int getFoodFromItem(Item f) {
         if (this.getItemType() == 1) {
-            return f.getItemHealth();
+            return f.getHealth();
         }
         return 0;
     }
