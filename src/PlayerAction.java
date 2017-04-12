@@ -52,6 +52,7 @@ class PlayerAction {
 		System.out.println("I currently have " + myself.getItsHealth() + " Health Points of " + myself.getMaxHealth()+ " max");
 		System.out.println("I currently have " + myself.getItsMana() + " mana points of " + myself.getMaxMana() + " max");
 		System.out.println("I have " + Main.convertMoney(myself.getMoney()));
+		System.out.println("PlayerAction.report I have " + myself.showMoney());
 		System.out.println("I have " + myself.getExperience() + " experience" );
 		System.out.println("You can find me near " + myself.getPosition() + " of " + myself.getCity() + ", " + myself.getArea());
 		System.out.println("My exact Location is (" + myself.getItsX() + "," + myself.getItsY() + ")");

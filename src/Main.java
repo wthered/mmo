@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 import static java.text.MessageFormat.format;
@@ -191,6 +190,7 @@ class Main {
 
 	static String convertMoney(int money) {
 //		int[] data;
+
 
 		int copper = money % 100;
 

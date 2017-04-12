@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /**
  * Created by wthered on 12/11/2016 3:24 μμ
  * The Project name is mmo.
@@ -10,9 +8,9 @@ Before we begin, we init with random Values
 Random rndStats = new Random();
 */
 
-	default int showMoney() {
+	default String showMoney() {
 		System.out.println("playerInterface.showMoney says you have some money");
-		return 0;
+		return "The Money";
 	}
 
 	default String getFaction() {
